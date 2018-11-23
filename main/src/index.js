@@ -11,9 +11,9 @@ let GoleryEditor, EditorToolbar, htmlSerializer, SlateValue;
 const Mock = () => <div>(mock react component in nodejs)</div>;
 
 if (isBrowser) {
-    GoleryEditor = require('./editor').default;
+    GoleryEditor = require('./Editor').default;
     htmlSerializer = require('./components/html/html').default;
-    EditorToolbar = require("./EditorToolbar").default;
+    //EditorToolbar = require("./EditorToolbar").default;
     SlateValue = require("slate").Value;
 } else {
     GoleryEditor = Mock;

@@ -37,6 +37,9 @@ class DemoEditor extends React.Component {
             value: initialValue
         };
         this.editor = React.createRef();
+        this.controller = {
+            toggleCode: () => {}
+        };
     }
 
     render() {
@@ -44,13 +47,15 @@ class DemoEditor extends React.Component {
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
         return (
             <div style={{ margin: "20px" }}>
-                <EditorToolbar value={value} onChange={onChange}/>
                 <div style={{border: "1px solid red"}}>
-                <GoleryEditor value={value} onChange={onChange} readOnly={false} debug={true}
+                <GoleryEditor
+                        controller={this.controller}
+                        value={value} onChange={onChange} readOnly={false} debug={true}
                             ref={this.editor}/>
                 </div>
                 <button onClick={() => this._setHtml()}>SetHtml</button>
                 <button onClick={() => this._getHtml()}>GetHtml</button>
+                <button onClick={() => this._toogleCode()}>Toogle code</button>
                 <button onClick={() => this._setHtmlFromGet()}>SetHtmlFromGet</button>
 
                 <div id={"sample"}>
@@ -63,6 +68,10 @@ class DemoEditor extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    _toogleCode() {
+        this.controller.toggleCode();
     }
 
     _setHtml() {
