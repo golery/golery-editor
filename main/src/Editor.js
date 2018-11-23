@@ -90,6 +90,9 @@ class App extends React.Component {
     }
 
     _toggleCodeBlock() {
+        this.editor.setBlocks({
+            data: { ["syntax"]: "javascript" }
+        });
         slateCodeBlockPlugin.changes.toggleCodeBlock(this.editor, 'paragraph').focus()
     }
 }
