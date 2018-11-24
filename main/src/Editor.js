@@ -66,15 +66,6 @@ class GoleryEditor extends React.Component {
         props.controller.toggleCode = this._toggleCodeBlock.bind(this);
     }
 
-    // On change, update the app's React state with the new editor value.
-    onChange = ({value}) => {
-        this.setState({value})
-    };
-
-    ref = editor => {
-        this.editor = editor;
-    };
-
     // Render the editor.
     render() {
         return <SlateEditor value={this.state.value}
@@ -84,6 +75,15 @@ class GoleryEditor extends React.Component {
                             {...this.props}
         />;
     }
+
+
+    onChange = ({value}) => {
+        this.setState({value})
+    };
+
+    ref = editor => {
+        this.editor = editor;
+    };
 
     _toggleCodeBlock() {
         this.editor.setBlocks({
