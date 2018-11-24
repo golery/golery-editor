@@ -44,15 +44,16 @@ const initialValue = Value.fromJSON({
     },
 });
 
-let slateCodeBlockPlugin = SlateCodeBlock({
+let slateCodeBlock = SlateCodeBlock({
     onlyIn: node => node.type === "code_block"
 });
+let slatePrism = SlatePrism({
+    onlyIn: node => node.type === "code_block",
+    getSyntax: node => node.data.get("syntax")
+});
 let plugins = [
-    SlatePrism({
-        onlyIn: node => node.type === "code_block",
-        getSyntax: node => node.data.get("syntax")
-    }),
-    slateCodeBlockPlugin,
+    slatePrism,
+    slateCodeBlock,
     CodeBlockPlugin(null)
 ];
 
@@ -66,6 +67,7 @@ class GoleryEditor extends React.Component {
     constructor(props) {
         super(props);
         props.controller.toggleCode = this._toggleCodeBlock.bind(this);
+        props.controller.isInCodeBlock = this._isInCodeBlock.bind(this);
     }
 
     // Render the editor.
@@ -91,7 +93,11 @@ class GoleryEditor extends React.Component {
         this.editor.setBlocks({
             data: {["syntax"]: "tsx"}
         });
-        slateCodeBlockPlugin.changes.toggleCodeBlock(this.editor, 'paragraph').focus()
+        slateCodeBlock.changes.toggleCodeBlock(this.editor, 'paragraph').focus();
+    }
+
+    _isInCodeBlock() {
+        return slateCodeBlock.utils.isInCodeBlock(this.editor.value);
     }
 }
 
