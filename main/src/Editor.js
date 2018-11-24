@@ -54,7 +54,7 @@ let plugins = [
     CodeBlockPlugin(null)
 ];
 
-class App extends React.Component {
+class GoleryEditor extends React.Component {
     // Set the initial value when the app is first constructed.
     state = {
         value: initialValue,
@@ -67,7 +67,6 @@ class App extends React.Component {
 
     // On change, update the app's React state with the new editor value.
     onChange = ({value}) => {
-        console.log(value);
         this.setState({value})
     };
 
@@ -78,10 +77,11 @@ class App extends React.Component {
 
     // Render the editor.
     render() {
-
         return <div className="editor">
                 <Editor value={this.state.value} onChange={this.onChange} plugins={plugins}
-                        ref={this.ref}/>
+                        ref={this.ref}
+                        {...this.props}
+                />
             </div>;
     }
 
@@ -97,4 +97,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default GoleryEditor;

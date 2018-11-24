@@ -32,7 +32,8 @@ class DemoEditor extends React.Component {
     constructor() {
         super();
         this.state = {
-            value: initialValue
+            value: initialValue,
+            readOnly: false
         };
         this.editor = React.createRef();
         this.controller = {
@@ -53,11 +54,12 @@ class DemoEditor extends React.Component {
                 <div style={{border: "1px solid red"}}>
                 <GoleryEditor
                         controller={this.controller}
-                        value={value} onChange={onChange} readOnly={false} debug={true}
+                        value={value} onChange={onChange} readOnly={this.state.readOnly} debug={true}
                             ref={this.editor}/>
                 </div>
                 <button onClick={() => this._setHtml()}>SetHtml</button>
                 <button onClick={() => this._getHtml()}>GetHtml</button>
+                <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
 
                 <div id={"sample"}>
                     This is test<ol>
@@ -71,6 +73,9 @@ class DemoEditor extends React.Component {
         );
     }
 
+    _toogleReadOnly() {
+        this.setState({readOnly: !this.state.readOnly});
+    }
     _setHtml() {
         let html = document.getElementById("sample").innerHTML;
         const v = htmlSerializer.deserialize(html);
