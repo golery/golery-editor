@@ -1,12 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import styles from "./indexbrowser.css";
 import GoleryEditorLib from "../index";
 let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer} = GoleryEditorLib;
 
-//import "antd/dist/antd.css";
-
+import styles from "./indexbrowser.css";
 
 const initialValue = SlateValue.fromJSON({
     document: {
@@ -60,7 +58,6 @@ class DemoEditor extends React.Component {
                 </div>
                 <button onClick={() => this._setHtml()}>SetHtml</button>
                 <button onClick={() => this._getHtml()}>GetHtml</button>
-                <button onClick={() => this._toogleCode()}>Toogle code</button>
 
                 <div id={"sample"}>
                     This is test<ol>
