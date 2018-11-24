@@ -145,8 +145,10 @@ export default class Toolbar extends React.Component<Props, State> {
           <ToolbarButton title={"Bold"} icon={"Bold"}/>
           <ToolbarButton title={"Bold"} icon={"Italic"}/>
           <ToolbarButton title={"Bold"} icon={"Underline"}/>
+          <Seperator/>
           <ToolbarButton title={"Bold"} icon={"ListOrdered"}/>
           <ToolbarButton title={"Bold"} icon={"ListBullet"}/>
+          <Seperator/>
           <ToolbarButton title={"Bold"} icon={"CodeBlock"}/>
       </Container>);
     /*return (
