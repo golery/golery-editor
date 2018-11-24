@@ -3,7 +3,7 @@ import {Editor as SlateEditor} from 'slate-react';
 import {Value} from 'slate';
 import CodeBlockPlugin from "./plugins/codeblockplugin/CodeBlockPlugin";
 import SlateCodeBlock from "golery-slate-code-block";
-import { ParagraphPlugin } from "@canner/slate-icon-shared";
+import {ParagraphPlugin} from "@canner/slate-icon-shared";
 import SlatePrism from "golery-slate-prism";
 
 
@@ -54,6 +54,7 @@ let plugins = [
     CodeBlockPlugin(null)
 ];
 
+/** A pack of plugins for Golery Editor */
 class GoleryEditor extends React.Component {
     // Set the initial value when the app is first constructed.
     state = {
@@ -76,19 +77,17 @@ class GoleryEditor extends React.Component {
 
     // Render the editor.
     render() {
-        return <SlateEditor value={this.state.value} onChange={this.onChange} plugins={plugins}
-                        ref={this.ref}
-                        {...this.props}
-                />;
-    }
-
-    _getEditor= () => {
-        return this.editor;
+        return <SlateEditor value={this.state.value}
+                            onChange={this.onChange}
+                            plugins={plugins}
+                            ref={this.ref}
+                            {...this.props}
+        />;
     }
 
     _toggleCodeBlock() {
         this.editor.setBlocks({
-            data: { ["syntax"]: "javascript" }
+            data: {["syntax"]: "javascript"}
         });
         slateCodeBlockPlugin.changes.toggleCodeBlock(this.editor, 'paragraph').focus()
     }
