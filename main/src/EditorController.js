@@ -1,4 +1,5 @@
 class EditorController {
+    // The list of icon name is in canner::packages/quill-icons/src/index.js
     getToolbarOptions() {
         let options = [
             {
@@ -10,17 +11,32 @@ class EditorController {
                 isActive: () => {
                     return this.isInCodeBlock()
                 }
+            },
+            {
+                title: "Image",
+                icon: "Image",
+                onClick: () => {
+                    this.insertImage()
+                },
+                isActive: () => {
+                    return this.isInCodeBlock()
+                }
             }
         ];
         return options;
     }
 
+
     toggleCode() {
-        // do nothing when editor was not started.
-        // later the GoleryEditor will inject the method
+        // to be injected by editor
+    }
+
+    insertImage() {
+        // to be injected by editor
     }
 
     isInCodeBlock() {
+        // to be injected by editor
         return false;
     }
 }

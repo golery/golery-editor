@@ -1,24 +1,12 @@
 import * as React from 'react';
 import {Editor as SlateEditor} from 'slate-react';
 import {Value} from 'slate';
-import CodeBlockPlugin from "./plugins/codeblockplugin/CodeBlockPlugin";
+import CodeBlockPlugin from "./plugins/codeblock/CodeBlockPlugin";
 import SlateCodeBlock from "golery-slate-code-block";
 import {ParagraphPlugin} from "@canner/slate-icon-shared";
 import SlatePrism from "golery-slate-prism";
-
-
-import Prism from 'prismjs';
-import PrismJson from 'prismjs/components/prism-json';
-import PrismMarkup from 'prismjs/components/prism-markup';
-import PrismJsx from 'prismjs/components/prism-jsx';
-import PrismTypescript from 'prismjs/components/prism-typescript';
-import PrismTsx from 'prismjs/components/prism-tsx';
-import PrismSql from 'prismjs/components/prism-sql';
-import PrismPlsql from 'prismjs/components/prism-plsql';
-import PrismScss from 'prismjs/components/prism-scss';
-import PrismBash from 'prismjs/components/prism-bash';
-import PrismCsharp from 'prismjs/components/prism-csharp';
-import PrismJava from 'prismjs/components/prism-java';
+import "./plugins/codeblock/PrismGrammars";
+import {insertImage} from "./plugins/image/ImagePlugin";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -66,8 +54,11 @@ class GoleryEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        props.controller.toggleCode = this._toggleCodeBlock.bind(this);
-        props.controller.isInCodeBlock = this._isInCodeBlock.bind(this);
+        Object.assign(props.controller, {
+            toggleCode: this._toggleCodeBlock.bind(this),
+            insertImage: this._insertImage.bind(this),
+            isInCodeBlock: this._isInCodeBlock.bind(this),
+        });
     }
 
     // Render the editor.
@@ -79,7 +70,6 @@ class GoleryEditor extends React.Component {
                             {...this.props}
         />;
     }
-
 
     onChange = ({value}) => {
         this.setState({value})
@@ -98,6 +88,10 @@ class GoleryEditor extends React.Component {
 
     _isInCodeBlock() {
         return slateCodeBlock.utils.isInCodeBlock(this.editor.value);
+    }
+
+    _insertImage() {
+        insertImage(this.editor);
     }
 }
 
