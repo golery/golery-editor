@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Editor} from 'slate-react';
+import {Editor as SlateEditor} from 'slate-react';
 import {Value} from 'slate';
 import CodeBlockPlugin from "./plugins/codeblockplugin/CodeBlockPlugin";
 import SlateCodeBlock from "golery-slate-code-block";
@@ -71,18 +71,15 @@ class GoleryEditor extends React.Component {
     };
 
     ref = editor => {
-        console.log("Editor", editor);
         this.editor = editor;
     };
 
     // Render the editor.
     render() {
-        return <div className="editor">
-                <Editor value={this.state.value} onChange={this.onChange} plugins={plugins}
+        return <SlateEditor value={this.state.value} onChange={this.onChange} plugins={plugins}
                         ref={this.ref}
                         {...this.props}
-                />
-            </div>;
+                />;
     }
 
     _getEditor= () => {
