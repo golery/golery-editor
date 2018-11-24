@@ -1,13 +1,17 @@
 import PluginEditCode from "golery-slate-code-block";
 import { CODE, CODE_LINE, PARAGRAPH } from "@canner/slate-constant/lib/blocks";
 import {codeBlockNode, codeLineNode} from "../../canner/renderer/codeBlockNode";
+// This key/values comes from "prismjs/components.js".
+// There are more values.
+import languages from "./languages.json";
 
 const CodeBlockPlugin = opt => {
     const options = Object.assign(
         {
             codeType: CODE,
             codeLineType: CODE_LINE,
-            getSyntax: node => node.data.get("syntax")
+            getSyntax: node => node.data.get("syntax"),
+            languages: languages
         },
         opt
     );

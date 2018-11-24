@@ -3,7 +3,6 @@ import * as React from "react";
 import type {nodeProps} from "./type";
 import {Select} from "antd";
 import styled from "styled-components";
-import {languages} from "prismjs/components.json";
 
 const {Option} = Select;
 
@@ -30,6 +29,7 @@ export const codeBlockNode = options => {
                                     editor
                                 }: nodeProps) => {
         const syntax = options.getSyntax(node);
+        let languages = options.languages;
         const selectLang = value => {
             editor.change(change =>
                 change.setNodeByKey(node.key, {data: {syntax: value}})

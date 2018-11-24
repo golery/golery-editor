@@ -8,14 +8,17 @@ import SlatePrism from "golery-slate-prism";
 
 
 import Prism from 'prismjs';
-import PrismJava from 'prismjs/components/prism-java';
 import PrismJson from 'prismjs/components/prism-json';
-import PrismTsx from 'prismjs/components/prism-tsx';
+import PrismMarkup from 'prismjs/components/prism-markup';
 import PrismJsx from 'prismjs/components/prism-jsx';
-//import PrismPlsql from 'prismjs/components/prism-plsql';
+import PrismTypescript from 'prismjs/components/prism-typescript';
+import PrismTsx from 'prismjs/components/prism-tsx';
+import PrismSql from 'prismjs/components/prism-sql';
+import PrismPlsql from 'prismjs/components/prism-plsql';
 import PrismScss from 'prismjs/components/prism-scss';
 import PrismBash from 'prismjs/components/prism-bash';
 import PrismCsharp from 'prismjs/components/prism-csharp';
+import PrismJava from 'prismjs/components/prism-java';
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -86,7 +89,7 @@ class GoleryEditor extends React.Component {
 
     _toggleCodeBlock() {
         this.editor.setBlocks({
-            data: {["syntax"]: "javascript"}
+            data: {["syntax"]: "tsx"}
         });
         slateCodeBlockPlugin.changes.toggleCodeBlock(this.editor, 'paragraph').focus()
     }
