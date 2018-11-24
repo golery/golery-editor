@@ -1,23 +1,6 @@
 import * as React from "react";
-import {Icon, Modal} from "antd";
 import styled from "styled-components";
 import {Container} from "./components/item";
-
-import {AlignCenter, AlignLeft, AlignRight} from "@canner/slate-icon-align";
-import Blockquote from "@canner/slate-icon-blockquote";
-import Table from "@canner/slate-icon-table";
-import FontBgColor from "@canner/slate-icon-fontbgcolor";
-import FontColor from "@canner/slate-icon-fontcolor";
-import {Header1, Header2, Header3} from "@canner/slate-icon-header";
-import Hr from "@canner/slate-icon-hr";
-import Image from "@canner/slate-icon-image";
-import {Indent, Outdent} from "@canner/slate-icon-indent";
-import Link from "@canner/slate-icon-link";
-import {OlList, UlList} from "@canner/slate-icon-list";
-import Undo from "@canner/slate-icon-undo";
-import Redo from "@canner/slate-icon-redo";
-import Video from "@canner/slate-icon-video";
-import HelpMenu from "@canner/slate-editor-help";
 import ToolbarIcon from "@canner/slate-icon-shared";
 
 /** Wrapper of icon and add mouse hover, title, animation */
