@@ -1,4 +1,3 @@
-// @flow
 import * as React from "react";
 import type {Value, Change} from "slate";
 import {Icon, Modal} from "antd";
@@ -23,22 +22,6 @@ import Redo from "@canner/slate-icon-redo";
 import Video from "@canner/slate-icon-video";
 import HelpMenu from "@canner/slate-editor-help";
 import ToolbarIcon from "@canner/slate-icon-shared";
-
-type
-Props = {
-    value: Value,
-    isFull? : boolean,
-    onChange: (change: Change) => void,
-    menuToolbarOption: {[string]: any}[],
-    goFull: () => void,
-    serviceConfig: any,
-    galleryConfig? : any
-};
-
-type
-State = {
-    showMenu: boolean
-};
 
 /** Wrapper of icon and add mouse hover, title, animation */
 const IconContainer = styled.div`

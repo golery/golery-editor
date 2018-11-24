@@ -46,7 +46,7 @@ class DemoEditor extends React.Component {
         const { value } = this.state;
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
         let options = [
-            {title: "Code", icon: "CodeBlock", onClick: () => {this._toogleCode()}}
+            {title: "Code", icon: "CodeBlock", onClick: () => {this.controller.toggleCode()}}
         ];
         return (
             <div style={{ margin: "20px" }}>
@@ -61,7 +61,6 @@ class DemoEditor extends React.Component {
                 <button onClick={() => this._setHtml()}>SetHtml</button>
                 <button onClick={() => this._getHtml()}>GetHtml</button>
                 <button onClick={() => this._toogleCode()}>Toogle code</button>
-                <button onClick={() => this._setHtmlFromGet()}>SetHtmlFromGet</button>
 
                 <div id={"sample"}>
                     This is test<ol>
@@ -73,10 +72,6 @@ class DemoEditor extends React.Component {
                 </div>
             </div>
         );
-    }
-
-    _toogleCode() {
-        this.controller.toggleCode();
     }
 
     _setHtml() {
