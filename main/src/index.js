@@ -5,9 +5,10 @@
  * */
 
 import React from "react";
+import EditorController from "./EditorController";
 
 let isBrowser = (typeof window !== 'undefined');
-let GoleryEditor, EditorToolbar, htmlSerializer, SlateValue, EditorToolbarOptions;
+let GoleryEditor, EditorToolbar, htmlSerializer, SlateValue;
 const Mock = () => <div>(mock react component in nodejs)</div>;
 
 if (isBrowser) {
@@ -15,15 +16,13 @@ if (isBrowser) {
     htmlSerializer = require('./components/html/html').default;
     EditorToolbar = require("./EditorToolbar").default;
     SlateValue = require("slate").Value;
-    EditorToolbarOptions = require('./EditorToolbarOptions').default;
 } else {
     GoleryEditor = Mock;
     EditorToolbar = Mock;
     htmlSerializer = {serialize: () => null, deserialize: () => null};
     SlateValue = {fromJSON: () => null};
-    EditorToolbarOptions = () => [];
 }
 
 
-const GoleryEditorLib = {GoleryEditor, EditorToolbar, htmlSerializer, SlateValue, EditorToolbarOptions};
+const GoleryEditorLib = {GoleryEditor, EditorToolbar, htmlSerializer, SlateValue, EditorController};
 export default GoleryEditorLib;

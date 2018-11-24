@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import GoleryEditorLib from "../index";
-let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer, EditorToolbarOptions} = GoleryEditorLib;
+let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer, EditorController} = GoleryEditorLib;
 
 import styles from "./indexbrowser.css";
 
@@ -36,15 +36,13 @@ class DemoEditor extends React.Component {
             readOnly: false
         };
         this.editor = React.createRef();
-        this.controller = {
-            toggleCode: () => {}
-        };
+        this.controller = new EditorController();
     }
 
     render() {
         const { value } = this.state;
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
-        let editorToolbarOptions = EditorToolbarOptions(this.controller);
+        let editorToolbarOptions = this.controller.getToolbarOptions();
         return (
             <div style={{ margin: "20px" }}>
                 <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
