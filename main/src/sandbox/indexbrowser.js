@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import GoleryEditorLib from "../index";
-let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer} = GoleryEditorLib;
+let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer, EditorToolbarOptions} = GoleryEditorLib;
 
 import styles from "./indexbrowser.css";
 
@@ -44,22 +44,24 @@ class DemoEditor extends React.Component {
     render() {
         const { value } = this.state;
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
-        let options = [
-            {title: "Code", icon: "CodeBlock", onClick: () => {this.controller.toggleCode()}}
-        ];
+        let editorToolbarOptions = EditorToolbarOptions(this.controller);
         return (
             <div style={{ margin: "20px" }}>
-                <EditorToolbar value={value} onChange={onChange} options={options}/>
+                <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
 
                 <div style={{border: "1px solid red"}}>
-                <GoleryEditor
-                        controller={this.controller}
-                        value={value} onChange={onChange} readOnly={this.state.readOnly} debug={true}
+                    <GoleryEditor
+                            controller={this.controller}
+                            value={value} onChange={onChange}
+                            readOnly={this.state.readOnly}
                             ref={this.editor}/>
                 </div>
-                <button onClick={() => this._setHtml()}>SetHtml</button>
-                <button onClick={() => this._getHtml()}>GetHtml</button>
-                <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
+
+                <div>
+                    <button onClick={() => this._setHtml()}>SetHtml</button>
+                    <button onClick={() => this._getHtml()}>GetHtml</button>
+                    <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
+                </div>
 
                 <div id={"sample"}>
                     This is test<ol>

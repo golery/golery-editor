@@ -1,5 +1,4 @@
 import * as React from "react";
-import type {Value, Change} from "slate";
 import {Icon, Modal} from "antd";
 import styled from "styled-components";
 import {Container} from "./components/item";
