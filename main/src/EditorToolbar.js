@@ -95,6 +95,7 @@ class ToolbarButton extends React.Component {
 
 export default class Toolbar extends React.Component {
     render() {
+        let { options } = this.props;
         return (<Container>
             <ToolbarButton title={"Bold"} icon={"Bold"}/>
             <ToolbarButton title={"Italic"} icon={"Italic"}/>
@@ -103,7 +104,9 @@ export default class Toolbar extends React.Component {
             <ToolbarButton title={"List"} icon={"ListOrdered"}/>
             <ToolbarButton title={"Bullet"} icon={"ListBullet"}/>
             <Seperator/>
-            <ToolbarButton title={"Code"} icon={"CodeBlock"} />
+            {options.map((option, i) =>
+                <ToolbarButton key={i} title={option.title} icon={option.icon} onClick={option.onClick} />
+            )}
         </Container>);
     }
 }

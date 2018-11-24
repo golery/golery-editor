@@ -45,9 +45,12 @@ class DemoEditor extends React.Component {
     render() {
         const { value } = this.state;
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
+        let options = [
+            {title: "Code", icon: "CodeBlock", onClick: () => {this._toogleCode()}}
+        ];
         return (
             <div style={{ margin: "20px" }}>
-                <EditorToolbar value={value} onChange={onChange}/>
+                <EditorToolbar value={value} onChange={onChange} options={options}/>
 
                 <div style={{border: "1px solid red"}}>
                 <GoleryEditor
