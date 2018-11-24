@@ -1,6 +1,6 @@
 import PluginEditCode from "golery-slate-code-block";
 import { CODE, CODE_LINE, PARAGRAPH } from "@canner/slate-constant/lib/blocks";
-import {codeBlockNode, codeLineNode} from "@canner/slate-editor-renderer/lib/codeBlockNode";
+import {codeBlockNode, codeLineNode} from "../../canner/renderer/codeBlockNode";
 
 const CodeBlockPlugin = opt => {
     const options = Object.assign(

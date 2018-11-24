@@ -2,7 +2,6 @@ import * as React from "react";
 import {Icon, Modal} from "antd";
 import styled from "styled-components";
 import {Container} from "./components/item";
-import FullScreenIcon from "./components/fullScreen";
 
 import {AlignCenter, AlignLeft, AlignRight} from "@canner/slate-icon-align";
 import Blockquote from "@canner/slate-icon-blockquote";
