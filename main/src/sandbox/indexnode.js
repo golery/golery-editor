@@ -1,5 +1,8 @@
+/** Sample index file when load with node.
+ * It's for testing the compatible with serverside rendering */
 import Editor from "../index";
-let {GoleryEditor, EditorToolbar,  htmlSerializer, SlateValue} = Editor;
+
+let {GoleryEditor, EditorToolbar, htmlSerializer, SlateValue, EditorController} = Editor;
 
 // Load libary in node env.
 // GoleryEditor is just a placehoder, other variables are empty

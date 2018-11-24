@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require("webpack");
 module.exports = {
-    entry: "./src/sandbox/indexbrowser.js",
+    entry: "./src/sandbox/index.js",
     output: {
         path: __dirname + "/",
         publicPath: "/",
         filename: "bundle.js"
     },
-    devtool: "source-map",
+    devtool: "eval-source-map",
     module: {
         rules: [
             {

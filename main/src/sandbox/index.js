@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import GoleryEditorLib from "../index";
 let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer, EditorController} = GoleryEditorLib;
 
-import styles from "./indexbrowser.css";
+import styles from "./main.css";
 
 const initialValue = SlateValue.fromJSON({
     document: {
