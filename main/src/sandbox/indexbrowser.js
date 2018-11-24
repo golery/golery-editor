@@ -47,6 +47,8 @@ class DemoEditor extends React.Component {
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
         return (
             <div style={{ margin: "20px" }}>
+                <EditorToolbar value={value} onChange={onChange}/>
+
                 <div style={{border: "1px solid red"}}>
                 <GoleryEditor
                         controller={this.controller}

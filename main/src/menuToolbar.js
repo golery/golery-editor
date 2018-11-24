@@ -22,6 +22,7 @@ import Undo from "@canner/slate-icon-undo";
 import Redo from "@canner/slate-icon-redo";
 import Video from "@canner/slate-icon-video";
 import HelpMenu from "@canner/slate-editor-help";
+import ToolbarIcon from "@canner/slate-icon-shared";
 
 type Props = {
   value: Value,
@@ -61,6 +62,31 @@ const Seperator = styled.div`
   display: inline-block;
   vertical-align: top;
 `;
+
+class ToolbarButton extends React.Component {
+  render() {
+    const {title, icon} = this.props;
+    return <IconContainer title={title}>
+      <div style={{display: "inline-block"}}>
+        <ToolbarIcon icon={icon}
+                     className="__canner-editor_topToolbarItem"
+                     disableClassName="__canner-editor_topToolbarItemDisabled"
+                     strokeClassName="qlStroke"
+                     strokeMitterClassName="qlStrokeMitter"
+                     fillClassName="qlFill"
+                     evenClassName="qlEven"
+                     colorLabelClassName="qlColorLabel"
+                     thinClassName="qlThin"
+                     activeStrokeMitterClassName="qlStrokeMitterActive"
+                     activeClassName="__canner-editor_topToolbarItem __canner-editor_topToolbarItemActive"
+                     activeStrokeClassName="qlStrokeActive"
+                     activeFillClassName="qlFillActive"
+                     activeThinClassName="qlThinActive"
+                     activeEvenClassName="qlEvenActive"
+        />
+      </div></IconContainer>;
+  }
+}
 
 export default class Toolbar extends React.Component<Props, State> {
   state = {
@@ -115,7 +141,15 @@ export default class Toolbar extends React.Component<Props, State> {
       // { type: "help", title: "Help" }
     ];
 
-    return (
+      return (<Container>
+          <ToolbarButton title={"Bold"} icon={"Bold"}/>
+          <ToolbarButton title={"Bold"} icon={"Italic"}/>
+          <ToolbarButton title={"Bold"} icon={"Underline"}/>
+          <ToolbarButton title={"Bold"} icon={"ListOrdered"}/>
+          <ToolbarButton title={"Bold"} icon={"ListBullet"}/>
+          <ToolbarButton title={"Bold"} icon={"CodeBlock"}/>
+      </Container>);
+    /*return (
       <Container>
         {options.map((option, i) => {
           let Type =
@@ -192,7 +226,6 @@ export default class Toolbar extends React.Component<Props, State> {
             </IconContainer>
           );
         })}
-      </Container>
-    );
+      </Container>);*/
   }
 }
