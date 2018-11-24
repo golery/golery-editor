@@ -8,7 +8,6 @@ import FullScreenIcon from "./components/fullScreen";
 import {AlignCenter, AlignLeft, AlignRight} from "@canner/slate-icon-align";
 import Blockquote from "@canner/slate-icon-blockquote";
 import Table from "@canner/slate-icon-table";
-import CodeBlock from "./components/codeblock/CodeBlockIcon";
 import FontBgColor from "@canner/slate-icon-fontbgcolor";
 import FontColor from "@canner/slate-icon-fontcolor";
 import {Header1, Header2, Header3} from "@canner/slate-icon-header";
