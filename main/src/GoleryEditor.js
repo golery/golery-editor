@@ -19,7 +19,6 @@ import PrismCsharp from 'prismjs/components/prism-csharp';
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
-import './main.css';
 
 const initialValue = Value.fromJSON({
     document: {
