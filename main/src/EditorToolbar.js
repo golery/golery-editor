@@ -34,7 +34,8 @@ class ToolbarButton extends React.Component {
     render() {
         let {title, icon, onClick, isActive} = this.props;
         isActive = isActive || (() => false);
-        onClick = onClick || (() => {});
+        onClick = onClick || (() => {
+        });
         return <IconContainer title={title} onClick={onClick}>
             <div style={{display: "inline-block"}}>
                 <ToolbarIcon icon={icon}
@@ -63,16 +64,10 @@ export default class Toolbar extends React.Component {
     render() {
         let {options} = this.props;
         return (<Container>
-            <ToolbarButton title={"Bold"} icon={"Bold"}/>
-            <ToolbarButton title={"Italic"} icon={"Italic"}/>
-            <ToolbarButton title={"Underline"} icon={"Underline"}/>
-            <Seperator/>
-            <ToolbarButton title={"List"} icon={"ListOrdered"}/>
-            <ToolbarButton title={"Bullet"} icon={"ListBullet"}/>
-            <Seperator/>
-            {options.map((options, i) =>
-                <ToolbarButton key={i} {...options}/>
-            )}
+            {options.map((options, i) => {
+                if (options === "separator") return <Seperator/>;
+                return <ToolbarButton key={i} {...options}/>
+            })}
         </Container>);
     }
 }

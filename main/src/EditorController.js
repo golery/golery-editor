@@ -3,6 +3,58 @@ class EditorController {
     getToolbarOptions() {
         let options = [
             {
+                title: "Bold",
+                icon: "Bold",
+                onClick: () => {
+                    this.toggleCode()
+                },
+                isActive: () => {
+                    return this.isInCodeBlock()
+                }
+            },
+            {
+                title: "Italic",
+                icon: "Italic",
+                onClick: () => {
+                    this.toggleCode()
+                },
+                isActive: () => {
+                    return this.isInCodeBlock()
+                }
+            },
+            {
+                title: "Underline",
+                icon: "Underline",
+                onClick: () => {
+                    this.toggleCode()
+                },
+                isActive: () => {
+                    return this.isInCodeBlock()
+                }
+            },
+            "separator",
+            {
+                title: "List",
+                icon: "ListOrdered",
+                onClick: () => {
+                    this.toggleCode()
+                },
+                isActive: () => {
+                    return this.isInCodeBlock()
+                }
+            },
+            {
+                title: "Bullet",
+                icon: "ListBullet",
+                onClick: () => {
+                    this.toggleCode()
+                },
+                isActive: () => {
+                    return this.isInCodeBlock()
+                }
+            },
+            "separator",
+            {
                 title: "Code",
                 icon: "CodeBlock",
                 onClick: () => {
