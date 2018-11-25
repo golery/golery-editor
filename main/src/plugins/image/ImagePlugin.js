@@ -17,7 +17,6 @@ function ImagePlugin(opts) {
         renderNode: (props, editor, next) => {
             let {node, attributes} = props;
             let src = node.data.get("src");
-            console.log(attributes);
             if (props.node.type === "image") return <img {...attributes} src={src
             }/>;
             return next();
