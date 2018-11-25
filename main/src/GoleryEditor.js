@@ -7,6 +7,9 @@ import {ParagraphPlugin} from "@canner/slate-icon-shared";
 import SlatePrism from "golery-slate-prism";
 import "./plugins/codeblock/PrismGrammars";
 import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
+import BoldPlugin from "./plugins/basicmarks/BoldPlugin";
+import UnderlinePlugin from "./plugins/basicmarks/UnderlinePlugin";
+import ItalicPlugin from "./plugins/basicmarks/ItalicPlugin";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -40,11 +43,19 @@ let slatePrism = SlatePrism({
     getSyntax: node => node.data.get("syntax")
 });
 let imagePlugin = ImagePlugin();
+let codeBlockPlugin = CodeBlockPlugin();
+let boldPlugin = BoldPlugin();
+let underlinePlugin = UnderlinePlugin();
+let itaticPlugin = ItalicPlugin();
+
 let plugins = [
- //   slatePrism,
-  //  slateCodeBlock,
-   // CodeBlockPlugin(null),
-    imagePlugin
+    boldPlugin,
+    underlinePlugin,
+    itaticPlugin,
+    slatePrism,
+    slateCodeBlock,
+    codeBlockPlugin,
+    imagePlugin,
 ];
 
 const schema = {

@@ -65,7 +65,7 @@ export default class Toolbar extends React.Component {
         let {options} = this.props;
         return (<Container>
             {options.map((options, i) => {
-                if (options === "separator") return <Seperator/>;
+                if (options === "separator") return <Seperator key={i}/>;
                 return <ToolbarButton key={i} {...options}/>
             })}
         </Container>);
