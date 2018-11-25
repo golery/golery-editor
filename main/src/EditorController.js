@@ -6,7 +6,7 @@ class EditorController {
                 title: "Bold",
                 icon: "Bold",
                 onClick: () => {
-                    this.toggleCode()
+                    this.toggleBold()
                 },
                 isActive: () => {
                     return this.isInCodeBlock()
@@ -16,7 +16,7 @@ class EditorController {
                 title: "Italic",
                 icon: "Italic",
                 onClick: () => {
-                    this.toggleCode()
+                    this.toggleItalic()
                 },
                 isActive: () => {
                     return this.isInCodeBlock()
@@ -26,7 +26,7 @@ class EditorController {
                 title: "Underline",
                 icon: "Underline",
                 onClick: () => {
-                    this.toggleCode()
+                    this.toggleUnderline()
                 },
                 isActive: () => {
                     return this.isInCodeBlock()
@@ -78,6 +78,17 @@ class EditorController {
         return options;
     }
 
+    toggleBold() {
+        // to be injected by editor
+    }
+
+    toggleItalic() {
+        // to be injected by editor
+    }
+
+    toggleUnderline() {
+        // to be injected by editor
+    }
 
     toggleCode() {
         // to be injected by editor

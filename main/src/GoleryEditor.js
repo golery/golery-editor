@@ -7,9 +7,7 @@ import {ParagraphPlugin} from "@canner/slate-icon-shared";
 import SlatePrism from "golery-slate-prism";
 import "./plugins/codeblock/PrismGrammars";
 import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
-import BoldPlugin from "./plugins/basicmarks/BoldPlugin";
-import UnderlinePlugin from "./plugins/basicmarks/UnderlinePlugin";
-import ItalicPlugin from "./plugins/basicmarks/ItalicPlugin";
+import BasicMarkPlugin, {toggleBold, toggleUnderline, toggleItalic} from "./plugins/basicmarks/BasicMarkPlugin";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -44,14 +42,10 @@ let slatePrism = SlatePrism({
 });
 let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
-let boldPlugin = BoldPlugin();
-let underlinePlugin = UnderlinePlugin();
-let itaticPlugin = ItalicPlugin();
+let basicMarkPlugin = BasicMarkPlugin();
 
 let plugins = [
-    boldPlugin,
-    underlinePlugin,
-    itaticPlugin,
+    basicMarkPlugin,
     slatePrism,
     slateCodeBlock,
     codeBlockPlugin,
@@ -90,6 +84,9 @@ class GoleryEditor extends React.Component {
             toggleCode: this._toggleCodeBlock.bind(this),
             insertImage: this._insertImage.bind(this),
             isInCodeBlock: this._isInCodeBlock.bind(this),
+            toggleBold: this._toggleBold.bind(this),
+            toggleUnderline: this._toggleUnderline.bind(this),
+            toggleItalic: this._toggleItalic.bind(this)
         });
     }
 
@@ -125,6 +122,18 @@ class GoleryEditor extends React.Component {
 
     _insertImage() {
         insertImage(this.editor);
+    }
+
+    _toggleBold() {
+        toggleBold(this.editor);
+    }
+
+    _toggleUnderline() {
+        toggleUnderline(this.editor);
+    }
+
+    _toggleItalic() {
+        toggleItalic(this.editor);
     }
 }
 
