@@ -8,7 +8,8 @@ import SlatePrism from "golery-slate-prism";
 import "./plugins/codeblock/PrismGrammars";
 import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
 import BasicMarkPlugin, {toggleBold, toggleUnderline, toggleItalic} from "./plugins/basicmarks/BasicMarkPlugin";
-import ListPlugin, {toggleList, toggleBullet, EditList} from "./plugins/list/ListPlugin";
+import ListPlugin, {toggleList, toggleBullet, editListPlugin} from "./plugins/list/ListPlugin";
+import SoftBreakPlugin from "./plugins/softbreak/slate-soft-break";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -45,16 +46,17 @@ let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
 let basicMarkPlugin = BasicMarkPlugin();
 let listPlugin = ListPlugin();
-let editList = EditList();
+let softBreakPlugin = SoftBreakPlugin();
 
 let plugins = [
-    // basicMarkPlugin,
-    editList,
-    // slatePrism,
-    // slateCodeBlock,
-    // codeBlockPlugin,
-    // imagePlugin,
-    listPlugin
+    basicMarkPlugin,
+    editListPlugin,
+    slatePrism,
+    slateCodeBlock,
+    codeBlockPlugin,
+    imagePlugin,
+    listPlugin,
+    softBreakPlugin
 ];
 
 const schema = {

@@ -45,11 +45,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx"],
-        alias: {
-            // have shorter list of language for prism
-            "prismjs/components.json":  path.resolve(__dirname, 'src/components/codeblock/prism/components.json')
-        }
+        extensions: ["*", ".js", ".jsx"]
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {

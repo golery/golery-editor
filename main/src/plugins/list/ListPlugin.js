@@ -1,11 +1,18 @@
 import React from "react";
 import EditList from "golery-slate-edit-list";
+import {
+    OL_LIST,
+    UL_LIST,
+    LIST_ITEM,
+    PARAGRAPH
+} from "@canner/slate-constant/lib/blocks";
 
-const UL_LIST = "ul_list";
-const OL_LIST = "ol_list";
-const LIST_ITEM = "list_item";
+const editListPlugin = EditList({
+    types: [OL_LIST, UL_LIST],
+    typeItem: LIST_ITEM
+});
 
-const {utils, changes} = EditList();
+const {utils, changes} = editListPlugin;
 
 function toggle(editor, currentType) {
     if (utils.isSelectionInList(editor.value)) {
@@ -46,4 +53,4 @@ export const ListPlugin = () => {
 };
 
 export default ListPlugin;
-export {EditList};
+export {editListPlugin};

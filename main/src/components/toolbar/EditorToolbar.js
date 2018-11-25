@@ -1,34 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
-import {Container} from "./components/item";
+import {Container, IconContainer, Separator} from "./Items";
 import ToolbarIcon from "@canner/slate-icon-shared";
-
-/** Wrapper of icon and add mouse hover, title, animation */
-const IconContainer = styled.div`
-  display: inline-block;
-  background: transparent;
-  color: #222;
-  cursor: pointer;
-  -webkit-transition: background 0.2s ease 0s;
-
-  ${props =>
-    !props.noHover &&
-    `
-    &:hover {
-      background: #ebebeb;
-    }
-  `};
-`;
-
-/** Vertical separator lines between icons */
-const Seperator = styled.div`
-  height: 35px;
-  width: 1px;
-  margin: 2px 0;
-  background: #ebebeb;
-  display: inline-block;
-  vertical-align: top;
-`;
 
 class ToolbarButton extends React.Component {
     render() {
@@ -65,7 +37,7 @@ export default class Toolbar extends React.Component {
         let {options} = this.props;
         return (<Container>
             {options.map((options, i) => {
-                if (options === "separator") return <Seperator key={i}/>;
+                if (options === "separator") return <Separator key={i}/>;
                 return <ToolbarButton key={i} {...options}/>
             })}
         </Container>);

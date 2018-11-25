@@ -83,3 +83,30 @@ export const Container = styled.div`
     stroke-width: 1;
   }
 `;
+
+/** Wrapper of icon and add mouse hover, title, animation */
+export const IconContainer = styled.div`
+  display: inline-block;
+  background: transparent;
+  color: #222;
+  cursor: pointer;
+  -webkit-transition: background 0.2s ease 0s;
+
+  ${props =>
+    !props.noHover &&
+    `
+    &:hover {
+      background: #ebebeb;
+    }
+  `};
+`;
+
+/** Vertical separator lines between icons */
+export const Separator = styled.div`
+  height: 35px;
+  width: 1px;
+  margin: 2px 0;
+  background: #ebebeb;
+  display: inline-block;
+  vertical-align: top;
+`;
