@@ -59,6 +59,7 @@ class DemoEditor extends React.Component {
                     <button onClick={() => this._setHtml()}>SetHtml</button>
                     <button onClick={() => this._getHtml()}>GetHtml</button>
                     <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
+                    <button onClick={() => this._logValue()}>Value</button>
                 </div>
 
                 <div id={"sample"}>
@@ -71,6 +72,10 @@ class DemoEditor extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    _logValue() {
+        console.log(JSON.stringify(this.editor.current.editor.value.toJSON(), null, 2));
     }
 
     _toogleReadOnly() {

@@ -6,7 +6,7 @@ import SlateCodeBlock from "golery-slate-code-block";
 import {ParagraphPlugin} from "@canner/slate-icon-shared";
 import SlatePrism from "golery-slate-prism";
 import "./plugins/codeblock/PrismGrammars";
-import {insertImage} from "./plugins/image/ImagePlugin";
+import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -39,11 +39,32 @@ let slatePrism = SlatePrism({
     onlyIn: node => node.type === "code_block",
     getSyntax: node => node.data.get("syntax")
 });
+let imagePlugin = ImagePlugin();
 let plugins = [
-    slatePrism,
-    slateCodeBlock,
-    CodeBlockPlugin(null)
+ //   slatePrism,
+  //  slateCodeBlock,
+   // CodeBlockPlugin(null),
+    imagePlugin
 ];
+
+const schema = {
+    document: {
+        last: { type: 'paragraph' },
+        normalize: (editor, { code, node, child }) => {
+            switch (code) {
+                case 'last_child_type_invalid': {
+                    const paragraph = Block.create('paragraph')
+                    return editor.insertNodeByKey(node.key, node.nodes.size, paragraph)
+                }
+            }
+        },
+    },
+    blocks: {
+        image: {
+            isVoid: true,
+        },
+    },
+};
 
 /** A pack of plugins for Golery Editor */
 class GoleryEditor extends React.Component {
@@ -67,6 +88,7 @@ class GoleryEditor extends React.Component {
                             onChange={this.onChange}
                             plugins={plugins}
                             ref={this.ref}
+                            schema={schema}
                             {...this.props}
         />;
     }
