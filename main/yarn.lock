@@ -3307,6 +3307,11 @@ golery-slate-code-block@^0.16.0-golery.0:
     ends-with "^1.0.1"
     is-hotkey "^0.1.3"
 
+golery-slate-edit-list@^0.18.0-golery.0:
+  version "0.18.0-golery.0"
+  resolved "https://registry.yarnpkg.com/golery-slate-edit-list/-/golery-slate-edit-list-0.18.0-golery.0.tgz#33dc630d1429d5d83ecf4d24bcf0a687c37c8502"
+  integrity sha512-YxacMqVuqozzUm5a46yEVf7tL5yu7vsqpgpTzfFcjmmsBSpOQr30bioU5KfaPC5A6aEVtLBsqpl7g7fKzBha5w==
+
 golery-slate-prism@^0.6.0-golery.1:
   version "0.6.0-golery.1"
   resolved "https://registry.yarnpkg.com/golery-slate-prism/-/golery-slate-prism-0.6.0-golery.1.tgz#1e1ab5896658560dc27563663872e4052f3c34a9"

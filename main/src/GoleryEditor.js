@@ -8,6 +8,7 @@ import SlatePrism from "golery-slate-prism";
 import "./plugins/codeblock/PrismGrammars";
 import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
 import BasicMarkPlugin, {toggleBold, toggleUnderline, toggleItalic} from "./plugins/basicmarks/BasicMarkPlugin";
+import ListPlugin, {toggleList, toggleBullet, EditList} from "./plugins/list/ListPlugin";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
@@ -43,13 +44,17 @@ let slatePrism = SlatePrism({
 let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
 let basicMarkPlugin = BasicMarkPlugin();
+let listPlugin = ListPlugin();
+let editList = EditList();
 
 let plugins = [
-    basicMarkPlugin,
-    slatePrism,
-    slateCodeBlock,
-    codeBlockPlugin,
-    imagePlugin,
+    // basicMarkPlugin,
+    editList,
+    // slatePrism,
+    // slateCodeBlock,
+    // codeBlockPlugin,
+    // imagePlugin,
+    listPlugin
 ];
 
 const schema = {
@@ -73,9 +78,11 @@ class GoleryEditor extends React.Component {
             toggleCode: this._toggleCodeBlock.bind(this),
             insertImage: this._insertImage.bind(this),
             isInCodeBlock: this._isInCodeBlock.bind(this),
-            toggleBold: this._toggleBold.bind(this),
-            toggleUnderline: this._toggleUnderline.bind(this),
-            toggleItalic: this._toggleItalic.bind(this)
+            toggleBold: () => toggleBold(this.editor),
+            toggleUnderline: () => toggleUnderline(this.editor),
+            toggleItalic: () => toggleItalic(this.editor),
+            toggleList: () => this.editor.toggleList(),
+            toggleBullet: () => this.editor.toggleBullet()
         });
     }
 
@@ -96,6 +103,8 @@ class GoleryEditor extends React.Component {
 
     ref = editor => {
         this.editor = editor;
+        window.EDITOR = editor;
+        window.logValue = () => JSON.stringify(EDITOR.value, null, 2);
     };
 
     _toggleCodeBlock() {
@@ -111,18 +120,6 @@ class GoleryEditor extends React.Component {
 
     _insertImage() {
         insertImage(this.editor);
-    }
-
-    _toggleBold() {
-        toggleBold(this.editor);
-    }
-
-    _toggleUnderline() {
-        toggleUnderline(this.editor);
-    }
-
-    _toggleItalic() {
-        toggleItalic(this.editor);
     }
 }
 

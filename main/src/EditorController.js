@@ -37,7 +37,7 @@ class EditorController {
                 title: "List",
                 icon: "ListOrdered",
                 onClick: () => {
-                    this.toggleCode()
+                    this.toggleList()
                 },
                 isActive: () => {
                     return this.isInCodeBlock()
@@ -47,7 +47,7 @@ class EditorController {
                 title: "Bullet",
                 icon: "ListBullet",
                 onClick: () => {
-                    this.toggleCode()
+                    this.toggleBullet()
                 },
                 isActive: () => {
                     return this.isInCodeBlock()
@@ -100,7 +100,14 @@ class EditorController {
 
     isInCodeBlock() {
         // to be injected by editor
-        return false;
+    }
+
+    toggleList() {
+        // to be injected by editor
+    }
+
+    toggleBullet() {
+        // to be injected by editor
     }
 }
 

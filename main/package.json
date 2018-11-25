@@ -43,6 +43,7 @@
     "antd": "3.9.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
+    "golery-slate-edit-list": "^0.18.0-golery.0",
     "less-loader": "^4.1.0",
     "path": "^0.12.7",
     "react": "^16.6.0",
