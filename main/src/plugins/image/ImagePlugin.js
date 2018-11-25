@@ -2,10 +2,11 @@ import React from 'react';
 
 function insertImage(editor) {
     editor.command((editor) => {
-        editor.insertBlock({
+        editor.insertInline({
             type: 'image',
+            isVoid: true,
             data: {  ["src"]: "https://i.imgur.com/yTY1rpS.jpg" },
-        }).moveToStartOfNextText();
+        }).moveToStartOfNextText().focus();
     });
 
     // editor.props.onChange(editor);

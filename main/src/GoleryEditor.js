@@ -59,7 +59,7 @@ const schema = {
             }
         },
     },
-    blocks: {
+    inlines: {
         image: {
             isVoid: true,
         },
