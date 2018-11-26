@@ -1,6 +1,6 @@
 class EditorController {
     // The list of icon name is in canner::packages/quill-icons/src/index.js
-    getToolbarOptions() {
+    getToolbarOptions({getImageUrl}) {
         let options = [
             {
                 title: "Bold (ctrl+b)",
@@ -68,7 +68,7 @@ class EditorController {
                 title: "Image",
                 icon: "Image",
                 onClick: () => {
-                    this.insertImage()
+                    getImageUrl().then(url => this.insertImage(url));
                 },
                 isActive: () => {
                     return this.isInCodeBlock()

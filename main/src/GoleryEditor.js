@@ -1,7 +1,7 @@
 import React from 'react';
 import {Editor as SlateEditor} from 'slate-react';
 import CodeBlockPlugin from "./plugins/codeblock/CodeBlockPlugin";
-import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
+import ImagePlugin from "./plugins/image/ImagePlugin";
 import BasicMarkPlugin from "./plugins/basicmarks/BasicMarkPlugin";
 import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
 import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
@@ -42,7 +42,7 @@ class GoleryEditor extends React.Component {
         super(props);
         Object.assign(props.controller, {
             toggleCode: () => this.editor.toggleCode("tsx"),
-            insertImage: this._insertImage.bind(this),
+            insertImage: () => this.editor.insertImage("https://jaspergilhuis.files.wordpress.com/2018/07/logo.png"),
 
             toggleBold: () => this.editor.toggleBold(),
             toggleUnderline: () => this.editor.toggleUnderline(),

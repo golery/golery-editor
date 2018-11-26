@@ -1,17 +1,5 @@
 import React from 'react';
 
-function insertImage(editor) {
-    editor.command((editor) => {
-        editor.insertInline({
-            type: 'image',
-            isVoid: true,
-            data: {  ["src"]: "https://i.imgur.com/yTY1rpS.jpg" },
-        }).moveToStartOfNextText().focus();
-    });
-
-    // editor.props.onChange(editor);
-}
-
 function ImagePlugin(opts) {
     return {
         renderNode: (props, editor, next) => {
@@ -20,9 +8,25 @@ function ImagePlugin(opts) {
             if (props.node.type === "image") return <img {...attributes} src={src
             }/>;
             return next();
+        },
+
+        commands: {
+            insertImage(editor, url) {
+                if (!url) {
+                    console.log("No image url");
+                    return;
+                }
+
+                editor.command((editor) => {
+                    editor.insertInline({
+                        type: 'image',
+                        isVoid: true,
+                        data: {  ["src"]: url },
+                    }).moveToStartOfNextText().focus();
+                });
+            }
         }
     };
 }
 
-export {insertImage};
 export default ImagePlugin;

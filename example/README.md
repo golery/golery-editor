@@ -1,4 +1,6 @@
-An example of how to use golery-editor
+An example of how to use golery-editor.
+This is for integration demo only.
+For dev, use main/src/sandbox (ref. main/src/sandbox/README.md)
 
 # USE LOCAL DEV VERSION OF GOLERY-EDITOR
 **/main:**
