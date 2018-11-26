@@ -1,47 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import {Editor as SlateEditor} from 'slate-react';
-import {Value} from 'slate';
 import CodeBlockPlugin from "./plugins/codeblock/CodeBlockPlugin";
-import SlateCodeBlock from "golery-slate-code-block";
-import {ParagraphPlugin} from "@canner/slate-icon-shared";
-import SlatePrism from "golery-slate-prism";
-import "./plugins/codeblock/PrismGrammars";
 import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
-import BasicMarkPlugin, {toggleBold, toggleUnderline, toggleItalic} from "./plugins/basicmarks/BasicMarkPlugin";
-import ListPlugin, {toggleList, toggleBullet, editListPlugin} from "./plugins/list/ListPlugin";
+import BasicMarkPlugin from "./plugins/basicmarks/BasicMarkPlugin";
+import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
 import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
 
-import 'antd/lib/select/style/index.css';
-import "prismjs/themes/prism.css";
-
-const initialValue = Value.fromJSON({
-    document: {
-        nodes: [
-            {
-                object: 'block',
-                type: 'paragraph',
-                nodes: [
-                    {
-                        object: 'text',
-                        leaves: [
-                            {
-                                text: 'for (var i = 0; i < 10; i++) {}',
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-});
-
-let slateCodeBlock = SlateCodeBlock({
-    onlyIn: node => node.type === "code_block"
-});
-let slatePrism = SlatePrism({
-    onlyIn: node => node.type === "code_block",
-    getSyntax: node => node.data.get("syntax")
-});
 let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
 let basicMarkPlugin = BasicMarkPlugin();
@@ -51,8 +15,8 @@ let softBreakPlugin = SoftBreakPlugin();
 let plugins = [
     basicMarkPlugin,
     editListPlugin,
-    slatePrism,
-    slateCodeBlock,
+    codeBlockPlugin.slatePrism,
+    codeBlockPlugin.slateCodeBlock,
     codeBlockPlugin,
     imagePlugin,
     listPlugin,
@@ -71,7 +35,7 @@ const schema = {
 class GoleryEditor extends React.Component {
     // Set the initial value when the app is first constructed.
     state = {
-        value: initialValue,
+        value: null,
     };
 
     constructor(props) {
@@ -87,7 +51,7 @@ class GoleryEditor extends React.Component {
             toggleList: () => this.editor.toggleList(),
             toggleBullet: () => this.editor.toggleBullet(),
 
-            isInCodeBlock: this._isInCodeBlock.bind(this),
+            isInCodeBlock: () => codeBlockPlugin.isInCodeBlock(this.editor),
             isInBold: () => basicMarkPlugin.isInBold(this.editor),
             isInItalic: () =>  basicMarkPlugin.isInItalic(this.editor),
             isInUnderline: () => basicMarkPlugin.isInUnderline(this.editor)
@@ -111,13 +75,10 @@ class GoleryEditor extends React.Component {
 
     ref = editor => {
         this.editor = editor;
+        // for debugging purpose
         window.EDITOR = editor;
         window.logValue = () => JSON.stringify(EDITOR.value, null, 2);
     };
-
-    _isInCodeBlock() {
-        return slateCodeBlock.utils.isInCodeBlock(this.editor.value);
-    }
 
     _insertImage() {
         insertImage(this.editor);

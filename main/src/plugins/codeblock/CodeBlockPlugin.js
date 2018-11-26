@@ -1,10 +1,22 @@
-import PluginEditCode from "golery-slate-code-block";
+import SlateCodeBlock from "golery-slate-code-block";
 import {CODE, CODE_LINE, PARAGRAPH} from "@canner/slate-constant/lib/blocks";
 import {codeBlockNode, codeLineNode} from "../../canner/renderer/codeBlockNode";
 // This key/values comes from "prismjs/components.js".
 // There are more values.
 import languages from "./languages.json";
 import isHotkey from "is-hotkey";
+import SlatePrism from "golery-slate-prism";
+import "./PrismGrammars";
+import "prismjs/themes/prism.css";
+import 'antd/lib/select/style/index.css';
+
+let slateCodeBlock = SlateCodeBlock({
+    onlyIn: node => node.type === "code_block"
+});
+let slatePrism = SlatePrism({
+    onlyIn: node => node.type === "code_block",
+    getSyntax: node => node.data.get("syntax")
+});
 
 const CodeBlockPlugin = opt => {
     const options = Object.assign(
@@ -38,7 +50,7 @@ const CodeBlockPlugin = opt => {
         commands: {
             toggleCode(editor, language) {
                 let typeName = CODE;
-                let codePlugin = PluginEditCode({
+                let codePlugin = SlateCodeBlock({
                     onlyIn: node => node.type === typeName
                 });
 
@@ -55,7 +67,15 @@ const CodeBlockPlugin = opt => {
                    codePlugin.changes.wrapCodeBlock(newChange);
                 }
             }
-        }
+        },
+
+        isInCodeBlock(editor) {
+            return slateCodeBlock.utils.isInCodeBlock(editor.value);
+        },
+
+        slateCodeBlock,
+
+        slatePrism
     };
 };
 
