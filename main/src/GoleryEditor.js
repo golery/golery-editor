@@ -42,7 +42,7 @@ class GoleryEditor extends React.Component {
         super(props);
         Object.assign(props.controller, {
             toggleCode: () => this.editor.toggleCode("tsx"),
-            insertImage: () => this.editor.insertImage("https://jaspergilhuis.files.wordpress.com/2018/07/logo.png"),
+            insertImage: (url) => this.editor.insertImage(url),
 
             toggleBold: () => this.editor.toggleBold(),
             toggleUnderline: () => this.editor.toggleUnderline(),
