@@ -50,6 +50,7 @@ module.exports = {
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
         contentBase: path.resolve(__dirname, 'src', 'sandbox'),
-        hot: true
+        hot: true,
+        port: 9000
     }
 };
