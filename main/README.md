@@ -18,3 +18,8 @@
 
 # Dev
 Read /example/README.md
+
+# UX
+## Shortcuts
+- Ctrl-/ : code block
+- Ctrl-b or u or i: basic format

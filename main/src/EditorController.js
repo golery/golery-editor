@@ -3,7 +3,7 @@ class EditorController {
     getToolbarOptions() {
         let options = [
             {
-                title: "Bold",
+                title: "Bold (ctrl+b)",
                 icon: "Bold",
                 onClick: () => {
                     this.toggleBold()
@@ -13,7 +13,7 @@ class EditorController {
                 }
             },
             {
-                title: "Italic",
+                title: "Italic (ctrl+i)",
                 icon: "Italic",
                 onClick: () => {
                     this.toggleItalic()
@@ -23,7 +23,7 @@ class EditorController {
                 }
             },
             {
-                title: "Underline",
+                title: "Underline (ctrl+u)",
                 icon: "Underline",
                 onClick: () => {
                     this.toggleUnderline()
@@ -55,7 +55,7 @@ class EditorController {
             },
             "separator",
             {
-                title: "Code",
+                title: "Code (ctrl+/)",
                 icon: "CodeBlock",
                 onClick: () => {
                     this.toggleCode()
