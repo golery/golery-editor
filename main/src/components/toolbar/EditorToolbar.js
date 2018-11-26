@@ -6,9 +6,8 @@ class ToolbarButton extends React.Component {
     render() {
         let {title, icon, onClick, isActive} = this.props;
         isActive = isActive || (() => false);
-        onClick = onClick || (() => {
-        });
-        return <IconContainer title={title} onClick={onClick}>
+        let decoractedOnClick = this._decorateOnClick(onClick);
+        return <IconContainer title={title} onClick={decoractedOnClick}>
             <div style={{display: "inline-block"}}>
                 <ToolbarIcon icon={icon}
                              isActive={isActive()}
@@ -29,6 +28,20 @@ class ToolbarButton extends React.Component {
                 />
             </div>
         </IconContainer>;
+    }
+
+    _decorateOnClick(onClick) {
+        if (onClick) {
+            return (e) => {
+                onClick(e);
+                e.preventDefault()
+            }
+        } else {
+            return (e) => {
+                console.log("No event handler for toolbar icon");
+                e.preventDefault()
+            };
+        }
     }
 }
 

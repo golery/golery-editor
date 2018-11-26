@@ -77,7 +77,7 @@ class GoleryEditor extends React.Component {
     constructor(props) {
         super(props);
         Object.assign(props.controller, {
-            toggleCode: this._toggleCodeBlock.bind(this),
+            toggleCode: () => this.editor.toggleCode("tsx"),
             insertImage: this._insertImage.bind(this),
             isInCodeBlock: this._isInCodeBlock.bind(this),
             toggleBold: () => toggleBold(this.editor),
@@ -108,13 +108,6 @@ class GoleryEditor extends React.Component {
         window.EDITOR = editor;
         window.logValue = () => JSON.stringify(EDITOR.value, null, 2);
     };
-
-    _toggleCodeBlock() {
-        this.editor.setBlocks({
-            data: {["syntax"]: "tsx"}
-        });
-        slateCodeBlock.changes.toggleCodeBlock(this.editor, 'paragraph').focus();
-    }
 
     _isInCodeBlock() {
         return slateCodeBlock.utils.isInCodeBlock(this.editor.value);
