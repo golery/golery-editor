@@ -29,7 +29,7 @@ const initialValue = SlateValue.fromJSON({
 });
 
 
-class DemoEditor extends React.Component {
+class SandboxApp extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -112,4 +112,4 @@ class DemoEditor extends React.Component {
     }
 }
 
-ReactDOM.render(<DemoEditor />, document.getElementById("root"));
+ReactDOM.render(<SandboxApp />, document.getElementById("root"));
