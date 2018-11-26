@@ -5,17 +5,14 @@ import {BOLD, ITALIC, UNDERLINE} from "@canner/slate-constant/lib/marks";
 
 const tagNames = {BOLD: "strong", ITALIC: "i", UNDERLINE: "u"};
 
-export function toggleBold(editor) {
-    editor.toggleMark(BOLD);
-}
+function haveMarks(editor, type) {
+    let {value} = editor;
+    if (value.marks.size > 0) {
+        return value.marks.some(mark => mark.type === type);
+    }
 
-export function toggleUnderline(editor) {
-    editor.toggleMark(UNDERLINE);
-}
-
-export function toggleItalic(editor) {
-    editor.toggleMark(ITALIC);
-}
+    return false;
+};
 
 export default function () {
     return {
@@ -30,18 +27,40 @@ export default function () {
         onKeyDown(event, editor, next) {
             if (isHotkey("mod+b", event)) {
                 event.preventDefault();
-                toggleBold(editor);
+                editor.toggleBold(editor);
                 return;
             } else if (isHotkey("mod+i", event)) {
                 event.preventDefault();
-                toggleItalic(editor);
+                editor.toggleItalic(editor);
                 return;
             } else if (isHotkey("mod+u", event)) {
                 event.preventDefault();
-                toggleUnderline(editor);
+                editor.toggleUnderline(editor);
                 return;
             } else {
                 return next();
+            }
+        },
+        isInBold(editor) {
+            return haveMarks(editor, BOLD);
+        },
+        isInItalic(editor) {
+            return haveMarks(editor, ITALIC);
+        },
+        isInUnderline(editor) {
+            return haveMarks(editor, UNDERLINE);
+        },
+        commands: {
+            toggleBold(editor) {
+                editor.toggleMark(BOLD);
+            },
+
+            toggleUnderline(editor) {
+                editor.toggleMark(UNDERLINE);
+            },
+
+            toggleItalic(editor) {
+                editor.toggleMark(ITALIC);
             }
         }
     };

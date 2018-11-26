@@ -79,12 +79,18 @@ class GoleryEditor extends React.Component {
         Object.assign(props.controller, {
             toggleCode: () => this.editor.toggleCode("tsx"),
             insertImage: this._insertImage.bind(this),
-            isInCodeBlock: this._isInCodeBlock.bind(this),
-            toggleBold: () => toggleBold(this.editor),
-            toggleUnderline: () => toggleUnderline(this.editor),
-            toggleItalic: () => toggleItalic(this.editor),
+
+            toggleBold: () => this.editor.toggleBold(),
+            toggleUnderline: () => this.editor.toggleUnderline(),
+            toggleItalic: () => this.editor.toggleItalic(),
+
             toggleList: () => this.editor.toggleList(),
-            toggleBullet: () => this.editor.toggleBullet()
+            toggleBullet: () => this.editor.toggleBullet(),
+
+            isInCodeBlock: this._isInCodeBlock.bind(this),
+            isInBold: () => basicMarkPlugin.isInBold(this.editor),
+            isInItalic: () =>  basicMarkPlugin.isInItalic(this.editor),
+            isInUnderline: () => basicMarkPlugin.isInUnderline(this.editor)
         });
     }
 

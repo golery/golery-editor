@@ -9,7 +9,7 @@ class EditorController {
                     this.toggleBold()
                 },
                 isActive: () => {
-                    return this.isInCodeBlock()
+                    return this.isInBold()
                 }
             },
             {
@@ -19,7 +19,7 @@ class EditorController {
                     this.toggleItalic()
                 },
                 isActive: () => {
-                    return this.isInCodeBlock()
+                    return this.isInItalic()
                 }
             },
             {
@@ -29,7 +29,7 @@ class EditorController {
                     this.toggleUnderline()
                 },
                 isActive: () => {
-                    return this.isInCodeBlock()
+                    return this.isInUnderline()
                 }
             },
             "separator",
@@ -78,11 +78,24 @@ class EditorController {
         return options;
     }
 
+
+    isInBold() {
+        // to be injected by editor
+    }
+
     toggleBold() {
         // to be injected by editor
     }
 
+    isInItalic() {
+        // to be injected by editor
+    }
+
     toggleItalic() {
+        // to be injected by editor
+    }
+
+    isInUnderline() {
         // to be injected by editor
     }
 
