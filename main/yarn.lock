@@ -3298,9 +3298,9 @@ globby@^6.1.0:
     pinkie-promise "^2.0.0"
 
 golery-slate-code-block@^0.16.0-golery.0:
-  version "0.16.0-golery.0"
-  resolved "https://registry.yarnpkg.com/golery-slate-code-block/-/golery-slate-code-block-0.16.0-golery.0.tgz#deb4d086791a08d786c7cc1747fee2417b55f0b0"
-  integrity sha512-rOdiH/m3vBY+6AcVxb0jBjust/5AWqHrk9gOOJJ6H7L8B/hTwWfnjC0D59ucon+ty1019JYv+eQyhaucLGDlKg==
+  version "0.16.0-golery.1"
+  resolved "https://registry.yarnpkg.com/golery-slate-code-block/-/golery-slate-code-block-0.16.0-golery.1.tgz#5cb8619a2a477197e625e407b25309e09cf715be"
+  integrity sha512-5xtArxS5yNX+sOJzurrH8a4TgRWU7iTtty35xG+3GpDiDpc6hZRnINLN5kTVTvKz205tHUODOpfkFyRdOlukPw==
   dependencies:
     detect-indent "^5.0.0"
     detect-newline "^2.1.0"
@@ -3312,10 +3312,10 @@ golery-slate-edit-list@^0.18.0-golery.0:
   resolved "https://registry.yarnpkg.com/golery-slate-edit-list/-/golery-slate-edit-list-0.18.0-golery.0.tgz#33dc630d1429d5d83ecf4d24bcf0a687c37c8502"
   integrity sha512-YxacMqVuqozzUm5a46yEVf7tL5yu7vsqpgpTzfFcjmmsBSpOQr30bioU5KfaPC5A6aEVtLBsqpl7g7fKzBha5w==
 
-golery-slate-prism@^0.6.0-golery.1:
-  version "0.6.0-golery.1"
-  resolved "https://registry.yarnpkg.com/golery-slate-prism/-/golery-slate-prism-0.6.0-golery.1.tgz#1e1ab5896658560dc27563663872e4052f3c34a9"
-  integrity sha512-fFGQ7nxYKkgTDfYENopJgVZTy/oC7c+/pVNqJN2kNJrCF3eNDpcYZOI8Ggslb1azo2vWggdDAeloP4emVkmIew==
+golery-slate-prism@^0.6.0-golery.2:
+  version "0.6.0-golery.2"
+  resolved "https://registry.yarnpkg.com/golery-slate-prism/-/golery-slate-prism-0.6.0-golery.2.tgz#d56ae8f2dc8056c752da18cb06298dbf84a3d1b4"
+  integrity sha512-vYJ2gU4lq2vXjICh1NWmS8xJWbFtVmHq56ubitNz10ZGIJmOklT4/qEDAAnGsVgpCZ1RcNCSjsGSrrC3jv3zNw==
 
 good-listener@^1.2.2:
   version "1.2.2"

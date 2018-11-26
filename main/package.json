@@ -43,7 +43,9 @@
     "antd": "3.9.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
+    "golery-slate-code-block": "^0.16.0-golery.0",
     "golery-slate-edit-list": "^0.18.0-golery.0",
+    "golery-slate-prism": "^0.6.0-golery.2",
     "less-loader": "^4.1.0",
     "path": "^0.12.7",
     "react": "^16.6.0",
@@ -59,6 +61,7 @@
     "slate-md-editor": "^1.5.4",
     "slate-prism": "^0.5.0",
     "slate-react": "^0.21.12",
+    "slate-schema-violations": "^0.1.39",
     "slate-sidebar": "^1.5.0",
     "slate-simulator": "^0.4.23",
     "slate-soft-break": "^0.9.0",
@@ -70,9 +73,5 @@
     "webpack-dev-server": "^3.1.10"
   },
   "license": "MIT",
-  "dependencies": {
-    "golery-slate-code-block": "^0.16.0-golery.0",
-    "golery-slate-prism": "^0.6.0-golery.1",
-    "slate-schema-violations": "^0.1.39"
-  }
+  "dependencies": {}
 }
