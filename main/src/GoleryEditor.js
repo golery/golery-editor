@@ -9,7 +9,7 @@ import "./plugins/codeblock/PrismGrammars";
 import ImagePlugin, {insertImage} from "./plugins/image/ImagePlugin";
 import BasicMarkPlugin, {toggleBold, toggleUnderline, toggleItalic} from "./plugins/basicmarks/BasicMarkPlugin";
 import ListPlugin, {toggleList, toggleBullet, editListPlugin} from "./plugins/list/ListPlugin";
-import SoftBreakPlugin from "./plugins/softbreak/slate-soft-break";
+import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
 
 import 'antd/lib/select/style/index.css';
 import "prismjs/themes/prism.css";
