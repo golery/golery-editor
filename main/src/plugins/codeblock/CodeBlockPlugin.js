@@ -40,7 +40,7 @@ const CodeBlockPlugin = opt => {
         },
 
         onKeyDown(event, editor, next) {
-            if (isHotkey("ctrl+/", event)) {
+            if (isHotkey("mod+/", event)) {
                 event.preventDefault();
                 editor.toggleCode("tsx");
                 return;

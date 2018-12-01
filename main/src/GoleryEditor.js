@@ -5,12 +5,14 @@ import ImagePlugin from "./plugins/image/ImagePlugin";
 import BasicMarkPlugin from "./plugins/basicmarks/BasicMarkPlugin";
 import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
 import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
+import LinkPlugin from "./plugins/link/LinkPlugin";
 
 let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
 let basicMarkPlugin = BasicMarkPlugin();
 let listPlugin = ListPlugin();
 let softBreakPlugin = SoftBreakPlugin();
+let linkPlugin = LinkPlugin();
 
 let plugins = [
     basicMarkPlugin,
@@ -20,7 +22,8 @@ let plugins = [
     codeBlockPlugin,
     imagePlugin,
     listPlugin,
-    softBreakPlugin
+    softBreakPlugin,
+    linkPlugin
 ];
 
 const schema = {
