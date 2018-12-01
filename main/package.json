@@ -47,6 +47,7 @@
     "golery-slate-code-block": "^0.16.0-golery.0",
     "golery-slate-edit-list": "^0.18.0-golery.0",
     "golery-slate-prism": "^0.6.0-golery.2",
+    "is-url": "^1.2.4",
     "less-loader": "^4.1.0",
     "path": "^0.12.7",
     "react": "^16.6.0",

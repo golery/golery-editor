@@ -61,19 +61,9 @@ class SandboxApp extends React.Component {
                 </div>
 
                 <div>
-                    <button onClick={() => this._setHtml()}>SetHtml</button>
-                    <button onClick={() => this._getHtml()}>GetHtml</button>
+                    <button onClick={() => this._resetHtml()}>Parse then set Html</button>
                     <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
                     <button onClick={() => this._logValue()}>Value</button>
-                </div>
-
-                <div id={"sample"}>
-                    This is test<ol>
-                    <li>
-                        first<br />firt of firts
-                    </li>
-                    <li>second</li>
-                </ol>
                 </div>
             </div>
         );
@@ -86,17 +76,14 @@ class SandboxApp extends React.Component {
     _toogleReadOnly() {
         this.setState({readOnly: !this.state.readOnly});
     }
-    _setHtml() {
-        let html = document.getElementById("sample").innerHTML;
-        const v = htmlSerializer.deserialize(html);
-        this.setState({ value: v });
-        console.log(v);
-    }
 
-    _getHtml() {
+    _resetHtml() {
         let html = htmlSerializer.serialize(this.state.value);
         this.html = html;
         console.log("Out:", html);
+        const v = htmlSerializer.deserialize(html);
+        console.log(JSON.stringify(v, null ,2));
+        this.setState({ value: v });
     }
 
     _setHtmlFromGet() {
