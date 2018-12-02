@@ -29,7 +29,7 @@ export default function () {
                 if (editor.props.readOnly) {
                     let link = `https://www.youtube.com/embed/${id}`;
                     return <VideoLink link={link} width={data.get('width')}
-                                      height={data.get('height')} />;
+                                      height={data.get('height')} {...attributes}/>;
                 } else {
                     let linkScreenshot = `https://img.youtube.com/vi/${id}/0.jpg`;
                     return <img src={linkScreenshot} {...attributes}/>;
