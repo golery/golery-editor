@@ -34,8 +34,8 @@ export default function () {
             const {type, text} = getEventTransfer(event);
             console.log(type);
             if (text && isUrl(text) && text.startsWith("https://www.youtube.com/")) {
-                let url = urlParser.parse('http://www.youtube.com/watch?v=HRb7B9fPhfA');
-                if (url) {
+                let url = urlParser.parse(text);
+                if (url && url.id) {
                     console.log('Insert video', text);
                     editor.insertInline({type: 'youtube', data: {id: url.id, width: 800, height: 600}})
                         .moveToStartOfNextText()
