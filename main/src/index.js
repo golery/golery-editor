@@ -13,7 +13,7 @@ const Mock = () => <div>(mock react component in nodejs)</div>;
 
 if (isBrowser) {
     GoleryEditor = require('./GoleryEditor').default;
-    htmlSerializer = require('./canner/html/html').default;
+    htmlSerializer = require('./canner/slate-editor-html/serializer').default;
     EditorToolbar = require("./components/toolbar/EditorToolbar").default;
     SlateValue = require("slate").Value;
 } else {

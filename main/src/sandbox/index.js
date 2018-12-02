@@ -86,12 +86,6 @@ class SandboxApp extends React.Component {
         this.setState({ value: v });
     }
 
-    _setHtmlFromGet() {
-        let value = htmlSerializer.deserialize(this.html);
-        console.log(value.toJSON());
-        this.setState({ value: value });
-    }
-
     _onChange(change, v1, v2) {
         let value = change.value;
         // let innerHtml = htmlSerializer.serialize(value);

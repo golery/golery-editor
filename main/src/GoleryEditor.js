@@ -6,6 +6,7 @@ import BasicMarkPlugin from "./plugins/basicmarks/BasicMarkPlugin";
 import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
 import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
 import LinkPlugin from "./plugins/link/LinkPlugin";
+import VideoPlugin from "./plugins/video/VideoPlugin";
 
 let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
@@ -13,6 +14,7 @@ let basicMarkPlugin = BasicMarkPlugin();
 let listPlugin = ListPlugin();
 let softBreakPlugin = SoftBreakPlugin();
 let linkPlugin = LinkPlugin();
+let videoPlugin = VideoPlugin();
 
 let plugins = [
     basicMarkPlugin,
@@ -23,6 +25,7 @@ let plugins = [
     imagePlugin,
     listPlugin,
     softBreakPlugin,
+    videoPlugin,
     linkPlugin
 ];
 
@@ -31,6 +34,9 @@ const schema = {
         image: {
             isVoid: true,
         },
+        link: {
+            isVoid: true
+        }
     },
 };
 
