@@ -44,10 +44,6 @@ export default function (inlineType = "video", stylesAttr = defaultAttrs) {
         },
         serialize(obj) {
             if (obj.object === "inline" && obj.type === inlineType) {
-                const align = stylesAttr.textAlign(obj);
-                const indent = stylesAttr.paddingLeft(obj);
-                const width = stylesAttr.width(obj) || 560;
-                const height = stylesAttr.height(obj) || 315;
                 const id = stylesAttr.id(obj);
                 let link;
 
@@ -62,13 +58,7 @@ export default function (inlineType = "video", stylesAttr = defaultAttrs) {
                 }
 
                 return (
-                    <VideoContiner
-                        align={align}
-                        width={width}
-                        height={height}
-                        indent={indent}
-                        src={link}
-                    />
+                    <iframe src={link}/>
                 );
             }
         }

@@ -26,8 +26,14 @@ export default function () {
             if (node.type === 'youtube') {
                 const {data} = node;
                 const id = data.get('id');
-                let link = `https://www.youtube.com/embed/${id}`;
-                return <VideoLink link={link} {...attributes}/>;
+                if (editor.props.readOnly) {
+                    let link = `https://www.youtube.com/embed/${id}`;
+                    return <VideoLink link={link} width={data.get('width')}
+                                      height={data.get('height')} />;
+                } else {
+                    let linkScreenshot = `https://img.youtube.com/vi/${id}/0.jpg`;
+                    return <img src={linkScreenshot} {...attributes}/>;
+                }
             } else
                 return next();
         },
@@ -38,8 +44,9 @@ export default function () {
                 let url = urlParser.parse(text);
                 if (url && url.id) {
                     console.log('Insert video', text);
-                    editor.insertInline({type: 'youtube', data: {id: url.id, width: 800, height: 600}})
+                    editor.insertText("\n").insertInline({type: 'youtube', data: {id: url.id, width: 853, height: 505}})
                         .moveToStartOfNextText()
+                        .insertText("\n")
                         .focus();
                     return;
                 }
