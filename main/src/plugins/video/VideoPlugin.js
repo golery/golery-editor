@@ -12,7 +12,8 @@ class VideoLink extends React.Component {
 
     render() {
         const { link, ...attributes } = this.props;
-        return <iframe style={{ pointerEvents: "none" }} src={link} {...attributes}/>;
+        // add style={{ pointerEvents: "none" }}  to disable playing
+        return <iframe src={link} {...attributes}/>;
     }
 }
 

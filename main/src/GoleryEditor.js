@@ -32,9 +32,12 @@ let plugins = [
 const schema = {
     inlines: {
         image: {
-            isVoid: true,
+            isVoid: true
         },
         link: {
+            isVoid: true
+        },
+        youtube: {
             isVoid: true
         }
     },
