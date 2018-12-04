@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build.dev": "webpack --config webpack.config.js --mode development --progress",
-    "build.prod": "webpack --config webpack.config.js --mode production  --progress --output-filename index.min.js",
+    "build.prod": "webpack --config webpack.config.js --mode production  --progress",
     "build": "yarn run build.dev && yarn run build.prod",
     "dev": "webpack-dev-server --config webpack.config.sandboxbrowser.js --mode development --progress",
     "watch.node": "webpack --config webpack.config.sandboxnode.js --mode development --progress --watch",
@@ -19,7 +19,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.min.js",
+  "main": "dist/min/index.js",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.2",

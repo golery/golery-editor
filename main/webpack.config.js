@@ -63,11 +63,11 @@ module.exports = function (env, argv) {
     if (argv.mode === "production") {
         config.output.filename = "index.js";
         config.output.path += "/min";
-        config.devtool = false;
+        config.devtool = "source-map";
     } else {
         config.output.filename = "index.js";
         config.output.path += "/dev";
-        config.devtool = "source-map";
+        config.devtool = "eval-source-map";
     }
     console.log(config);
     return config;
