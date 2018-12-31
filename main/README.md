@@ -16,8 +16,17 @@
 3. In golery project
 `yarn upgrade --latest golery-editor`
 
-# Dev
-Read /example/README.md
+# DEV: Run at local for dev
+## Sandbox for browser
+Sandbox for render editor in browser mode.
+[/main] yarn dev
+Access: http://localhost:9000
+
+
+## Sandbox for nodejs
+Sandbox for nodejs. It validates that the library can be safely imported from nodejs env
+[/main] yarn watch.node
+[/main] yarn dev.node
 
 # UX
 ## Shortcuts
