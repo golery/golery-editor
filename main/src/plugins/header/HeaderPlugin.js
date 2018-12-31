@@ -18,11 +18,11 @@ const headers = [
 ];
 
 function fromType(type) {
-    return headers.filter(header => header.type === type);
+    return headers.find(header => header.type === type);
 }
 
 function fromLevel(level) {
-    return headers.filter(header => header.level === level);
+    return headers.find(header => header.level === level);
 }
 
 function doToggleHeader(editor, type) {
@@ -33,13 +33,13 @@ function doToggleHeader(editor, type) {
         .unwrapBlock(OL_LIST);
 }
 
-const plugin = () => {
+const HeaderPlugin = () => {
     return {
         renderNode: (props, editor, next) => {
             let type = props.node.type;
             let header = fromType(type);
             if (header) {
-                return commonNode(tagName.tag, nodeAttrs)(props);
+                return commonNode(header.tag, nodeAttrs)(props);
             }
             return next();
         },
@@ -47,13 +47,13 @@ const plugin = () => {
             if (e.key === "Enter") {
                 // press enter will start a new normal paragraph
                 // Special case: press enter at the end of header, start a new normal paragraph
-                const getCurrentblock = editor.value.blocks.get(0);
-
-                if (getCurrentblock.type === type) {
+                const currentBlock = editor.value.blocks.get(0);
+                let header = fromType(currentBlock.type);
+                if (header) {
                     return editor.splitBlock().setBlocks(PARAGRAPH);
                 }
             } else {
-                let header = headers.filter(header => isHotkey(header.hotkey, e));
+                let header = headers.find(header => isHotkey(header.hotkey, e));
                 if (header) {
                     e.preventDefault();
                     doToggleHeader(editor, header.type);
@@ -65,17 +65,14 @@ const plugin = () => {
         commands: {
             toggleHeader(editor, level) {
                 let header = fromLevel(level);
-                if (header) {
-                    doToggleHeader(editor, header.type);
-                }
-            }
+                doToggleHeader(editor, header.type);
+            },
+        },
+        isHeader(editor, level) {
+            let header = fromLevel(level);
+            return hasBlock(editor, header.type);
         }
     };
 };
 
-export const HeaderOnePlugin = (type = HEADING_1) =>
-    plugin(1, type, "h1", "ctrl+opt+1");
-export const HeaderTwoPlugin = (type = HEADING_2) =>
-    plugin(2, type, "h2", "ctrl+opt+2");
-export const HeaderThreePlugin = (type = HEADING_3) =>
-    plugin(3, type, "h3", "ctrl+opt+3");
+export default HeaderPlugin;

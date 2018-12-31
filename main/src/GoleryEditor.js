@@ -7,6 +7,7 @@ import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
 import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
 import LinkPlugin from "./plugins/link/LinkPlugin";
 import VideoPlugin from "./plugins/video/VideoPlugin";
+import HeaderPlugin from "./plugins/header/HeaderPlugin";
 
 let imagePlugin = ImagePlugin();
 let codeBlockPlugin = CodeBlockPlugin();
@@ -15,7 +16,11 @@ let listPlugin = ListPlugin();
 let softBreakPlugin = SoftBreakPlugin();
 let linkPlugin = LinkPlugin();
 let videoPlugin = VideoPlugin();
+let headerPlugin = HeaderPlugin();
 
+// List of plugins and toolbar ubttons can be found at:?
+// https://github.com/Canner/canner-slate-editor/blob/master/packages/editors/canner-slate-editor/src/index.js
+// https://github.com/Canner/canner-slate-editor/blob/master/packages/editors/canner-slate-editor/src/menuToolbar.js
 let plugins = [
     basicMarkPlugin,
     editListPlugin,
@@ -26,7 +31,8 @@ let plugins = [
     listPlugin,
     softBreakPlugin,
     videoPlugin,
-    linkPlugin
+    linkPlugin,
+    headerPlugin
 ];
 
 const schema = {
@@ -53,6 +59,8 @@ class GoleryEditor extends React.Component {
     constructor(props) {
         super(props);
         Object.assign(props.controller, {
+            toggleHeader: (level) => this.editor.toggleHeader(level),
+
             toggleCode: () => this.editor.toggleCode("tsx"),
             insertImage: (url) => this.editor.insertImage(url),
 
@@ -63,6 +71,7 @@ class GoleryEditor extends React.Component {
             toggleList: () => this.editor.toggleList(),
             toggleBullet: () => this.editor.toggleBullet(),
 
+            isHeader: (level) => headerPlugin.isHeader(this.editor, level),
             isInCodeBlock: () => codeBlockPlugin.isInCodeBlock(this.editor),
             isInBold: () => basicMarkPlugin.isInBold(this.editor),
             isInItalic: () =>  basicMarkPlugin.isInItalic(this.editor),

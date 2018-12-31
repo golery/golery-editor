@@ -1,7 +1,38 @@
 class EditorController {
-    // The list of icon name is in canner::packages/quill-icons/src/index.js
+    // The list of icon name is in https://github.com/Canner/canner-slate-editor/blob/master/packages/quill-icons/src/index.js
     getToolbarOptions({getImageUrl}) {
         let options = [
+            {
+                title: "Header 1 (ctrl+alt+1)",
+                icon: "Header",
+                onClick: () => {
+                    this.toggleHeader(1)
+                },
+                isActive: () => {
+                    return this.isHeader(1)
+                }
+            },
+            {
+                title: "Header 2 (ctrl+alt+2)",
+                icon: "Header2",
+                onClick: () => {
+                    this.toggleHeader(2)
+                },
+                isActive: () => {
+                    return this.isHeader(2)
+                }
+            },
+            {
+                title: "Header 3 (ctrl+alt+3)",
+                icon: "Header3",
+                onClick: () => {
+                    this.toggleHeader(3)
+                },
+                isActive: () => {
+                    return this.isHeader(3)
+                }
+            },
+            "separator",
             {
                 title: "Bold (ctrl+b)",
                 icon: "Bold",
@@ -78,6 +109,14 @@ class EditorController {
         return options;
     }
 
+
+    isHeader(level) {
+        // to be injected by editor
+    }
+
+    toggleHeader(level) {
+        // to be injected by editor
+    }
 
     isInBold() {
         // to be injected by editor
