@@ -6,7 +6,6 @@ class ToolbarButton extends React.Component {
     render() {
         let {title, icon, onClick, isActive} = this.props;
         isActive = isActive || (() => false);
-        console.log('====', isActive());
         let decoractedOnClick = this._decorateOnClick(onClick);
         return <IconContainer title={title} onClick={decoractedOnClick}>
             <div style={{display: "inline-block"}}>
