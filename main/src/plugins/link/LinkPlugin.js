@@ -2,6 +2,32 @@ import React from "react";
 import {getEventTransfer} from 'slate-react';
 import isUrl from 'is-url'
 
+/**
+ * A change helper to standardize wrapping links.
+ *
+ * @param {Editor} editor
+ * @param {String} href
+ */
+
+function wrapLink(editor, href) {
+    editor.wrapInline({
+        type: 'link',
+        data: { href },
+    })
+
+    editor.moveToEnd()
+}
+
+/**
+ * A change helper to standardize unwrapping links.
+ *
+ * @param {Editor} editor
+ */
+
+function unwrapLink(editor) {
+    editor.unwrapInline('link')
+}
+
 export default function () {
     return {
         renderNode(props, editor, next) {
@@ -11,7 +37,7 @@ export default function () {
                 const {data} = node;
                 const href = data.get('href');
                 return (
-                    <a {...attributes} href={href} target="_blank">{href}
+                    <a {...attributes} href={href} target="_blank">
                         {children}
                     </a>
                 )
@@ -21,8 +47,12 @@ export default function () {
             const {type, text} = getEventTransfer(event);
             console.log(type);
             if (text && isUrl(text)) {
+                let href = text;
                 console.log('Insert link', text);
-                editor.insertInline({type: 'link', data: {href: text}});
+                editor
+                    .insertText(text)
+                    .moveFocusBackward(text.length)
+                    .command(wrapLink, href)
             } else next();
         }
     };

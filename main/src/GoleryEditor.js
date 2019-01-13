@@ -40,9 +40,6 @@ const schema = {
         image: {
             isVoid: true
         },
-        link: {
-            isVoid: true
-        },
         youtube: {
             isVoid: true
         }
