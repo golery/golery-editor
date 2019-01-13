@@ -45,7 +45,7 @@
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
     "golery-slate-code-block": "^0.16.0-golery.0",
-    "golery-slate-edit-list": "^0.18.0-golery.0",
+    "golery-slate-edit-list": "^0.18.0-golery.4",
     "golery-slate-prism": "^0.6.0-golery.2",
     "is-url": "^1.2.4",
     "js-video-url-parser": "^0.2.7",

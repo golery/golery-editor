@@ -15,6 +15,7 @@
 
 3. In golery project
 `yarn upgrade --latest golery-editor`
+`yarn upgrade --latest golery-slate-edit-list`
 
 # DEV: Run at local for dev
 ## Sandbox for browser
