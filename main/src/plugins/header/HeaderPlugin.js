@@ -50,7 +50,16 @@ const HeaderPlugin = () => {
                 const currentBlock = editor.value.blocks.get(0);
                 let header = fromType(currentBlock.type);
                 if (header) {
-                    return editor.splitBlock().setBlocks(PARAGRAPH);
+                    let {anchor, focus} = editor.value.selection;
+                    if (anchor.key === focus.key && anchor.offset === 0 && focus.offset ===0) {
+                        // when enter at begining of header line
+                        editor.setBlocks(PARAGRAPH);
+                        editor.splitBlock().setBlocks(header);
+                        return;
+                    } else {
+                        editor.splitBlock().setBlocks(PARAGRAPH);
+                        return;
+                    }
                 }
             } else {
                 let header = headers.find(header => isHotkey(header.hotkey, e));
