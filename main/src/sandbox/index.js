@@ -29,6 +29,27 @@ const initialValue = SlateValue.fromJSON({
 });
 
 
+class MyController extends EditorController {
+    /**
+     * When clicking on image button in toolbar, this method is called to open image dialge
+     * Injected by library user
+     * */
+    async openInsertImageDialog() {
+        console.log("In real application, we allow user to select the image");
+        return "https://jaspergilhuis.files.wordpress.com/2018/07/logo.png";
+    }
+
+    /**
+     * When paste an image, this method is called and allow user to modify image
+     * Injected by library user
+     * */
+    async editImageOnPaste(pasteBlobUrl) {
+        console.log("Image image ", pasteBlobUrl);
+        console.log("In real application, we allow user to modify the image in blobUrl");
+        return pasteBlobUrl;
+    }
+}
+
 class SandboxApp extends React.Component {
     constructor() {
         super();
@@ -37,16 +58,15 @@ class SandboxApp extends React.Component {
             readOnly: false
         };
         this.editor = React.createRef();
-        this.controller = new EditorController();
+        this.controller = new MyController();
+
     }
 
     render() {
         const { value } = this.state;
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
         let editorToolbarOptions = this.controller.getToolbarOptions({
-            async getImageUrl() {
-                return "https://jaspergilhuis.files.wordpress.com/2018/07/logo.png"
-            }
+
         });
         return (
             <div style={{ margin: "20px" }}>
@@ -86,7 +106,7 @@ class SandboxApp extends React.Component {
         this.setState({ value: v });
     }
 
-    _onChange(change, v1, v2) {
+    _onChange(change) {
         let value = change.value;
         // let innerHtml = htmlSerializer.serialize(value);
         this.setState({value: value});

@@ -46,7 +46,18 @@ const schema = {
     },
 };
 
-/** A pack of plugins for Golery Editor */
+/**
+ * How to interact to GoleryEditor
+ * <GoleryEditor controller=myController/>
+ * MyController extends default MyController()
+ *
+ * GoleryEditor then populate controller with API methods (ex: toggleBold)
+ * User can also add method to Controller so that GoleryEditor/Plugin can call back (ex: editImageOnPaste)
+ *
+ * Plugin call controller by editor.api.editImageOnPaste()
+ * Read: /work/golery-editor/main/src/sandbox/index.js for example usage
+ *
+ *  */
 class GoleryEditor extends React.Component {
     // Set the initial value when the app is first constructed.
     state = {
@@ -93,14 +104,12 @@ class GoleryEditor extends React.Component {
 
     ref = editor => {
         this.editor = editor;
+        editor.api = this.props.controller;
+
         // for debugging purpose
         window.EDITOR = editor;
         window.logValue = () => JSON.stringify(EDITOR.value, null, 2);
     };
-
-    _insertImage() {
-        insertImage(this.editor);
-    }
 }
 
 export default GoleryEditor;

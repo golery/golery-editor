@@ -1,6 +1,6 @@
 class EditorController {
     // The list of icon name is in https://github.com/Canner/canner-slate-editor/blob/master/packages/quill-icons/src/index.js
-    getToolbarOptions({getImageUrl}) {
+    getToolbarOptions() {
         let options = [
             {
                 title: "Header 1 (ctrl+alt+1)",
@@ -99,7 +99,7 @@ class EditorController {
                 title: "Image",
                 icon: "Image",
                 onClick: () => {
-                    getImageUrl().then(url => this.insertImage(url));
+                    this.openInsertImageDialog().then(url => this.insertImage(url));
                 },
                 isActive: () => {
                     return this.isInCodeBlock()
@@ -146,7 +146,7 @@ class EditorController {
         // to be injected by editor
     }
 
-    insertImage() {
+    insertImage(url) {
         // to be injected by editor
     }
 
@@ -160,6 +160,23 @@ class EditorController {
 
     toggleBullet() {
         // to be injected by editor
+    }
+
+
+    /**
+     * When clicking on image button in toolbar, this method is called to open image dialge
+     * Injected by library user
+     * */
+    async openInsertImageDialog() {
+        // to be in
+    }
+
+    /**
+     * When paste an image, this method is called and allow user to modify image
+     * Injected by library user
+     * */
+    async editImageOnPaste(pasteBlobUrl) {
+        return pasteBlobUrl;
     }
 }
 
