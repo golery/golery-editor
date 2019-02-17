@@ -104,7 +104,9 @@ class GoleryEditor extends React.Component {
 
     ref = editor => {
         this.editor = editor;
-        editor.api = this.props.controller;
+        if (editor != null) {
+            editor.api = this.props.controller;
+        }
 
         // for debugging purpose
         window.EDITOR = editor;
