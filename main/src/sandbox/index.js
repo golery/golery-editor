@@ -53,40 +53,69 @@ class MyController extends EditorController {
 class SandboxApp extends React.Component {
     constructor() {
         super();
+
+        let value = htmlSerializer.deserialize("");
+        // value = initialValue;
         this.state = {
-            value: initialValue,
-            readOnly: false
+            value,
+            readOnly: false,
+            showEditor: false
         };
         this.editor = React.createRef();
         this.controller = new MyController();
+        this.textAreaRef = React.createRef();
 
     }
 
     render() {
-        const { value } = this.state;
+        const { value, showEditor } = this.state;
         const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
         let editorToolbarOptions = this.controller.getToolbarOptions({
 
         });
+        let $editor = showEditor ?
+            (<GoleryEditor
+            controller={this.controller}
+            value={value} onChange={onChange}
+            readOnly={this.state.readOnly}
+            ref={this.editor}/>) : null;
         return (
             <div style={{ margin: "20px" }}>
                 <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
 
                 <div style={{border: "1px solid red"}}>
-                    <GoleryEditor
-                            controller={this.controller}
-                            value={value} onChange={onChange}
-                            readOnly={this.state.readOnly}
-                            ref={this.editor}/>
+                    {$editor}
                 </div>
 
                 <div>
                     <button onClick={() => this._resetHtml()}>Parse then set Html</button>
                     <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
                     <button onClick={() => this._logValue()}>Value</button>
+                    <button onClick={() => this._setEmpty()}>Set empty</button>
+                    <button onClick={() => this._focus()}>Focus</button>
+                </div>
+
+                <div>
+                    <textarea ref={this.textAreaRef}/>
                 </div>
             </div>
         );
+    }
+
+    _setEmpty() {
+        const v = htmlSerializer.deserialize("");
+        console.log(JSON.stringify(v, null ,2));
+        this.setState({ value: v, showEditor: true });
+
+        this.textAreaRef.current.focus();
+    }
+
+    _focus() {
+        this._getEditor().editor.focus();
+    }
+
+    _getEditor() {
+        return this.editor.current;
     }
 
     _logValue() {
