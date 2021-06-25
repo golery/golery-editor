@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import GoleryEditorLib from "../index";
-let {GoleryEditor, EditorToolbar, SlateValue, htmlSerializer, EditorController} = GoleryEditorLib;
+let {GoleryEditor, EditorToolbar, SlateValue, EditorController} = GoleryEditorLib;
 import "@babel/polyfill";
 
 import styles from "./main.css";
+import ErrorBoundary from "./ErrorBoundary";
 
-const initialValue = SlateValue.fromJSON({
+const initialValue = [];
+/*SlateValue.fromJSON({
     document: {
         nodes: [
             {
@@ -26,7 +28,7 @@ const initialValue = SlateValue.fromJSON({
             }
         ]
     }
-});
+});*/
 
 
 class MyController extends EditorController {
@@ -54,12 +56,12 @@ class SandboxApp extends React.Component {
     constructor() {
         super();
 
-        let value = htmlSerializer.deserialize("");
-        // value = initialValue;
+        // let value = htmlSerializer.deserialize("<p>This is text</p>");
+        let value = initialValue;
         this.state = {
             value,
             readOnly: false,
-            showEditor: false
+            showEditor: true
         };
         this.editor = React.createRef();
         this.controller = new MyController();
@@ -73,26 +75,29 @@ class SandboxApp extends React.Component {
         let editorToolbarOptions = this.controller.getToolbarOptions({
 
         });
+        console.log('Value', value);
         let $editor = showEditor ?
             (<GoleryEditor
-            controller={this.controller}
-            value={value} onChange={onChange}
-            readOnly={this.state.readOnly}
-            ref={this.editor}/>) : null;
+                controller={this.controller}
+                value={value} onChange={onChange}
+                readOnly={this.state.readOnly}
+                ref={this.editor}/>) : null;
         return (
             <div style={{ margin: "20px" }}>
                 <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
 
                 <div style={{border: "1px solid red"}}>
+                    <ErrorBoundary>---
                     {$editor}
+                    ]]]</ErrorBoundary>
                 </div>
 
                 <div>
-                    <button onClick={() => this._resetHtml()}>Parse then set Html</button>
-                    <button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>
-                    <button onClick={() => this._logValue()}>Value</button>
-                    <button onClick={() => this._setEmpty()}>Set empty</button>
-                    <button onClick={() => this._focus()}>Focus</button>
+                    {/*<button onClick={() => this._resetHtml()}>Parse then set Html</button>*/}
+                    {/*<button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>*/}
+                    {/*<button onClick={() => this._logValue()}>Value</button>*/}
+                    {/*<button onClick={() => this._setEmpty()}>Set empty</button>*/}
+                    {/*<button onClick={() => this._focus()}>Focus</button>*/}
                 </div>
 
                 <div>
@@ -103,11 +108,11 @@ class SandboxApp extends React.Component {
     }
 
     _setEmpty() {
-        const v = htmlSerializer.deserialize("");
-        console.log(JSON.stringify(v, null ,2));
-        this.setState({ value: v, showEditor: true });
-
-        this.textAreaRef.current.focus();
+        // const v = htmlSerializer.deserialize("");
+        // console.log(JSON.stringify(v, null ,2));
+        // this.setState({ value: v, showEditor: true });
+        //
+        // this.textAreaRef.current.focus();
     }
 
     _focus() {
@@ -127,18 +132,18 @@ class SandboxApp extends React.Component {
     }
 
     _resetHtml() {
-        let html = htmlSerializer.serialize(this.state.value);
-        this.html = html;
-        console.log("Out:", html);
-        const v = htmlSerializer.deserialize(html);
-        console.log(JSON.stringify(v, null ,2));
-        this.setState({ value: v });
+        // let html = htmlSerializer.serialize(this.state.value);
+        // this.html = html;
+        // console.log("Out:", html);
+        // const v = htmlSerializer.deserialize(html);
+        // console.log(JSON.stringify(v, null ,2));
+        // this.setState({ value: v });
     }
 
     _onChange(change) {
-        let value = change.value;
-        // let innerHtml = htmlSerializer.serialize(value);
-        this.setState({value: value});
+        // let value = change.value;
+        // // let innerHtml = htmlSerializer.serialize(value);
+        // this.setState({value: value});
     }
 }
 
