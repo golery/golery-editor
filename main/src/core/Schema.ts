@@ -6,3 +6,5 @@ export const BLOCK_NUMBERED_LIST = 'ol';
 export const BLOCK_BULLETED_LIST = 'ul';
 export const BLOCK_LIST_ITEM = 'li';
 export const BLOCK_PARAGRAPH = 'p';
+export const BLOCK_OBJECT = 'obj'
+export const BLOCK_IMAGE = 'image'

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BLOCK_BULLETED_LIST, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST} from "./Schema";
+import {BLOCK_BULLETED_LIST, BLOCK_IMAGE, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST, BLOCK_OBJECT} from "./Schema";
 
 // Ref. https://github.com/ianstormtaylor/slate/blob/main/site/examples/richtext.tsx
 const Element = ({ attributes, children, element }) => {
@@ -20,8 +20,10 @@ const Element = ({ attributes, children, element }) => {
             return <li {...attributes}>{children}</li>
         case BLOCK_NUMBERED_LIST:
             return <ol {...attributes}>{children}</ol>
-        case 'image':
+        case BLOCK_IMAGE:
             return <div {...attributes}><img src={element.url}></img>{children}</div>
+        case BLOCK_OBJECT:
+            return <div {...attributes} contentEditable={false}>OBJECT{children}</div>
         default:
             return <p {...attributes}>{children}</p>
     }
