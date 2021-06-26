@@ -97,6 +97,7 @@ const GoleryEditor = (props) => {
    }, [props.controller]);
 
 
+
     return (
             <Editable
                 renderElement={renderElement}
