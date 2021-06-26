@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import GoleryEditorLib from "../index";
+
 let {GoleryEditor, EditorToolbar, SlateValue, EditorController} = GoleryEditorLib;
 import "@babel/polyfill";
 
@@ -10,6 +11,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import {EditorContextProvider} from "../EditorContext";
 
 const initialValue = [];
+
 /*SlateValue.fromJSON({
     document: {
         nodes: [
@@ -71,11 +73,9 @@ class SandboxApp extends React.Component {
     }
 
     render() {
-        const { value, showEditor } = this.state;
-        const onChange = (change, v1, v2)=>this._onChange(change, v1, v2);
-        let editorToolbarOptions = this.controller.getToolbarOptions({
-
-        });
+        const {value, showEditor} = this.state;
+        const onChange = (change, v1, v2) => this._onChange(change, v1, v2);
+        let editorToolbarOptions = this.controller.getToolbarOptions({});
         console.log('Value', value);
         let $editor = showEditor ?
             (<GoleryEditor
@@ -84,30 +84,30 @@ class SandboxApp extends React.Component {
                 readOnly={this.state.readOnly}
                 ref={this.editor}/>) : null;
         return (
+            <ErrorBoundary>
+                <div style={{margin: "20px"}}>
+                    <EditorContextProvider>
+                        <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
 
-            <div style={{ margin: "20px" }}>
-                <EditorContextProvider>
-                <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
+                        <div style={{border: "1px solid red"}}>
 
-                <div style={{border: "1px solid red"}}>
-                    <ErrorBoundary>
-                    {$editor}
-                    </ErrorBoundary>
+                            {$editor}
+                        </div>
+                    </EditorContextProvider>
+
+                    <div>
+                        {/*<button onClick={() => this._resetHtml()}>Parse then set Html</button>*/}
+                        {/*<button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>*/}
+                        {/*<button onClick={() => this._logValue()}>Value</button>*/}
+                        {/*<button onClick={() => this._setEmpty()}>Set empty</button>*/}
+                        {/*<button onClick={() => this._focus()}>Focus</button>*/}
+                    </div>
+
+                    <div>
+                        <textarea ref={this.textAreaRef}/>
+                    </div>
                 </div>
-                </EditorContextProvider>
-
-                <div>
-                    {/*<button onClick={() => this._resetHtml()}>Parse then set Html</button>*/}
-                    {/*<button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>*/}
-                    {/*<button onClick={() => this._logValue()}>Value</button>*/}
-                    {/*<button onClick={() => this._setEmpty()}>Set empty</button>*/}
-                    {/*<button onClick={() => this._focus()}>Focus</button>*/}
-                </div>
-
-                <div>
-                    <textarea ref={this.textAreaRef}/>
-                </div>
-            </div>
+            </ErrorBoundary>
         );
     }
 
@@ -151,4 +151,4 @@ class SandboxApp extends React.Component {
     }
 }
 
-ReactDOM.render(<SandboxApp />, document.getElementById("root"));
+ReactDOM.render(<SandboxApp/>, document.getElementById("root"));

@@ -74,7 +74,7 @@ const schema = {
 const GoleryEditor = (props) => {
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
-    const editor = useMemo(() => withReact(createEditor()), []);
+    const editor = useSlate();
    useEffect(()=>{
            Object.assign(props.controller, {
                toggleHeader: (level) => toggleBlock(editor, 'h'+level),
@@ -96,27 +96,12 @@ const GoleryEditor = (props) => {
            });
    }, [props.controller]);
 
-    // Add the initial value when setting up our state.
-    const [value, setValue] = useState([
-        {
-            type: 'paragraph',
-            children: [{text: 'A line of text in a paragraph.'}],
-        },
-    ])
-
-    console.log('Value', value);
 
     return (
-        <Slate
-            editor={editor}
-            value={value}
-            onChange={newValue => setValue(newValue)}
-        >
             <Editable
                 renderElement={renderElement}
                 renderLeaf={renderLeaf}
             />
-        </Slate>
     );
 };
 

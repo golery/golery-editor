@@ -1,15 +1,8 @@
-import {useMemo, useState} from 'react';
-import {Slate, Editable, withReact, useSlate} from 'slate-react'
-
-import {
-    Editor,
-    Transforms,
-    createEditor,
-    Descendant,
-    Element as SlateElement,
-} from 'slate'
-
 import * as React from 'react';
+import {useMemo, useState} from 'react';
+import {Slate, withReact} from 'slate-react'
+
+import {createEditor,} from 'slate'
 
 const EditorContextProvider = ({children}:{children:any}) => {
     // @ts-ignore
