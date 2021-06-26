@@ -45,14 +45,13 @@ class ToolbarButton extends React.Component {
     }
 }
 
-export default class Toolbar extends React.Component {
-    render() {
-        let {options} = this.props;
-        return (<Container>
-            {options.map((options, i) => {
-                if (options === "separator") return <Separator key={i}/>;
-                return <ToolbarButton key={i} {...options}/>
-            })}
-        </Container>);
-    }
+const Toolbar = ({options}) => {
+    return (<Container>
+        {options.map((options, i) => {
+            if (options === "separator") return <Separator key={i}/>;
+            return <ToolbarButton key={i} {...options}/>
+        })}
+    </Container>);
 }
+
+export default Toolbar;

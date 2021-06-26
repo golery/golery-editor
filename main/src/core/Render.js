@@ -7,14 +7,18 @@ const Element = ({ attributes, children, element }) => {
             return <blockquote {...attributes}>{children}</blockquote>
         case 'bulleted-list':
             return <ul {...attributes}>{children}</ul>
-        case 'heading-one':
+        case 'h1':
             return <h1 {...attributes}>{children}</h1>
-        case 'heading-two':
+        case 'h2':
             return <h2 {...attributes}>{children}</h2>
+        case 'h3':
+            return <h3 {...attributes}>{children}</h3>
         case 'list-item':
             return <li {...attributes}>{children}</li>
         case 'numbered-list':
             return <ol {...attributes}>{children}</ol>
+        case 'image':
+            return <div {...attributes}><img src={element.url}></img>{children}</div>
         default:
             return <p {...attributes}>{children}</p>
     }

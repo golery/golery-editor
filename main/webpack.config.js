@@ -21,11 +21,9 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
+                test: /(\.ts?|\.js?)$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
@@ -55,7 +53,7 @@ const config = {
         ]
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx"],
+        extensions: ['.tsx', '.ts', '.jsx', '.js'],
     }
 };
 

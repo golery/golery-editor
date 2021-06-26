@@ -1,6 +1,6 @@
+import Editor from "../index";
 /** Sample index file when load with node.
  * It's for testing the compatible with serverside rendering */
-import Editor from "../index";
 
 let {GoleryEditor, EditorToolbar, htmlSerializer, SlateValue, EditorController} = Editor;
 

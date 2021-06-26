@@ -7,6 +7,7 @@ import "@babel/polyfill";
 
 import styles from "./main.css";
 import ErrorBoundary from "./ErrorBoundary";
+import {EditorContextProvider} from "../EditorContext";
 
 const initialValue = [];
 /*SlateValue.fromJSON({
@@ -83,14 +84,17 @@ class SandboxApp extends React.Component {
                 readOnly={this.state.readOnly}
                 ref={this.editor}/>) : null;
         return (
+
             <div style={{ margin: "20px" }}>
+                <EditorContextProvider>
                 <EditorToolbar value={value} onChange={onChange} options={editorToolbarOptions}/>
 
                 <div style={{border: "1px solid red"}}>
-                    <ErrorBoundary>---
+                    <ErrorBoundary>
                     {$editor}
-                    ]]]</ErrorBoundary>
+                    </ErrorBoundary>
                 </div>
+                </EditorContextProvider>
 
                 <div>
                     {/*<button onClick={() => this._resetHtml()}>Parse then set Html</button>*/}

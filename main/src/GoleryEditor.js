@@ -9,27 +9,27 @@ import {
 } from 'slate'
 
 // Import the Slate components and React plugin.
-import {Slate, Editable, withReact} from 'slate-react'
-import {Editor as SlateEditor} from 'slate-react';
-import CodeBlockPlugin from "./plugins/codeblock/CodeBlockPlugin";
-import ImagePlugin from "./plugins/image/ImagePlugin";
-import BasicMarkPlugin from "./plugins/basicmarks/BasicMarkPlugin";
-import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
-import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
-import LinkPlugin from "./plugins/link/LinkPlugin";
-import VideoPlugin from "./plugins/video/VideoPlugin";
-import HeaderPlugin from "./plugins/header/HeaderPlugin";
-import {toggleBlock, toggleMark} from "./core/TextFormat";
+import {Slate, Editable, withReact, useSlate} from 'slate-react'
+// import {Editor as SlateEditor} from 'slate-react';
+// import CodeBlockPlugin from "./plugins/codeblock/CodeBlockPlugin";
+// import ImagePlugin from "./plugins/image/ImagePlugin";
+// import BasicMarkPlugin from "./plugins/basicmarks/BasicMarkPlugin";
+// import ListPlugin, {editListPlugin} from "./plugins/list/ListPlugin";
+// import SoftBreakPlugin from "./plugins/softbreak/SoftBreakPlugin";
+// import LinkPlugin from "./plugins/link/LinkPlugin";
+// import VideoPlugin from "./plugins/video/VideoPlugin";
+// import HeaderPlugin from "./plugins/header/HeaderPlugin";
+import {isMarkActive, toggleBlock, toggleMark} from "./core/TextFormat";
 import {Element, Leaf} from "./core/Render";
-
-let imagePlugin = ImagePlugin();
-let codeBlockPlugin = CodeBlockPlugin();
-let basicMarkPlugin = BasicMarkPlugin();
-let listPlugin = ListPlugin();
-let softBreakPlugin = SoftBreakPlugin();
-let linkPlugin = LinkPlugin();
-let videoPlugin = VideoPlugin();
-let headerPlugin = HeaderPlugin();
+//
+// let imagePlugin = ImagePlugin();
+// let codeBlockPlugin = CodeBlockPlugin();
+// let basicMarkPlugin = BasicMarkPlugin();
+// let listPlugin = ListPlugin();
+// let softBreakPlugin = SoftBreakPlugin();
+// let linkPlugin = LinkPlugin();
+// let videoPlugin = VideoPlugin();
+// let headerPlugin = HeaderPlugin();
 
 // List of plugins and toolbar ubttons can be found at:?
 // https://github.com/Canner/canner-slate-editor/blob/master/packages/editors/canner-slate-editor/src/index.js
@@ -59,8 +59,6 @@ const schema = {
     },
 };
 
-
-
 /**
  * How to interact to GoleryEditor
  * <GoleryEditor controller=myController/>
@@ -79,35 +77,24 @@ const GoleryEditor = (props) => {
     const editor = useMemo(() => withReact(createEditor()), []);
    useEffect(()=>{
            Object.assign(props.controller, {
-               toggleHeader: (level) => toggleBlock(editor, 'heading-one'),
+               toggleHeader: (level) => toggleBlock(editor, 'h'+level),
        //
        //         toggleCode: () => this.editor.toggleCode("tsx"),
-       //         insertImage: (url) => this.editor.insertImage(url),
-       //
+               insertImage: (url) => Transforms.insertNodes(editor, { type: 'image', url, children: [{ text: '' }] }),
                toggleBold: () => toggleMark(editor, 'bold'),
                toggleUnderline: () => toggleMark(editor, 'underline'),
                toggleItalic: () => toggleMark(editor, 'italic'),
-       //
-       //         toggleList: () => this.editor.toggleList(),
-       //         toggleBullet: () => this.editor.toggleBullet(),
+
+               toggleList: (level) => toggleBlock(editor, 'numbered-list'),
+               toggleBullet: (level) => toggleBlock(editor, 'bulleted-list'),
        //
        //         isHeader: (level) => headerPlugin.isHeader(this.editor, level),
        //         isInCodeBlock: () => codeBlockPlugin.isInCodeBlock(this.editor),
-       //         isInBold: () => basicMarkPlugin.isInBold(this.editor),
+               isInBold: () => isMarkActive(editor, 'bold'),
        //         isInItalic: () =>  basicMarkPlugin.isInItalic(this.editor),
        //         isInUnderline: () => basicMarkPlugin.isInUnderline(this.editor)
            });
    }, [props.controller]);
-
-    // }
-
-    // return <SlateEditor value={this.state.value}
-    //                     onChange={this.onChange}
-    //                     plugins={plugins}
-    //                     ref={this.ref}
-    //                     schema={schema}
-    //                     {...this.props}
-    // />;
 
     // Add the initial value when setting up our state.
     const [value, setValue] = useState([
@@ -131,20 +118,6 @@ const GoleryEditor = (props) => {
             />
         </Slate>
     );
-
-    //
-    // ref = editor => {
-    //     this.editor = editor;
-    //     if (editor != null) {
-    //         editor.api = this.props.controller;
-    //     } else {
-    //         console.log('No editor');
-    //     }
-    //
-    //     // for debugging purpose
-    //     window.EDITOR = editor;
-    //     window.logValue = () => JSON.stringify(EDITOR.value, null, 2);
-    // };
 };
 
 export default GoleryEditor;

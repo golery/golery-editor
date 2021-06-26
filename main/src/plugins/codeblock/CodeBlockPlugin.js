@@ -3,12 +3,40 @@ import {CODE, CODE_LINE, PARAGRAPH} from "@canner/slate-constant/lib/blocks";
 import {codeBlockNode, codeLineNode} from "../../canner/renderer/codeBlockNode";
 // This key/values comes from "prismjs/components.js".
 // There are more values.
-import languages from "./languages.json";
+// import languages from "./languages.json";
 import isHotkey from "is-hotkey";
 import SlatePrism from "golery-slate-prism";
 import "./PrismGrammars";
 import "prismjs/themes/prism.css";
 import 'antd/lib/select/style/index.css';
+
+let languages =
+    {
+        "markup": {
+            "title": "Html/Xml"
+        },
+        "css": {
+            "title": "CSS"
+        },
+        "java": {
+            "title": "Java"
+        },
+        "json": {
+            "title": "JSON"
+        },
+        "tsx": {
+            "title": "Javascript"
+        },
+        "bash": {
+            "title": "Bash"
+        },
+        "plsql": {
+            "title": "PL/SQL"
+        },
+        "scss": {
+            "title": "Sass (Scss)"
+        }
+    };
 
 let slateCodeBlock = SlateCodeBlock({
     onlyIn: node => node.type === "code_block"

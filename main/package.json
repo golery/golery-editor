@@ -12,7 +12,7 @@
     "build.dev": "webpack --config webpack.config.js --mode development --progress",
     "build.prod": "webpack --config webpack.config.js --mode production  --progress",
     "build": "yarn run build.dev && yarn run build.prod",
-    "dev": "webpack-dev-server --config webpack.config.sandboxbrowser.js --mode development --progress",
+    "dev": "webpack serve --config webpack.config.sandboxbrowser.js --mode development --progress",
     "watch.node": "webpack --config webpack.config.sandboxnode.js --mode development --progress --watch",
     "dev.node": "node ./src/sandbox/build/server.js"
   },
@@ -42,6 +42,8 @@
     "@canner/slate-icon-redo": "^1.5.0",
     "@canner/slate-icon-table": "^1.5.0",
     "@canner/slate-icon-undo": "^1.5.0",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "antd": "3.9.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
@@ -53,8 +55,8 @@
     "less-loader": "^4.1.0",
     "path": "^0.12.7",
     "react": "^17.0.2",
-    "react-dom": "*",
-    "react-emotion": "*",
+    "react-dom": "^17.0.8",
+    "react-emotion": "^10.0.0",
     "slate": "^0.63.0",
     "slate-edit-blockquote": "0.6.1",
     "slate-edit-code": "^0.15.5",
@@ -71,9 +73,11 @@
     "slate-toolbar": "^1.5.0",
     "slate-trailing-block": "^0.5.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.23.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.4",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
   },
   "license": "MIT",
   "dependencies": {}

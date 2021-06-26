@@ -1,6 +1,5 @@
 // @flow
 import * as React from "react";
-import type {nodeProps} from "./type";
 import {Select} from "antd";
 import styled from "styled-components";
 
@@ -27,7 +26,7 @@ export const codeBlockNode = options => {
                                     children,
                                     node,
                                     editor
-                                }: nodeProps) => {
+                                }) => {
         const syntax = options.getSyntax(node);
         let languages = options.languages;
         const selectLang = value => {
@@ -77,7 +76,7 @@ export const codeBlockNode = options => {
 };
 
 export const codeLineNode = () => {
-    const CodeLineComponent = ({attributes, children}: nodeProps) => {
+    const CodeLineComponent = ({attributes, children}) => {
         return <div {...attributes}>{children}</div>;
     };
 

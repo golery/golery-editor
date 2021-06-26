@@ -11,11 +11,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
+                test: /.ts|.tsx|.js|.jsx/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
@@ -45,7 +43,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx"]
+        extensions: ['.tsx', '.ts', '.jsx', '.js']
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
