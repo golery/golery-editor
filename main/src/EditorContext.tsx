@@ -16,7 +16,7 @@ const withImages = (editor: any) => {
 
 const EditorContextProvider = ({children}:{children:any}) => {
     // @ts-ignore
-    const editor = useMemo(() => withImages(withHistory(withReact(createEditor())), []));
+    const editor = useMemo(() => withImages(withHistory(withReact(createEditor()))), []);
     const [value, setValue] = useState([
         {
             type: 'paragraph',

@@ -78,7 +78,7 @@ const SandboxApp = () => {
         <ErrorBoundary>
             <div style={{margin: "20px"}}>
                 <EditorContextProvider>
-
+                        <EditorToolbar/>
                         <div style={{border: "1px solid red"}}>
 
                         {$editor}
