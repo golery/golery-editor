@@ -42,7 +42,7 @@ interface ElementProps {
 }
 const Element = (props: ElementProps) => {
     const { attributes, children, element, renderObject } = props;
-    const editor: ReactEditor = useSlateStatic() as ReactEditor;
+    const editor: ReactEditor = useSlate() as ReactEditor;
 
     const setData = (data:any) => {
         const path = ReactEditor.findPath(editor, element);

@@ -5,11 +5,11 @@ import { withHistory } from 'slate-history';
 import {createEditor,Editor} from 'slate'
 import {BLOCK_IMAGE} from "./core/Schema";
 
-const withImages = (editor) => {
+const withImages = (editor: any) => {
     const {insertData, isVoid} = editor
 
-    editor.isVoid = element => {
-        return element.type === BLOCK_IMAGE ? true : isVoid(element)
+    editor.isVoid = (element: any) => {
+        return element.type === BLOCK_IMAGE || element.type === 'code' ? true : isVoid(element)
     }
     return editor;
 }
