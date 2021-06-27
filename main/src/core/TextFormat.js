@@ -28,7 +28,6 @@ const isBlockActive = (editor, format) => {
             !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === format,
     });
     const match = iter.next().value;
-    console.log('xxxasda', match, format);
     return !!match
 }
 

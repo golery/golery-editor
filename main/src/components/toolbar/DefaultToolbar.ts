@@ -40,7 +40,10 @@ export const getDefaultToolbar = (editor: BaseEditor) => {
             children: [{text: ''}]
         } as any),
         insertCodeBlock: () => Transforms.insertNodes(editor, {
-            type: BLOCK_OBJECT,
+            type: 'code',
+            data: {
+              text: 'This is code'
+            },
             children: [{text: ''}]
         } as any),
     };
