@@ -3,6 +3,7 @@ import {Container, IconContainer, Separator} from "./Items";
 import ToolbarIcon from "@canner/slate-icon-shared";
 import {useSlate} from 'slate-react';
 import {getDefaultToolbar} from "./DefaultToolbar";
+import {WidgetConfig} from "../widget/Widget";
 
 class ToolbarButton extends React.Component {
     render() {
@@ -47,9 +48,13 @@ class ToolbarButton extends React.Component {
     }
 }
 
-const Toolbar = () => {
+interface Props {
+    widgets: WidgetConfig[]
+}
+
+const EditorToolbar = ({widgets}: Props) => {
     const editor = useSlate();
-    const options = getDefaultToolbar(editor);
+    const options = getDefaultToolbar(editor, widgets);
     return (<Container>
         {options.map((options, i) => {
             if (options === "separator") return <Separator key={i}/>;
@@ -58,4 +63,4 @@ const Toolbar = () => {
     </Container>);
 }
 
-export default Toolbar;
+export default EditorToolbar;

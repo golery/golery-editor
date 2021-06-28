@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require("webpack");
 module.exports = {
-    entry: "./src/sandbox/index.js",
+    entry: "./src/sandbox/index.tsx",
     output: {
         path: __dirname + "/",
         publicPath: "/",

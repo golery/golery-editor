@@ -17,8 +17,11 @@ import {
     MARK_ITALIC,
     MARK_UNDERLINE
 } from "../../core/Schema";
+import {WIDGET_CODE, WidgetConfig} from "../widget/Widget";
 
-export const getDefaultToolbar = (editor: BaseEditor) => {
+export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetConfig[]) => {
+    const codeWidget = widgets.find(o => o.type === WIDGET_CODE);
+
     const operations = {
         toggleHeader: (level: number) => toggleBlock(editor, BLOCK_HEADING_PREFIX + level),
         toggleBold: () => toggleMark(editor, MARK_BOLD),
@@ -39,13 +42,14 @@ export const getDefaultToolbar = (editor: BaseEditor) => {
             url,
             children: [{text: ''}]
         } as any),
-        insertCodeBlock: () => Transforms.insertNodes(editor, {
-            type: 'code',
-            data: {
-              text: 'This is code'
-            },
-            children: [{text: ''}]
-        } as any),
+        async insertCodeBlock() {
+            const data = await codeWidget.getData();
+            return Transforms.insertNodes(editor, {
+                type: codeWidget.type,
+                data: data,
+                children: [{text: ''}]
+            } as any);
+        },
     };
     return [
         {
