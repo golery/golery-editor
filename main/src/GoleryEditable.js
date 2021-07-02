@@ -2,7 +2,7 @@ import React, {useCallback} from 'react'
 import {Editable} from 'slate-react';
 import {Element, Leaf} from "./core/Render";
 
-const GoleryEditor = ({renderObject}) => {
+const GoleryEditable = ({renderObject}) => {
     const renderElement = useCallback(props => <Element {...props} renderObject={renderObject}/>, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
 
@@ -11,4 +11,4 @@ const GoleryEditor = ({renderObject}) => {
     );
 };
 
-export default GoleryEditor;
+export default GoleryEditable;

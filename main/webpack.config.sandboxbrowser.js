@@ -27,16 +27,22 @@ module.exports = {
                 ]
             },
             {
-                test: /\.less$/,
+                test: /\.module.scss$/,
                 use: [
                     {
                         loader: "style-loader"
                     },
                     {
-                        loader: "css-loader"
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: {
+                                localIdentName: "[name]_[local]_[hash:base64:5]",
+                            }
+                        }
                     },
                     {
-                        loader: "less-loader"
+                        loader: "sass-loader",
                     }
                 ]
             }

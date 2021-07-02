@@ -20,17 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f0d905b-e8f3-4737-9ac9-78cf8c1a10ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main/src/components/widget/Widget.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/sandbox/CodeBlockWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/EditorContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/EditorContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/EditorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/EditorController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/GoleryEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/GoleryEditor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/components/toolbar/DefaultToolbar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/components/toolbar/DefaultToolbar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/components/toolbar/EditorToolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/components/toolbar/EditorToolbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/sandbox/ErrorBoundary.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/sandbox/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/sandbox/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/webpack.config.sandboxbrowser.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/webpack.config.sandboxbrowser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +46,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main/src/sandbox" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/main/src/component/toolbar/icons" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/main/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/main/src/component/toolbar/icons" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/main/src/component/toolbar/icons" />
+      <recent name="$PROJECT_DIR$/main/src/component/toolbar" />
       <recent name="$PROJECT_DIR$/main/src/sandbox" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -149,7 +145,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624770929072</updated>
-      <workItem from="1624770930458" duration="9093000" />
+      <workItem from="1624770930458" duration="9275000" />
+      <workItem from="1625192203102" duration="3384000" />
+      <workItem from="1625227112355" duration="122000" />
+      <workItem from="1625235873775" duration="1432000" />
+      <workItem from="1625237471218" duration="1719000" />
+      <workItem from="1625258447292" duration="7786000" />
     </task>
     <task id="LOCAL-00010" summary="Editor">
       <created>1624771439497</created>
@@ -158,7 +159,49 @@
       <option name="project" value="LOCAL" />
       <updated>1624771439498</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Editor">
+      <created>1624846522068</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1624846522068</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Icons">
+      <created>1625319229054</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1625319229054</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Editor">
+      <created>1625334957242</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1625334957242</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Editor">
+      <created>1625335023311</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1625335023311</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Editor">
+      <created>1625335421866</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1625335421866</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Editor">
+      <created>1625335689582</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1625335689582</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +223,7 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="React" />
+    <MESSAGE value="Icons" />
     <MESSAGE value="Editor" />
     <option name="LAST_COMMIT_MESSAGE" value="Editor" />
   </component>
@@ -192,22 +236,33 @@
       <screen x="0" y="25" width="1920" height="889" />
     </state>
     <state x="693" y="214" width="526" height="507" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1920.889@0.25.1920.889" timestamp="1624811266612" />
-    <state x="367" y="25" width="1126" height="884" key="CommitChangelistDialog2" timestamp="1624771439345">
-      <screen x="0" y="25" width="1920" height="889" />
+    <state x="367" y="25" width="1196" height="1050" key="CommitChangelistDialog2" timestamp="1625335689506">
+      <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="367" y="25" width="1126" height="884" key="CommitChangelistDialog2/0.25.1920.889@0.25.1920.889" timestamp="1624771439345" />
-    <state x="222" y="90" width="1538" height="736" key="DiffContextDialog" timestamp="1624843842573">
-      <screen x="0" y="25" width="1920" height="889" />
+    <state x="336" y="25" width="1126" height="845" key="CommitChangelistDialog2/0.25.1756.849@0.25.1756.849" timestamp="1625238721715" />
+    <state x="357" y="25" width="1279" height="832" key="CommitChangelistDialog2/0.25.1868.837@0.25.1868.837" timestamp="1625319228871" />
+    <state x="367" y="25" width="1196" height="1050" key="CommitChangelistDialog2/0.25.1920.1055@0.25.1920.1055" timestamp="1625335689506" />
+    <state x="367" y="25" width="1126" height="884" key="CommitChangelistDialog2/0.25.1920.889@0.25.1920.889" timestamp="1624846521858" />
+    <state x="222" y="102" width="1538" height="736" key="DiffContextDialog" timestamp="1625335003037">
+      <screen x="0" y="25" width="1920" height="1055" />
     </state>
+    <state x="222" y="102" key="DiffContextDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1625335003037" />
     <state x="222" y="90" width="1538" height="736" key="DiffContextDialog/0.25.1920.889@0.25.1920.889" timestamp="1624843842573" />
-    <state x="704" y="227" key="FileChooserDialogImpl" timestamp="1624745549963">
-      <screen x="0" y="25" width="1920" height="889" />
+    <state x="703" y="239" key="FileChooserDialogImpl" timestamp="1625194405535">
+      <screen x="0" y="25" width="1918" height="943" />
     </state>
+    <state x="703" y="239" key="FileChooserDialogImpl/0.25.1918.943@0.25.1918.943" timestamp="1625194405535" />
     <state x="704" y="227" key="FileChooserDialogImpl/0.25.1920.889@0.25.1920.889" timestamp="1624745549963" />
-    <state x="737" y="56" width="516" height="810" key="RollbackChangesDialog" timestamp="1624771388274">
-      <screen x="0" y="25" width="1920" height="889" />
+    <state x="737" y="62" width="516" height="810" key="RollbackChangesDialog" timestamp="1625334990247">
+      <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="737" y="56" width="516" height="810" key="RollbackChangesDialog/0.25.1920.889@0.25.1920.889" timestamp="1624771388274" />
+    <state x="737" y="62" key="RollbackChangesDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1625334990247" />
+    <state x="737" y="56" width="516" height="810" key="RollbackChangesDialog/0.25.1920.889@0.25.1920.889" timestamp="1624846502828" />
+    <state x="384" y="125" key="SettingsEditor" timestamp="1625237157059">
+      <screen x="0" y="25" width="1798" height="882" />
+    </state>
+    <state x="384" y="125" key="SettingsEditor/0.25.1798.882@0.25.1798.882" timestamp="1625237157059" />
+    <state x="410" y="132" key="SettingsEditor/0.25.1918.943@0.25.1918.943" timestamp="1625194406495" />
     <state width="543" height="452" key="SwitcherDM" timestamp="1624770336342">
       <screen x="0" y="25" width="1920" height="889" />
     </state>
@@ -216,13 +271,23 @@
       <screen x="0" y="25" width="1920" height="889" />
     </state>
     <state x="653" y="104" width="606" height="727" key="VcsDiffUtil.ChangesDialog/0.25.1920.889@0.25.1920.889" timestamp="1624843607565" />
+    <state x="539" y="53" width="772" height="771" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1625317936176">
+      <screen x="0" y="25" width="1868" height="837" />
+    </state>
+    <state x="539" y="53" width="772" height="771" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.25.1868.837@0.25.1868.837" timestamp="1625317936176" />
     <state x="665" y="126" width="668" height="676" key="find.popup" timestamp="1624810027041">
       <screen x="0" y="25" width="1920" height="889" />
     </state>
     <state x="665" y="126" width="668" height="676" key="find.popup/0.25.1920.889@0.25.1920.889" timestamp="1624810027041" />
-    <state x="662" y="222" width="712" height="683" key="search.everywhere.popup" timestamp="1624846405761">
-      <screen x="0" y="25" width="1920" height="889" />
+    <state x="698" y="200" key="run.anything.popup" timestamp="1625255528581">
+      <screen x="0" y="25" width="1867" height="872" />
     </state>
+    <state x="698" y="200" key="run.anything.popup/0.25.1867.872@0.25.1867.872" timestamp="1625255528581" />
+    <state x="644" y="211" width="736" height="644" key="search.everywhere.popup" timestamp="1625319124341">
+      <screen x="0" y="25" width="1868" height="837" />
+    </state>
+    <state x="644" y="211" width="736" height="644" key="search.everywhere.popup/0.25.1868.837@0.25.1868.837" timestamp="1625319124341" />
+    <state x="661" y="234" width="712" height="725" key="search.everywhere.popup/0.25.1918.943@0.25.1918.943" timestamp="1625192438547" />
     <state x="662" y="222" width="712" height="683" key="search.everywhere.popup/0.25.1920.889@0.25.1920.889" timestamp="1624846405761" />
   </component>
 </project>

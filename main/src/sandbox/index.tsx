@@ -1,12 +1,12 @@
-import GoleryEditorLib from "../index";
 import {EditorContextProvider} from "../EditorContext";
-import {WIDGET_CODE, WidgetConfig} from "../components/widget/Widget";
+import {WIDGET_CODE, WidgetConfig} from "../component/widget/Widget";
 import * as React from "react";
 import {useMemo, useState, useRef} from "react";
 import * as ReactDOM from 'react-dom';
 import {CodeBlockWidget} from "./CodeBlockWidget";
-
-let {GoleryEditor, EditorToolbar, SlateValue} = GoleryEditorLib;
+import GoleryEditable from "../GoleryEditable";
+import EditorToolbar from "../component/toolbar/EditorToolbar";
+import "./main.css";
 
 function getWidgetConfigs(): WidgetConfig[] {
     return [{
@@ -27,14 +27,14 @@ const SandboxApp = () => {
             return <CodeBlockWidget data={data} setData={setData}/>
         }
     }
-    const input = useRef();
+    const input = useRef(null);
     const widgets = useMemo(() => getWidgetConfigs(), []);
 
-    const editor = useRef();
+    const editor = useRef(null);
 
     const focus = () => {
         if (editor.current) {
-           editor.current.focus();
+           editor.current?.focus();
         }
     };
 
@@ -43,7 +43,7 @@ const SandboxApp = () => {
     }
 
     const setContent = () => {
-        editor?.current?.setValue(JSON.parse(input.current?.value));
+        editor.current?.setValue(JSON.parse(input.current?.value));
     }
 
     return (
@@ -51,7 +51,7 @@ const SandboxApp = () => {
             <EditorContextProvider editorRef={editor}>
                 <EditorToolbar widgets={widgets}/>
                 <div style={{border: "1px solid red"}}>
-                    <GoleryEditor renderObject={renderObject}/>
+                    <GoleryEditable renderObject={renderObject}/>
                 </div>
             </EditorContextProvider>
 

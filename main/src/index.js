@@ -12,9 +12,9 @@ let GoleryEditor, EditorToolbar, htmlSerializer, SlateValue;
 const Mock = () => <div>(mock react component in nodejs)</div>;
 
 if (isBrowser) {
-    GoleryEditor = require('./GoleryEditor').default;
+    GoleryEditor = require('./GoleryEditor').GoleryEditable;
     htmlSerializer = null; //require('./canner/slate-editor-html/serializer').default;
-    EditorToolbar = require("./components/toolbar/EditorToolbar").default;
+    EditorToolbar = require("./component/toolbar/EditorToolbar").default;
     SlateValue = null; //require("slate").Value;
 } else {
     GoleryEditor = Mock;

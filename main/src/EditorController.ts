@@ -1,4 +1,4 @@
-import {WidgetConfig} from "./components/widget/Widget";
+import {WidgetConfig} from "./component/widget/Widget";
 
 export interface EditorController {
     getWidgetConfigs(): WidgetConfig[]

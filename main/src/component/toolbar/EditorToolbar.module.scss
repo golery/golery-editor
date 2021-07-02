@@ -1,0 +1,32 @@
+.component {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.toolbarIcon {
+  position: relative;
+  display: flex;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.toolbarIcon.active svg {
+  border-radius: 2px;
+  box-shadow: inset 0 0 2px 0 #696969;
+}
+
+.toolbarIcon:hover {
+  background-color: #e8e8e8;
+}
+
+.separator {
+  height: 20px;
+  border-left: 1px solid #c0c0c0;
+  padding-right: 1px;
+  margin-left: 1px;
+}

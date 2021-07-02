@@ -37,16 +37,20 @@ const config = {
                 ]
             },
             {
-                test: /\.less$/,
+                test: /\.module.scss$/,
                 use: [
                     {
                         loader: "style-loader"
                     },
                     {
-                        loader: "css-loader"
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true
+                        }
                     },
                     {
-                        loader: "less-loader"
+                        loader: "sass-loader"
                     }
                 ]
             }
