@@ -1,5 +1,6 @@
-import {WidgetConfig} from "./component/widget/Widget";
+import {WidgetPlugin} from "./core/EditorTypes";
+
 
 export interface EditorController {
-    getWidgetConfigs(): WidgetConfig[]
+    getWidgetConfigs(): WidgetPlugin[]
 }

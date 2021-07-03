@@ -16,10 +16,11 @@ import {
     MARK_ITALIC,
     MARK_UNDERLINE
 } from "../../core/Schema";
-import {WIDGET_CODE, WidgetConfig} from "../widget/Widget";
+import {WIDGET_CODE} from "../widget/Widget";
+import {WidgetPlugin} from "../../core/EditorTypes";
 
-export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetConfig[]) => {
-    const codeWidget = widgets.find(o => o.type === WIDGET_CODE);
+export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetPlugin[]) => {
+    const codeWidget = widgets.find(o => o.elmType === WIDGET_CODE);
 
     const operations = {
         toggleH1: () => toggleBlock(editor, BLOCK_H1),
@@ -46,9 +47,9 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetConfig[]) =
             children: [{text: ''}]
         } as any),
         async insertCodeBlock() {
-            const data = await codeWidget.getData();
+            const data = await codeWidget.getDataWhenInsert();
             return Transforms.insertNodes(editor, {
-                type: codeWidget.type,
+                type: codeWidget.elmType,
                 data: data,
                 children: [{text: ''}]
             } as any);

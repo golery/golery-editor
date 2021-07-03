@@ -10,9 +10,15 @@ import {
 } from "./Schema";
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
-import {EditorElement} from "./EditorTypes";
+import {CustomRenderer, EditorElement, WidgetPlugin} from "./EditorTypes";
 
-export function renderBlockElement(element: EditorElement, attributes: object, children: any) {
+export function renderBlockElement(element: EditorElement, attributes: object, children: any,
+                                   customRender: (type: string, data: any, readOnly: boolean) => React.ReactNode) {
+    let customElm = customRender && customRender(element.type, element.data, false);
+    if (customElm) {
+        return <div {...attributes} contentEditable={false}>{children}{customElm}</div>;
+    }
+
     const type = element.type;
     switch (type) {
         case BLOCK_BULLETED_LIST:
@@ -58,22 +64,19 @@ interface ElementProps {
     attributes : any,
     children: any,
     element: any,
-    renderObject: (setData: any, type: string, data: object) => any
+    customRender: CustomRenderer
 }
 const Element = (props: ElementProps) => {
-    const { attributes, children, element, renderObject } = props;
+    const { attributes, children, element, customRender } = props;
     const editor: ReactEditor = useSlate() as ReactEditor;
 
     const setData = (data:any) => {
         const path = ReactEditor.findPath(editor, element);
         Transforms.setNodes(editor,  {data} as any, { at: path })
     }
-    let custom = renderObject(setData, element.type, element.data);
-    if (custom) {
-        return <div {...attributes} contentEditable={false}>{children}{custom}</div>;
-    } else {
-        return renderBlockElement(element, attributes, children);
-    }
+
+    return renderBlockElement(element, attributes, children,
+        (type, data, readOnly) => customRender && customRender(type, data, readOnly, setData, ));
 }
 
 

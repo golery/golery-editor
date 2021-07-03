@@ -3,9 +3,9 @@ import {useCallback} from "react";
 import styles from "./EditorToolbar.module.scss";
 import {useSlate} from 'slate-react';
 import {getDefaultToolbar} from "./DefaultToolbar";
-import {WidgetConfig} from "../widget/Widget";
 import {EditorIcons} from "./icons";
 import QuoteIcon from "./icons/QuoteIcon";
+import {WidgetPlugin} from "../../core/EditorTypes";
 
 interface IconProps {
     icon: string
@@ -48,7 +48,7 @@ const Separator = () => {
 }
 
 interface EditorToolbar {
-    widgets: WidgetConfig[]
+    widgets: WidgetPlugin[]
 }
 
 const EditorToolbar = ({widgets}: EditorToolbar) => {
