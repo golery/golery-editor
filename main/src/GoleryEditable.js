@@ -7,7 +7,7 @@ const GoleryEditable = ({renderObject}) => {
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
 
     return (
-        <Editable renderElement={renderElement} renderLeaf={renderLeaf}/>
+        <Editable className={'golery-editable'} renderElement={renderElement} renderLeaf={renderLeaf}/>
     );
 };
 

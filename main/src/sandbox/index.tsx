@@ -1,12 +1,13 @@
-import {EditorContextProvider} from "../EditorContext";
+import GoleryEditor, {emptyTextValue, TextNode} from "../GoleryEditor";
 import {WIDGET_CODE, WidgetConfig} from "../component/widget/Widget";
 import * as React from "react";
-import {useMemo, useState, useRef} from "react";
+import {useMemo, useState, useRef, useCallback} from "react";
 import * as ReactDOM from 'react-dom';
 import {CodeBlockWidget} from "./CodeBlockWidget";
 import GoleryEditable from "../GoleryEditable";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
-import "./main.css";
+import {Descendant} from 'slate';
+import "./sandbox.module.scss";
 
 function getWidgetConfigs(): WidgetConfig[] {
     return [{
@@ -21,52 +22,41 @@ function getWidgetConfigs(): WidgetConfig[] {
 }
 
 const SandboxApp = () => {
-    const [text, setText] = useState();
+    const [value, setValue] = useState<TextNode[]>(emptyTextValue);
     const renderObject = (setData: any, type: any, data: any) => {
         if (type === 'code') {
             return <CodeBlockWidget data={data} setData={setData}/>
         }
     }
-    const input = useRef(null);
+
     const widgets = useMemo(() => getWidgetConfigs(), []);
 
     const editor = useRef(null);
 
     const focus = () => {
         if (editor.current) {
-           editor.current?.focus();
+            editor.current?.focus();
         }
     };
 
-    const getContent = () => {
-        setText(editor?.current?.getValue());
-    }
+    const setValueWrapper = useCallback((v) => {
+        setValue(v);
+        console.log('Value', v);
+    }, [setValue],);
 
-    const setContent = () => {
-        editor.current?.setValue(JSON.parse(input.current?.value));
-    }
 
     return (
         <div style={{margin: "20px"}}>
-            <EditorContextProvider editorRef={editor}>
-                <EditorToolbar widgets={widgets}/>
-                <div style={{border: "1px solid red"}}>
-                    <GoleryEditable renderObject={renderObject}/>
-                </div>
-            </EditorContextProvider>
-
             <div>
-                {/*<button onClick={() => this._resetHtml()}>Parse then set Html</button>*/}
-                {/*<button onClick={() => this._toogleReadOnly()}>Toogle readonly</button>*/}
-                <button onClick={setContent}>Set content</button>
-                <button onClick={getContent}>Get content</button>
                 <button onClick={focus}>Focus to editor</button>
             </div>
+            <div style={{padding: '1rem 0'}}><textarea value={JSON.stringify(value)} rows={5} cols={100}/></div>
+            <hr/>
 
-            <textarea ref={input}/>
-            <div>Data:
-                {text && JSON.stringify(text)}
-            </div>
+            <GoleryEditor editorRef={editor} value={value} setValue={setValueWrapper}>
+                <EditorToolbar widgets={widgets}/>
+                <GoleryEditable renderObject={renderObject}/>
+            </GoleryEditor>
         </div>
     );
 }
