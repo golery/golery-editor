@@ -57,7 +57,8 @@ const EditorToolbar = ({widgets}: EditorToolbar) => {
     return (<div className={styles.component}>
         {options.map((options, i) => {
             if (options === "separator") return <Separator key={i}/>;
-            return <ToolbarButton {...(options as ToolbarButtonProps)}/>
+            const params = {...(options as any as ToolbarButtonProps)};
+            return <ToolbarButton key={i} {...params}/>
         })}
     </div>);
 }

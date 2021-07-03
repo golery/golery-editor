@@ -10,8 +10,7 @@ import {
     BaseEditor,
 } from 'slate'
 import {
-    BLOCK_BULLETED_LIST,
-    BLOCK_HEADING_PREFIX,
+    BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3,
     BLOCK_NUMBERED_LIST, BLOCK_OBJECT,
     MARK_BOLD,
     MARK_ITALIC,
@@ -23,7 +22,9 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetConfig[]) =
     const codeWidget = widgets.find(o => o.type === WIDGET_CODE);
 
     const operations = {
-        toggleHeader: (level: number) => toggleBlock(editor, BLOCK_HEADING_PREFIX + level),
+        toggleH1: () => toggleBlock(editor, BLOCK_H1),
+        toggleH2: () => toggleBlock(editor, BLOCK_H2),
+        toggleH3: () => toggleBlock(editor, BLOCK_H3),
         toggleBold: () => toggleMark(editor, MARK_BOLD),
         toggleUnderline: () => toggleMark(editor, MARK_UNDERLINE),
         toggleItalic: () => toggleMark(editor, MARK_ITALIC),
@@ -32,14 +33,16 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetConfig[]) =
         toggleList: (level: number) => toggleBlock(editor, BLOCK_NUMBERED_LIST),
         toggleBullet: (level: number) => toggleBlock(editor, BLOCK_BULLETED_LIST),
 
-        isHeader: (level: number) => isBlockActive(editor, BLOCK_HEADING_PREFIX + level),
+        isH1: () => isBlockActive(editor, BLOCK_H1),
+        isH2: () => isBlockActive(editor, BLOCK_H2),
+        isH3: () => isBlockActive(editor, BLOCK_H3),
         isInBold: () => isMarkActive(editor, MARK_BOLD),
         isInItalic: () => isMarkActive(editor, MARK_ITALIC),
         isInUnderline: () => isMarkActive(editor, MARK_UNDERLINE),
 
         insertImage: (url: string) => Transforms.insertNodes(editor, {
             type: 'image',
-            url,
+            data: {url},
             children: [{text: ''}]
         } as any),
         async insertCodeBlock() {
@@ -55,20 +58,20 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetConfig[]) =
         {
             tooltip: "Header 1 (ctrl+alt+1)",
             icon: "h1",
-            onClick: () => operations.toggleHeader(1),
-            isActive: () => operations.isHeader(1)
+            onClick: () => operations.toggleH1(),
+            isActive: () => operations.isH1()
         },
         {
             tooltip: "Header 2 (ctrl+alt+2)",
             icon: "h2",
-            onClick: () => operations.toggleHeader(2),
-            isActive: () => operations.isHeader(2)
+            onClick: () => operations.toggleH2(),
+            isActive: () => operations.isH2()
         },
         {
             tooltip: "Header 3 (ctrl+alt+3)",
             icon: "h3",
-            onClick: () => operations.toggleHeader(3),
-            isActive: () => operations.isHeader(3)
+            onClick: () => operations.toggleH3(),
+            isActive: () => operations.isH3()
         },
         "separator",
         {

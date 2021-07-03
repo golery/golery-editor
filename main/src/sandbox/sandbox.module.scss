@@ -11,3 +11,7 @@ iframe {
     min-height: 5rem;
     border: 1px solid orange;
 }
+
+:global(.readonlyRender) {
+    border: 1px solid orange;
+}

@@ -3,7 +3,8 @@ import {useEffect, useMemo} from 'react';
 import {ReactEditor, Slate, withReact} from 'slate-react'
 import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
-import {BLOCK_IMAGE} from "./core/Schema";
+import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./core/Schema";
+import {EditorElement} from "./core/EditorTypes";
 
 const withImages = (editor: any) => {
     const {isVoid} = editor
@@ -26,32 +27,31 @@ class Controller {
     }
 }
 
-export interface TextNode {
-    type: string
-    children: object[]
-}
-
 interface Props {
     children: any
     editorRef: any
     value: object[]
-    setValue: (value: TextNode[]) => void
+    setValue: (value: EditorElement[]) => void
 }
+
+const getEmptyTextValue = () => ([{
+    type: BLOCK_PARAGRAPH,
+    children: [{text: ""}],
+}]);
 
 const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
     const editor = useMemo(() => withImages(withHistory(withReact(createEditor() as ReactEditor))), []);
     useEffect(() => {
         editorRef.current = new Controller(editor);
     }, [editor]);
+
+    const editorValue = Array.isArray(value) ? value : getEmptyTextValue();
     return (
-        <Slate editor={editor} value={value as Descendant[]} onChange={newValue => setValue(newValue as TextNode[])}>
+        <Slate editor={editor} value={editorValue as Descendant[]} onChange={newValue => setValue(newValue as EditorElement[])}>
             {children}
         </Slate>
     );
 }
 
 export default GoleryEditor;
-export const emptyTextValue: TextNode[] = [{
-    type: 'paragraph',
-    children: [{text: ""}],
-}];
+
