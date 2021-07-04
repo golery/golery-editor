@@ -1,32 +1,14 @@
 import GoleryEditor from "../GoleryEditor";
-import {WIDGET_CODE} from "../component/widget/Widget";
 import * as React from "react";
 import {useCallback, useMemo, useRef, useState} from "react";
 import * as ReactDOM from 'react-dom';
-import {CodeBlockWidget} from "./CodeBlockWidget";
 import GoleryEditable from "../GoleryEditable";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
 import "./sandbox.module.scss";
 import ReadOnlyRender from "../ReadOnlyRender";
-import {CustomRenderer, EditorElement, WidgetPlugin} from "../core/EditorTypes";
+import {WidgetRenderer, EditorElement, RenderMode} from "../core/EditorTypes";
+import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
 
-function getWidgetConfigs(): WidgetPlugin[] {
-    return [{
-        id: WIDGET_CODE,
-        elmType: WIDGET_CODE,
-        name: 'Code',
-        icon: 'code',
-        async getDataWhenInsert() {
-            return Promise.resolve({code: 'main() {}'});
-        },
-        renderEditable() {
-            return (<div>CodeEditable</div>);
-        },
-        renderReadOnly() {
-            return (<div>CodeReadOnly</div>);
-        }
-    }];
-}
 
 function getSavedTextValue() {
     let parsed: any;
@@ -40,13 +22,15 @@ function getSavedTextValue() {
 
 const SandboxApp = () => {
     const [value, setValue] = useState<EditorElement[]>(getSavedTextValue());
-    const customRender:CustomRenderer = (type: any, data: any, readOnly: false, setData: any) => {
-        if (type === 'code') {
-            return <CodeBlockWidget data={data} setData={setData}/>
-        }
-    }
 
-    const widgets = useMemo(() => getWidgetConfigs(), []);
+    const widgets = useMemo(() => getWidgetPlugins(), []);
+
+    const widgetRender:WidgetRenderer = ({type, data, mode, setData}) => {
+        return widgets.find(widget => widget.elmType === type)?.render({
+            type, data, mode, setData
+        });
+
+    }
 
     const editor = useRef(null);
 
@@ -78,13 +62,13 @@ const SandboxApp = () => {
             <h1>Editor</h1>
             <GoleryEditor editorRef={editor} value={value} setValue={setValueWrapper}>
                 <EditorToolbar widgets={widgets}/>
-                <GoleryEditable customRender={customRender}/>
+                <GoleryEditable widgetRender={widgetRender}/>
             </GoleryEditor>
 
             <hr/>
 
             <h1>ReadOnly</h1>
-            <ReadOnlyRender value={value} customRender={customRender}/>
+            <ReadOnlyRender value={value} customRender={widgetRender}/>
         </div>
     );
 }

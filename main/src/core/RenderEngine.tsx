@@ -1,25 +1,19 @@
 import * as React from 'react';
-import {
-    BLOCK_BULLETED_LIST,
-    BLOCK_H1,
-    BLOCK_H2,
-    BLOCK_H3,
-    BLOCK_IMAGE,
-    BLOCK_LIST_ITEM,
-    BLOCK_NUMBERED_LIST
-} from "./Schema";
+import {BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST} from "./Schema";
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
-import {CustomRenderer, EditorElement, WidgetPlugin} from "./EditorTypes";
+import {EditorElement, RenderMode, WidgetRenderer} from "./EditorTypes";
 
-export function renderBlockElement(element: EditorElement, attributes: object, children: any,
-                                   customRender: (type: string, data: any, readOnly: boolean) => React.ReactNode) {
-    let customElm = customRender && customRender(element.type, element.data, false);
+/** Block elements wraps multiple leaf elements */
+function renderBlockElement(element: EditorElement, attributes: object, children: any,
+                            customRender: (type: string, data: any) => React.ReactNode) {
+    let customElm = customRender && customRender(element.type, element.data);
     if (customElm) {
         return <div {...attributes} contentEditable={false}>{children}{customElm}</div>;
     }
 
     const type = element.type;
+    // It's mandatory to pass attributes and children values. They come from slatejs library
     switch (type) {
         case BLOCK_BULLETED_LIST:
             return <ul {...attributes}>{children}</ul>
@@ -33,14 +27,12 @@ export function renderBlockElement(element: EditorElement, attributes: object, c
             return <li {...attributes}>{children}</li>
         case BLOCK_NUMBERED_LIST:
             return <ol {...attributes}>{children}</ol>
-        case BLOCK_IMAGE:
-            return <div {...attributes}><img src={element.data.url}/>{children}</div>
         default:
             return <p {...attributes}>{children}</p>
     }
 }
 
-export const renderLeafElement = (leaf: any, children: any, attributes: any) => {
+const renderLeafElement = (leaf: any, children: any, attributes: any) => {
     if (leaf.bold) {
         children = <strong {...attributes}>{children}</strong>
     }
@@ -61,34 +53,33 @@ export const renderLeafElement = (leaf: any, children: any, attributes: any) => 
 }
 
 interface ElementProps {
-    attributes : any,
+    attributes: any,
     children: any,
     element: any,
-    customRender: CustomRenderer
+    widgetRender: WidgetRenderer
 }
+
 const Element = (props: ElementProps) => {
-    const { attributes, children, element, customRender } = props;
+    const {attributes, children, element, widgetRender} = props;
     const editor: ReactEditor = useSlate() as ReactEditor;
 
-    const setData = (data:any) => {
+    const setData = (data: any) => {
         const path = ReactEditor.findPath(editor, element);
-        Transforms.setNodes(editor,  {data} as any, { at: path })
+        Transforms.setNodes(editor, {data} as any, {at: path})
     }
 
     return renderBlockElement(element, attributes, children,
-        (type, data, readOnly) => customRender && customRender(type, data, readOnly, setData, ));
+        (type, data) => widgetRender && widgetRender({type, data, mode: RenderMode.EDIT, setData}));
 }
 
 
 interface LeafProps {
-    attributes : any,
+    attributes: any,
     children: any,
     leaf: any
 }
 
-
-
-const Leaf = ({ attributes, children, leaf} : LeafProps) => {
+const Leaf = ({attributes, children, leaf}: LeafProps) => {
     if (leaf.bold) {
         children = <strong>{children}</strong>
     }
@@ -108,4 +99,18 @@ const Leaf = ({ attributes, children, leaf} : LeafProps) => {
     return <span {...attributes}>{children}</span>
 }
 
-export {Element, Leaf};
+/** Render values as readonly. Note that slate is not used for rendering readonly */
+const renderReadOnly = (elms: EditorElement[], widgetRender: WidgetRenderer) => {
+    if (!elms) return [];
+    return elms.map((elm, index) => {
+        if (elm.type || Array.isArray(elm.children)) {
+            const children = renderReadOnly(elm.children, widgetRender);
+            return renderBlockElement(elm, {key: index}, children,
+                (type, data) => widgetRender && widgetRender({type, data, mode: RenderMode.VIEW}))
+        } else {
+            return renderLeafElement(elm, (elm as any)?.text, {key: index});
+        }
+    });
+}
+
+export {Element, Leaf, renderReadOnly};
