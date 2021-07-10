@@ -20,7 +20,6 @@ export const LinkDialog = ({controller, wrapLink}: LinkDialogProps) => {
     }
     useEffect(() => {
         controller.showLinkDialog = (link) => {
-            console.log('Show');
             setShow(true)
             setLink(link);
         }

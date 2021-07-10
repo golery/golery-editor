@@ -1,3 +1,4 @@
+/* Ref. Example https://www.slatejs.org/examples/links */
 import isUrl from 'is-url';
 import * as React from 'react';
 import {Descendant, Editor, Element as SlateElement, Range, Transforms,} from 'slate'
@@ -6,7 +7,6 @@ import {WidgetRenderer, WidgetRenderParams} from "../../core/EditorTypes";
 import {BLOCK_LINK} from "../../core/Schema";
 import {EditorPlugin} from "../../core/EditorPlugin";
 import {LinkDialog} from "./LinkDialog";
-
 
 const unwrapLink = editor => {
     Transforms.unwrapNodes(editor, {
@@ -22,7 +22,6 @@ const isLinkActive = editor => {
     })
     return !!link
 }
-
 
 type LinkElement = { type: 'link'; data: { url: string }; children: Descendant[] }
 
@@ -47,20 +46,12 @@ const wrapLink = (editor, url) => {
     }
 }
 
-const renderLink: WidgetRenderer = ({type, data, attributes, children}: WidgetRenderParams): React.ReactElement => {
-    if (type === BLOCK_LINK) {
-        return <a {...attributes} href={data.url}>{data.text | data.url}{children}</a>
-    }
-}
-
 export default class LinkPlugin implements EditorPlugin {
-    public render: WidgetRenderer
     private readonly controller: LinkPluginController;
     private readonly editor: ReactEditor;
 
     constructor(editor) {
         this.editor = editor;
-        this.render = renderLink;
         this.controller = {};
     }
 
@@ -95,7 +86,17 @@ export default class LinkPlugin implements EditorPlugin {
         }
     }
 
+    render({type, data, attributes, children}: WidgetRenderParams): React.ReactElement {
+        if (type !== BLOCK_LINK) return;
+        return <a {...attributes} href={data.url} target="_blank">{children}</a>
+    }
+
     getModal() {
         return <LinkDialog controller={this.controller} wrapLink={wrapLink}/>;
     }
+}
+
+export const linkPluginRenderReadOnly: WidgetRenderer = ({attributes, children, type, data}) => {
+    if (type !== BLOCK_LINK) return;
+    return <a {...attributes} href={data.url} target="_blank">{children}</a>
 }

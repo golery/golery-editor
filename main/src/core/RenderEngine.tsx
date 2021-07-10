@@ -1,16 +1,9 @@
 import * as React from 'react';
-import {
-    BLOCK_BULLETED_LIST,
-    BLOCK_H1,
-    BLOCK_H2,
-    BLOCK_H3,
-    BLOCK_LINK,
-    BLOCK_LIST_ITEM,
-    BLOCK_NUMBERED_LIST
-} from "./Schema";
+import {BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST} from "./Schema";
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
 import {EditorElement, RenderMode, WidgetRenderer} from "./EditorTypes";
+import {linkPluginRenderReadOnly} from "../plugins/link/LinkPlugin";
 
 /** Block elements wraps multiple leaf elements */
 function renderDefaultBlockElement(element: EditorElement, attributes: object, children: any) {
@@ -112,9 +105,13 @@ const renderReadOnly = (elms: EditorElement[], widgetRender: WidgetRenderer) => 
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {
             const {type, data} = elm;
+            const attributes = {key: index};
             const children = renderReadOnly(elm.children, widgetRender);
 
-            const attributes = {key: index};
+            const link = linkPluginRenderReadOnly({type, data, mode: RenderMode.VIEW, attributes, children});
+            if (link) {
+                return link;
+            }
             const customElm = widgetRender && widgetRender({type, data, mode: RenderMode.VIEW, attributes, children});
             if (customElm) {
                 return customElm;
