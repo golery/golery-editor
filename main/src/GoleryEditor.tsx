@@ -1,12 +1,12 @@
 
 import * as React from 'react';
-import {useEffect, useMemo} from 'react';
+import {useEffect, useMemo, useMemo} from 'react';
 import {ReactEditor, Slate, withReact} from 'slate-react'
 import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
 import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./core/Schema";
 import {EditorElement} from "./core/EditorTypes";
-import {withLink} from "./plugins/link/LinkPlugin";
+import {LinkDialog, setupLinkPlugin, withLink} from "./plugins/link/LinkPlugin";
 
 const withImages = (editor: any) => {
     const {isVoid} = editor
@@ -42,7 +42,12 @@ const getEmptyTextValue = () => ([{
 }]);
 
 const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
-    const editor = useMemo(() => withLink(withImages(withHistory(withReact(createEditor() as ReactEditor)))), []);
+    const controller = useMemo(() => ({}), []);
+    const editor = useMemo(() => {
+        let editor = withImages(withHistory(withReact(createEditor() as ReactEditor)));
+        setupLinkPlugin({editor, controller});
+        return editor;
+    }, []);
     useEffect(() => {
         editorRef.current = new Controller(editor);
     }, [editor]);
@@ -51,6 +56,7 @@ const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
     return (
         <Slate editor={editor} value={editorValue as Descendant[]} onChange={newValue => setValue(newValue as EditorElement[])}>
             {children}
+            <LinkDialog controller={controller}/>
         </Slate>
     );
 }

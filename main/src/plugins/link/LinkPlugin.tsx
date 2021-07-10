@@ -1,0 +1,117 @@
+import isUrl from 'is-url';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {Descendant, Editor, Element as SlateElement, Range, Transforms,} from 'slate'
+import {ReactEditor, useSlate} from 'slate-react';
+import {useCallback, useMemo, useEffect, useState} from "react"
+
+const unwrapLink = editor => {
+    Transforms.unwrapNodes(editor, {
+        match: n =>
+            !Editor.isEditor(n) && SlateElement.isElement(n) && (n as any).type === 'link',
+    })
+}
+
+const isLinkActive = editor => {
+    const [link] = Editor.nodes(editor, {
+        match: n =>
+            !Editor.isEditor(n) && SlateElement.isElement(n) && (n as any).type === 'link',
+    })
+    return !!link
+}
+
+
+export type LinkElement = { type: 'link'; data: { url: string }; children: Descendant[] }
+
+const wrapLink = (editor, url) => {
+    if (isLinkActive(editor)) {
+        unwrapLink(editor)
+    }
+
+    const {selection} = editor
+    const isCollapsed = selection && Range.isCollapsed(selection)
+    const link: LinkElement = {
+        type: 'link',
+        data: {url},
+        children: isCollapsed ? [{text: url}] : [],
+    }
+
+    if (isCollapsed) {
+        Transforms.insertNodes(editor, link)
+    } else {
+        Transforms.wrapNodes(editor, link, {split: true})
+        Transforms.collapse(editor, {edge: 'end'})
+    }
+}
+
+const Portal = ({children}) => {
+    return typeof document === 'object'
+        ? ReactDOM.createPortal(children, document.body)
+        : null
+}
+
+export const showLinkDialog = async (done) => {
+    ReactDOM.render(<LinkDialog done={done}/>, document.body);
+}
+
+interface LinkDialogProps {
+    controller: any
+}
+
+export const LinkDialog = (props: LinkDialogProps) => {
+    const editor = useSlate();
+    const [show, setShow] = useState(false);
+    const [link, setLink] = useState<string>();
+    const [text, setText] = useState<string>('link');
+    const onInsert = () => {
+        ReactEditor.focus(editor as ReactEditor);
+        setTimeout(() => {
+            wrapLink(editor, text || link);
+        });
+    }
+    useEffect(() => {
+        props.controller.showLinkDialog = (link) => {
+            console.log('Show');
+            setShow(true)
+            setLink(link);
+        }
+        return () => props.controller.showLinkDialog = null;
+    }, []);
+
+    if (!show) return null;
+    return (
+        <div>LINK DIALOG {show}x
+            <input value={link} onChange={e => setLink(e.target.value)}/>
+            <input value={text} onChange={e => setText(e.target.value)}/>
+            <button onClick={onInsert}>Insert</button>
+        </div>
+    );
+}
+
+export const setupLinkPlugin = ({editor, controller}) => {
+    const {insertData, insertText, isInline} = editor
+
+    editor.isInline = element => {
+        return element.type === 'link' ? true : isInline(element)
+    }
+
+    editor.insertText = text => {
+        if (text && isUrl(text)) {
+            controller.showLinkDialog && controller.showLinkDialog(text);
+        } else {
+            insertText(text)
+        }
+    }
+
+    editor.insertData = data => {
+        const text = data.getData('text/plain')
+
+        if (text && isUrl(text)) {
+            controller.showLinkDialog && controller.showLinkDialog(text);
+            wrapLink(editor, text)
+        } else {
+            insertData(data)
+        }
+    }
+    return editor;
+}
