@@ -1,12 +1,12 @@
 import isUrl from 'is-url';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import {Descendant, Editor, Element as SlateElement, Range, Transforms,} from 'slate'
-import {ReactEditor, useSlate} from 'slate-react';
-import {useCallback, useMemo, useEffect, useState} from "react"
+import {ReactEditor} from 'slate-react';
 import {WidgetRenderer, WidgetRenderParams} from "../../core/EditorTypes";
-import {BLOCK_LINK, BLOCK_OBJECT} from "../../core/Schema";
-import {Plugin} from "../../core/Plugin";
+import {BLOCK_LINK} from "../../core/Schema";
+import {EditorPlugin} from "../../core/EditorPlugin";
+import {LinkDialog} from "./LinkDialog";
+
 
 const unwrapLink = editor => {
     Transforms.unwrapNodes(editor, {
@@ -24,7 +24,7 @@ const isLinkActive = editor => {
 }
 
 
-export type LinkElement = { type: 'link'; data: { url: string }; children: Descendant[] }
+type LinkElement = { type: 'link'; data: { url: string }; children: Descendant[] }
 
 const wrapLink = (editor, url) => {
     if (isLinkActive(editor)) {
@@ -47,86 +47,55 @@ const wrapLink = (editor, url) => {
     }
 }
 
-const Portal = ({children}) => {
-    return typeof document === 'object'
-        ? ReactDOM.createPortal(children, document.body)
-        : null
-}
-
-export const showLinkDialog = async (done) => {
-    ReactDOM.render(<LinkDialog done={done}/>, document.body);
-}
-
-interface LinkDialogProps {
-    controller: any
-}
-
-export const LinkDialog = (props: LinkDialogProps) => {
-    const editor = useSlate();
-    const [show, setShow] = useState(false);
-    const [link, setLink] = useState<string>();
-    const [text, setText] = useState<string>('link');
-    const onInsert = () => {
-        ReactEditor.focus(editor as ReactEditor);
-        setTimeout(() => {
-            wrapLink(editor, text || link);
-        });
-    }
-    useEffect(() => {
-        props.controller.showLinkDialog = (link) => {
-            console.log('Show');
-            setShow(true)
-            setLink(link);
-        }
-        return () => props.controller.showLinkDialog = null;
-    }, []);
-
-    if (!show) return null;
-    return (
-        <div>LINK DIALOG {show}x
-            <input value={link} onChange={e => setLink(e.target.value)}/>
-            <input value={text} onChange={e => setText(e.target.value)}/>
-            <button onClick={onInsert}>Insert</button>
-        </div>
-    );
-}
-
-export const init = ({editor, controller}) => {
-    const {insertData, insertText, isInline} = editor
-
-    editor.isInline = element => {
-        return element.type === 'link' ? true : isInline(element)
-    }
-
-    editor.insertText = text => {
-        if (text && isUrl(text)) {
-            controller.showLinkDialog && controller.showLinkDialog(text);
-        } else {
-            insertText(text)
-        }
-    }
-
-    editor.insertData = data => {
-        const text = data.getData('text/plain')
-
-        if (text && isUrl(text)) {
-            controller.showLinkDialog && controller.showLinkDialog(text);
-            wrapLink(editor, text)
-        } else {
-            insertData(data)
-        }
-    }
-    return editor;
-}
-
-export const renderLink: WidgetRenderer = ({type, data, attributes, children}: WidgetRenderParams): React.ReactElement => {
+const renderLink: WidgetRenderer = ({type, data, attributes, children}: WidgetRenderParams): React.ReactElement => {
     if (type === BLOCK_LINK) {
         return <a {...attributes} href={data.url}>{data.text | data.url}{children}</a>
     }
 }
 
-const linkPlugin: Plugin = {
-    init,
-    render: renderLink
+export default class LinkPlugin implements EditorPlugin {
+    public render: WidgetRenderer
+    private readonly controller: LinkPluginController;
+    private readonly editor: ReactEditor;
+
+    constructor(editor) {
+        this.editor = editor;
+        this.render = renderLink;
+        this.controller = {};
+    }
+
+    init(editor) {
+        const {insertData, insertText, isInline} = editor;
+        const controller = this.controller;
+
+        editor.isInline = element => {
+            return element.type === 'link' ? true : isInline(element)
+        }
+
+        function showDialog(text) {
+            controller.showLinkDialog && controller.showLinkDialog(text);
+        }
+
+        editor.insertText = text => {
+            if (text && isUrl(text)) {
+                showDialog(text);
+            } else {
+                insertText(text)
+            }
+        }
+
+        editor.insertData = data => {
+            const text = data.getData('text/plain')
+
+            if (text && isUrl(text)) {
+                showDialog(text);
+            } else {
+                insertData(data)
+            }
+        }
+    }
+
+    getModal() {
+        return <LinkDialog controller={this.controller} wrapLink={wrapLink}/>;
+    }
 }
-export default linkPlugin;

@@ -29,13 +29,6 @@ function renderDefaultBlockElement(element: EditorElement, attributes: object, c
             return <li {...attributes}>{children}</li>
         case BLOCK_NUMBERED_LIST:
             return <ol {...attributes}>{children}</ol>
-        // FIXME
-        case BLOCK_LINK:
-            return  (
-                <a {...attributes} href={element.data.url}>
-                    {children}
-                </a>
-            );
         default:
             return <p {...attributes}>{children}</p>
     }

@@ -1,6 +1,6 @@
 import {WidgetRenderer} from "./EditorTypes";
 
-export interface Plugin {
+export interface EditorPlugin {
     init: (props: {editor: any, controller: any}) => void;
     render: WidgetRenderer
 }

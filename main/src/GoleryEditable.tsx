@@ -3,7 +3,8 @@ import {useCallback} from 'react';
 import {Editable} from 'slate-react';
 import {Element, Leaf} from "./core/RenderEngine";
 import {WidgetRenderer} from "./core/EditorTypes";
-import linkPlugin, {renderLink} from "./plugins/link/LinkPlugin";
+import {EditorPluginContext} from "./GoleryEditor";
+import {EditorPlugin} from "./core/EditorPlugin";
 
 interface Props {
     /** Render custom element */
@@ -11,9 +12,16 @@ interface Props {
 }
 
 const GoleryEditable = ({widgetRender}:Props) => {
+    const editorPlugins:EditorPlugin[] = React.useContext(EditorPluginContext);
+
     const renderer: WidgetRenderer = (params) => {
-        const result = linkPlugin.render(params);
-        if (result) return result;
+        for (const plugin of editorPlugins) {
+            if (plugin.render) {
+                const result = plugin.render(params);
+                if (result) return result;
+            }
+        }
+        // FIXME: create widget plugin
         return widgetRender(params);
     }
     const renderElement = useCallback(props => <Element {...props} widgetRender={renderer}/>, [])
