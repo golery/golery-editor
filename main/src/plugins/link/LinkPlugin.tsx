@@ -4,6 +4,9 @@ import * as ReactDOM from 'react-dom';
 import {Descendant, Editor, Element as SlateElement, Range, Transforms,} from 'slate'
 import {ReactEditor, useSlate} from 'slate-react';
 import {useCallback, useMemo, useEffect, useState} from "react"
+import {WidgetRenderer, WidgetRenderParams} from "../../core/EditorTypes";
+import {BLOCK_LINK, BLOCK_OBJECT} from "../../core/Schema";
+import {Plugin} from "../../core/Plugin";
 
 const unwrapLink = editor => {
     Transforms.unwrapNodes(editor, {
@@ -88,7 +91,7 @@ export const LinkDialog = (props: LinkDialogProps) => {
     );
 }
 
-export const setupLinkPlugin = ({editor, controller}) => {
+export const init = ({editor, controller}) => {
     const {insertData, insertText, isInline} = editor
 
     editor.isInline = element => {
@@ -115,3 +118,15 @@ export const setupLinkPlugin = ({editor, controller}) => {
     }
     return editor;
 }
+
+export const renderLink: WidgetRenderer = ({type, data, attributes, children}: WidgetRenderParams): React.ReactElement => {
+    if (type === BLOCK_LINK) {
+        return <a {...attributes} href={data.url}>{data.text | data.url}{children}</a>
+    }
+}
+
+const linkPlugin: Plugin = {
+    init,
+    render: renderLink
+}
+export default linkPlugin;

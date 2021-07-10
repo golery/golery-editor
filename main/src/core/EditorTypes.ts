@@ -19,11 +19,13 @@ export enum RenderMode {
     EDIT='EDIT',VIEW='VIEW'
 }
 
-export type WidgetRenderer = (params: WidgetRenderParams) => React.ReactNode;
+export type WidgetRenderer = (params: WidgetRenderParams) => React.ReactElement;
 
 export interface WidgetRenderParams {
     type: ElementType;
     data: WidgetData;
     mode: RenderMode;
     setData?: (WidgetData) => void;
+    attributes: any
+    children: any
 }

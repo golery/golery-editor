@@ -13,13 +13,7 @@ import {Transforms,} from 'slate'
 import {EditorElement, RenderMode, WidgetRenderer} from "./EditorTypes";
 
 /** Block elements wraps multiple leaf elements */
-function renderBlockElement(element: EditorElement, attributes: object, children: any,
-                            customRender: (type: string, data: any) => React.ReactNode) {
-    let customElm = customRender && customRender(element.type, element.data);
-    if (customElm) {
-        return <div {...attributes} contentEditable={false}>{children}{customElm}</div>;
-    }
-
+function renderDefaultBlockElement(element: EditorElement, attributes: object, children: any) {
     const type = element.type;
     // It's mandatory to pass attributes and children values. They come from slatejs library
     switch (type) {
@@ -74,7 +68,7 @@ interface ElementProps {
     widgetRender: WidgetRenderer
 }
 
-const Element = (props: ElementProps) => {
+const Element = (props: ElementProps)  => {
     const {attributes, children, element, widgetRender} = props;
     const editor: ReactEditor = useSlate() as ReactEditor;
 
@@ -83,8 +77,13 @@ const Element = (props: ElementProps) => {
         Transforms.setNodes(editor, {data} as any, {at: path})
     }
 
-    return renderBlockElement(element, attributes, children,
-        (type, data) => widgetRender && widgetRender({type, data, mode: RenderMode.EDIT, setData}));
+    const {type, data} = element;
+    if (widgetRender) {
+        const elm = widgetRender({type, data, mode: RenderMode.EDIT, attributes, children, setData});
+        if (elm) return elm;
+    }
+
+    return renderDefaultBlockElement(element, attributes, children);
 }
 
 
@@ -119,9 +118,15 @@ const renderReadOnly = (elms: EditorElement[], widgetRender: WidgetRenderer) => 
     if (!elms) return [];
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {
+            const {type, data} = elm;
             const children = renderReadOnly(elm.children, widgetRender);
-            return renderBlockElement(elm, {key: index}, children,
-                (type, data) => widgetRender && widgetRender({type, data, mode: RenderMode.VIEW}))
+
+            const attributes = {key: index};
+            const customElm = widgetRender && widgetRender({type, data, mode: RenderMode.VIEW, attributes, children});
+            if (customElm) {
+                return customElm;
+            }
+            return renderDefaultBlockElement(elm, attributes, children);
         } else {
             return renderLeafElement(elm, (elm as any)?.text, {key: index});
         }

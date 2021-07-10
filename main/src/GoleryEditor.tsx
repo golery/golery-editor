@@ -6,7 +6,7 @@ import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
 import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./core/Schema";
 import {EditorElement} from "./core/EditorTypes";
-import {LinkDialog, setupLinkPlugin, withLink} from "./plugins/link/LinkPlugin";
+import linkPlugin, {LinkDialog, setupLinkPlugin, withLink} from "./plugins/link/LinkPlugin";
 
 const withImages = (editor: any) => {
     const {isVoid} = editor
@@ -43,11 +43,13 @@ const getEmptyTextValue = () => ([{
 
 const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
     const controller = useMemo(() => ({}), []);
+
     const editor = useMemo(() => {
         let editor = withImages(withHistory(withReact(createEditor() as ReactEditor)));
-        setupLinkPlugin({editor, controller});
+        linkPlugin.init({editor, controller});
         return editor;
     }, []);
+
     useEffect(() => {
         editorRef.current = new Controller(editor);
     }, [editor]);
