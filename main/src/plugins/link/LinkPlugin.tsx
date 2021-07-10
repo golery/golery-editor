@@ -25,7 +25,7 @@ const isLinkActive = editor => {
 
 type LinkElement = { type: 'link'; data: { url: string }; children: Descendant[] }
 
-const wrapLink = (editor, url) => {
+const wrapLink = (editor, url, text) => {
     if (isLinkActive(editor)) {
         unwrapLink(editor)
     }
@@ -35,7 +35,7 @@ const wrapLink = (editor, url) => {
     const link: LinkElement = {
         type: 'link',
         data: {url},
-        children: isCollapsed ? [{text: url}] : [],
+        children: isCollapsed ? [{text: text}] : [],
     }
 
     if (isCollapsed) {
@@ -67,13 +67,14 @@ export default class LinkPlugin implements EditorPlugin {
             controller.showLinkDialog && controller.showLinkDialog(text);
         }
 
-        editor.insertText = text => {
-            if (text && isUrl(text)) {
-                showDialog(text);
-            } else {
-                insertText(text)
-            }
-        }
+        // This code is in example but not sure we need it.
+        // editor.insertText = text => {
+        //     if (text && isUrl(text)) {
+        //         showDialog(text);
+        //     } else {
+        //         insertText(text)
+        //     }
+        // }
 
         editor.insertData = data => {
             const text = data.getData('text/plain')

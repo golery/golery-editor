@@ -4,7 +4,7 @@ import {ReactEditor, useSlate} from 'slate-react';
 
 interface LinkDialogProps {
     controller: LinkPluginController
-    wrapLink: (editor, text) => void
+    wrapLink: (editor, url, text) => void
 }
 
 export const LinkDialog = ({controller, wrapLink}: LinkDialogProps) => {
@@ -13,9 +13,10 @@ export const LinkDialog = ({controller, wrapLink}: LinkDialogProps) => {
     const [link, setLink] = useState<string>();
     const [text, setText] = useState<string>('link');
     const onInsert = () => {
+        setShow(false);
         ReactEditor.focus(editor as ReactEditor);
         setTimeout(() => {
-            wrapLink(editor, text || link);
+            wrapLink(editor, link, text || link);
         });
     }
     useEffect(() => {
