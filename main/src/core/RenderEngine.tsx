@@ -1,5 +1,13 @@
 import * as React from 'react';
-import {BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST} from "./Schema";
+import {
+    BLOCK_BULLETED_LIST,
+    BLOCK_H1,
+    BLOCK_H2,
+    BLOCK_H3,
+    BLOCK_LINK,
+    BLOCK_LIST_ITEM,
+    BLOCK_NUMBERED_LIST
+} from "./Schema";
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
 import {EditorElement, RenderMode, WidgetRenderer} from "./EditorTypes";
@@ -27,6 +35,13 @@ function renderBlockElement(element: EditorElement, attributes: object, children
             return <li {...attributes}>{children}</li>
         case BLOCK_NUMBERED_LIST:
             return <ol {...attributes}>{children}</ol>
+        // FIXME
+        case BLOCK_LINK:
+            return  (
+                <a {...attributes} href={element.data.url}>
+                    {children}
+                </a>
+            );
         default:
             return <p {...attributes}>{children}</p>
     }

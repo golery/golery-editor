@@ -17,7 +17,7 @@ const isLinkActive = editor => {
 }
 
 
-export type LinkElement = { type: 'link'; url: string; children: Descendant[] }
+export type LinkElement = { type: 'link'; data: {url: string}; children: Descendant[] }
 
 const wrapLink = (editor, url) => {
     if (isLinkActive(editor)) {
@@ -28,7 +28,7 @@ const wrapLink = (editor, url) => {
     const isCollapsed = selection && Range.isCollapsed(selection)
     const link: LinkElement = {
         type: 'link',
-        url,
+        data: {url},
         children: isCollapsed ? [{ text: url }] : [],
     }
 

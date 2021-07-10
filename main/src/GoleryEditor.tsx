@@ -6,7 +6,7 @@ import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
 import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./core/Schema";
 import {EditorElement} from "./core/EditorTypes";
-import {withLink} from "./plugins/link/LinkPlugins2";
+import {withLink} from "./plugins/link/LinkPlugin";
 
 const withImages = (editor: any) => {
     const {isVoid} = editor

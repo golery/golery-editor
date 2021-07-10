@@ -1,6 +1,6 @@
-export const MARK_ITALIC = 'italic';
-export const MARK_UNDERLINE = 'underline';
-export const MARK_BOLD = 'bold';
+export const MARK_ITALIC = 'i';
+export const MARK_UNDERLINE = 'u';
+export const MARK_BOLD = 'b';
 export const BLOCK_H1 = 'h1';
 export const BLOCK_H2 = 'h2';
 export const BLOCK_H3 = 'h3';
@@ -10,3 +10,4 @@ export const BLOCK_LIST_ITEM = 'li';
 export const BLOCK_PARAGRAPH = 'p';
 export const BLOCK_OBJECT = 'obj'
 export const BLOCK_IMAGE = 'image'
+export const BLOCK_LINK = 'link'
