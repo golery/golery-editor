@@ -59,6 +59,7 @@ const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
 
     const pluginContext = useMemo(() => ([linkPlugin]), [linkPlugin]);
 
+    console.log('s', editor.selection);
     const editorValue = Array.isArray(value) ? value : getEmptyTextValue();
     return (
         <Slate editor={editor} value={editorValue as Descendant[]}
