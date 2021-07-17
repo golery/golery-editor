@@ -28,8 +28,9 @@ export const LinkDialog = ({controller, wrapLink}: LinkDialogProps) => {
     useEffect(() => {
         controller.showLinkDialog = (link) => {
             editorSelection.current = editor.selection;
-            setShow(true)
+            setText('link');
             setLink(link);
+            setShow(true)
         }
         return () => controller.showLinkDialog = null;
     }, [editor]);
