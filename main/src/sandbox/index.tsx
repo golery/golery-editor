@@ -25,9 +25,9 @@ const SandboxApp = () => {
 
     const widgets = useMemo(() => getWidgetPlugins(), []);
 
-    const widgetRender:WidgetRenderer = ({type, data, mode, setData}) => {
+    const widgetRender:WidgetRenderer = ({type, data, mode, setData, attributes, children}) => {
         return widgets.find(widget => widget.elmType === type)?.render({
-            type, data, mode, setData
+            type, data, mode, setData, attributes, children
         });
 
     }
