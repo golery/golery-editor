@@ -56,7 +56,7 @@ export default class LinkPlugin implements EditorPlugin {
     }
 
     init(editor) {
-        const {insertData, insertText, isInline} = editor;
+        const {insertData, isInline} = editor;
         const controller = this.controller;
 
         editor.isInline = element => {
@@ -66,15 +66,6 @@ export default class LinkPlugin implements EditorPlugin {
         function showDialog(text) {
             controller.showLinkDialog && controller.showLinkDialog(text);
         }
-
-        // This code is in example but not sure we need it.
-        // editor.insertText = text => {
-        //     if (text && isUrl(text)) {
-        //         showDialog(text);
-        //     } else {
-        //         insertText(text)
-        //     }
-        // }
 
         editor.insertData = data => {
             const text = data.getData('text/plain')
