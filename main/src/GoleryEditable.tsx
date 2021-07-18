@@ -2,27 +2,24 @@ import * as React from 'react';
 import {useCallback} from 'react';
 import {Editable} from 'slate-react';
 import {Element, Leaf} from "./core/RenderEngine";
-import {WidgetRenderer} from "./core/EditorTypes";
+import {EditorContext, WidgetRenderer} from "./core/EditorTypes";
 import {EditorPluginContext} from "./GoleryEditor";
 import {EditorPlugin} from "./core/EditorPlugin";
 
 interface Props {
-    /** Render custom element */
-    widgetRender?: WidgetRenderer
 }
 
-const GoleryEditable = ({widgetRender}:Props) => {
-    const editorPlugins:EditorPlugin[] = React.useContext(EditorPluginContext);
+const GoleryEditable = () => {
+    const editorContext:EditorContext = React.useContext(EditorPluginContext);
 
     const renderer: WidgetRenderer = (params) => {
-        for (const plugin of editorPlugins) {
+        console.log('RRR', editorContext);
+        for (const plugin of editorContext.plugins) {
             if (plugin.render) {
                 const result = plugin.render(params);
                 if (result) return result;
             }
         }
-        // FIXME: create widget plugin
-        return widgetRender && widgetRender(params);
     }
     const renderElement = useCallback(props => <Element {...props} widgetRender={renderer}/>, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])

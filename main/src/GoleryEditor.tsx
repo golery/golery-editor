@@ -1,13 +1,13 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import {useEffect, useMemo, useRef} from 'react';
+import {useEffect, useMemo} from 'react';
 import {ReactEditor, Slate, withReact} from 'slate-react'
 import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
 import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./core/Schema";
-import {EditorElement} from "./core/EditorTypes";
+import {EditorContext, EditorElement} from "./core/EditorTypes";
 import LinkPlugin from "./plugins/link/LinkPlugin";
 import {EditorPlugin} from "./core/EditorPlugin";
+import {getStandardPlugins} from "./plugins";
 
 const withImages = (editor: any) => {
     const {isVoid} = editor
@@ -35,6 +35,7 @@ interface Props {
     editorRef: any
     value: object[]
     setValue: (value: EditorElement[]) => void
+    plugins?: EditorPlugin[]
 }
 
 const getEmptyTextValue = () => ([{
@@ -43,9 +44,10 @@ const getEmptyTextValue = () => ([{
 }]);
 
 // This context pass list of plugins to GoleryEditable
-export const EditorPluginContext = React.createContext<EditorPlugin[]>([]);
+export const EditorPluginContext = React.createContext<EditorContext>({plugins:getStandardPlugins()});
 
-const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
+const editorContext = {plugins: getStandardPlugins()};
+const GoleryEditor = ({children, editorRef, value, setValue, plugins}: Props) => {
     const {linkPlugin, editor} = useMemo(() => {
         let editor = withImages(withHistory(withReact(createEditor() as ReactEditor)));
         const linkPlugin = new LinkPlugin(editor);
@@ -57,14 +59,13 @@ const GoleryEditor = ({children, editorRef, value, setValue}: Props) => {
         editorRef.current = new Controller(editor);
     }, [editor]);
 
-    const pluginContext = useMemo(() => ([linkPlugin]), [linkPlugin]);
 
     console.log('s', editor.selection);
     const editorValue = Array.isArray(value) ? value : getEmptyTextValue();
     return (
         <Slate editor={editor} value={editorValue as Descendant[]}
                onChange={newValue => setValue(newValue as EditorElement[])}>
-            <EditorPluginContext.Provider value={pluginContext}>
+            <EditorPluginContext.Provider value={editorContext}>
                 {children}
                 {linkPlugin.getModal()}
             </EditorPluginContext.Provider>

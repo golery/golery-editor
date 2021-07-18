@@ -1,5 +1,12 @@
+import {EditorPlugin} from "./EditorPlugin";
+
 export type ElementType = string;
 export type WidgetData = any;
+
+export interface EditorContext {
+    plugins: EditorPlugin[]
+}
+
 export interface EditorElement {
     type: string
     data: any
@@ -12,6 +19,8 @@ export interface WidgetPlugin {
     icon: string;
     name: string;
     getDataWhenInsert: () => Promise<any>;
+
+    init: (props: {editor: any, controller: any}) => void;
     render: WidgetRenderer;
 }
 

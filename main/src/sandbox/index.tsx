@@ -9,6 +9,7 @@ import ReadOnlyRender from "../ReadOnlyRender";
 import {WidgetRenderer, EditorElement, RenderMode} from "../core/EditorTypes";
 import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
 import {HtmlConversion} from "./HtmlConversion";
+import {getStandardPlugins} from "../plugins";
 
 
 function getSavedTextValue() {
@@ -25,6 +26,7 @@ const SandboxApp = () => {
     const [value, setValue] = useState<EditorElement[]>(getSavedTextValue());
 
     const widgets = useMemo(() => getWidgetPlugins(), []);
+    const plugins = useMemo(() => getStandardPlugins(), []);
 
     const widgetRender:WidgetRenderer = ({type, data, mode, setData, attributes, children}) => {
         return widgets.find(widget => widget.elmType === type)?.render({
@@ -63,9 +65,9 @@ const SandboxApp = () => {
             <hr/>
 
             <h1>Editor</h1>
-            <GoleryEditor editorRef={editor} value={value} setValue={setValueWrapper}>
+            <GoleryEditor editorRef={editor} value={value} setValue={setValueWrapper} plugins={plugins}>
                 <EditorToolbar widgets={widgets}/>
-                <GoleryEditable widgetRender={widgetRender}/>
+                <GoleryEditable/>
             </GoleryEditor>
 
             <hr/>

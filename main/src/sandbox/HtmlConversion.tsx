@@ -6,7 +6,8 @@ import {useRef, useState} from "react";
 import {EditorElement} from "../core/EditorTypes";
 import {jsx} from "slate-hyperscript";
 
-const html1 = `<p></p><p><img class=\\"sc-htpNat yIWw\\" src=\\"https://i.imgur.com/rELqqPp.png\\"/></p>`;
+const html1 = `<p>Image:</p><img class="sc-htpNat yIWw" src="https://i.imgur.com/rELqqPp.png"/>`;
+const html3 = `<p>Image:</p><p></p>`;
 const html2 = "Float and height<div>A {B}</div><div>If B is float and A does not have height EXCEPT: A is inline-block</div>";
 // Access via http://localhost:9000/?html
 export const HtmlConversion = () => {
