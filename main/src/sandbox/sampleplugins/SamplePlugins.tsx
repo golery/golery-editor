@@ -6,7 +6,7 @@ import SampleCodeBlockPlugin from "./codeblock";
 const plugins = [
     {
         id: 'image',
-        elmType: 'image',
+        elmType: 'img',
         name: 'Image',
         icon: 'image',
         async getDataWhenInsert() {

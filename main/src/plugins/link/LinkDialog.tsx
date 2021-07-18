@@ -13,7 +13,7 @@ interface LinkDialogProps {
 export const LinkDialog = ({controller, wrapLink}: LinkDialogProps) => {
     const editor = useSlate();
     const editorSelection = React.useRef<BaseRange>();
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     const [link, setLink] = useState<string>();
     const [text, setText] = useState<string>('link');
     const onInsert = () => {

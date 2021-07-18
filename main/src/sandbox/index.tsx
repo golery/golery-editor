@@ -8,6 +8,7 @@ import "./sandbox.module.scss";
 import ReadOnlyRender from "../ReadOnlyRender";
 import {WidgetRenderer, EditorElement, RenderMode} from "../core/EditorTypes";
 import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
+import {HtmlConversion} from "./HtmlConversion";
 
 
 function getSavedTextValue() {
@@ -46,7 +47,9 @@ const SandboxApp = () => {
         localStorage.setItem('editorValue', JSON.stringify(v));
     }, [setValue],);
 
-
+    if (window.location.href.indexOf('html') > 0) {
+        return <HtmlConversion/>
+    }
     return (
         <div style={{margin: "20px"}}>
             <div>

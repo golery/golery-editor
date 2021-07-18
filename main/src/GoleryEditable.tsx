@@ -8,7 +8,7 @@ import {EditorPlugin} from "./core/EditorPlugin";
 
 interface Props {
     /** Render custom element */
-    widgetRender: WidgetRenderer
+    widgetRender?: WidgetRenderer
 }
 
 const GoleryEditable = ({widgetRender}:Props) => {
@@ -22,7 +22,7 @@ const GoleryEditable = ({widgetRender}:Props) => {
             }
         }
         // FIXME: create widget plugin
-        return widgetRender(params);
+        return widgetRender && widgetRender(params);
     }
     const renderElement = useCallback(props => <Element {...props} widgetRender={renderer}/>, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])

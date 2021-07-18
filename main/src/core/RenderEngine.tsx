@@ -23,7 +23,7 @@ function renderDefaultBlockElement(element: EditorElement, attributes: object, c
         case BLOCK_NUMBERED_LIST:
             return <ol {...attributes}>{children}</ol>
         default:
-            return <p {...attributes}>{children}</p>
+            return <div {...attributes}>{children}</div>
     }
 }
 
