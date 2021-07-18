@@ -6,8 +6,10 @@ import {useRef, useState} from "react";
 import {EditorElement} from "../core/EditorTypes";
 import {jsx} from "slate-hyperscript";
 
-const html1 = `<p>Image:</p><img class="sc-htpNat yIWw" src="https://i.imgur.com/rELqqPp.png"/>`;
+const html4 = `<p>Image:</p><img class="sc-htpNat yIWw" src="https://cache1.artprintimages.com/images/homepage/slider-tiles/!_2021/apr/0410_slidertiles_afremov.jpg"/>`;
 const html3 = `<p>Image:</p><p></p>`;
+const html5 = `<p>Code</p><pre><code class=\\"lang-tsx\\">@RunWith(SpringRunner.class) \\npublic class MyTest {   @Autowired\\n   private ObjectMapper objectMapper;\\n   mockMvc = MockMvcBuilders.standaloneSetup(new CustomerController(customerService)).build();\\n   \\n     String response = mockMvc.perform(get(CONTROLLER_BASE))\\n                .andDo(print())\\n                .andExpect(status().isOk())\\n                .andReturn().getResponse().getContentAsString();\\n}</code></pre>`;
+const html1 = `<p>Code</p><code>import { Injectable, Inject } from '@angular/core'; \n function f() { const a = 1; }</code><p>Something</p>`;
 const html2 = "Float and height<div>A {B}</div><div>If B is float and A does not have height EXCEPT: A is inline-block</div>";
 // Access via http://localhost:9000/?html
 export const HtmlConversion = () => {
@@ -28,6 +30,7 @@ export const HtmlConversion = () => {
         }
 
         console.log(el.nodeName);
+        console.log(el.attributes);
         switch (el.nodeName) {
             case 'BODY':
                 return jsx('fragment', {}, children)
@@ -39,7 +42,11 @@ export const HtmlConversion = () => {
             case 'P':
                 return jsx('element', { type: 'p' }, children)
             case 'IMG':
-                return jsx('element', { type: 'img' }, children)
+                const src = el.getAttribute('src');
+                return jsx('element', { type: 'img', data: {src} }, children)
+            case 'CODE':
+                const code = el.textContent;
+                return jsx('element', { type: 'code', data: { code } }, children)
             case 'A':
                 return jsx(
                     'element',

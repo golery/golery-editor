@@ -52,6 +52,11 @@ const GoleryEditor = ({children, editorRef, value, setValue, plugins}: Props) =>
         let editor = withImages(withHistory(withReact(createEditor() as ReactEditor)));
         const linkPlugin = new LinkPlugin(editor);
         linkPlugin.init(editor);
+        if (plugins) {
+            for (let plugin of plugins) {
+                plugin?.init(editor);
+            }
+        }
         return ({linkPlugin, editor});
     }, []);
 
