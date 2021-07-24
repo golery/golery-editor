@@ -9,10 +9,15 @@ interface Props {
 }
 export const CodeEditor = ({code, onSave}: Props) => {
     const [editingCode, setEditingCode] = useState('');
+    const [dirty, setDirty] = useState(false);
     const onClick = useCallback(() => {onSave(editingCode)}, [editingCode]);
-    const displayCode = editingCode.length > 0 ? editingCode : code || '';
+    const onChange = useCallback((e) => {
+        setDirty(true);
+        setEditingCode(e.target.value)
+    }, []);
+    const displayCode = dirty ? editingCode : code;
     return (<div>
-        <textarea className={styles.code} value={displayCode} onChange={e => setEditingCode(e.target.value)}
+        <textarea className={styles.code} value={displayCode} onChange={e => onChange}
                     placeholder={'Paste code here'}/>
         <DialogFooter>
             <button onClick={onClick}>SAVE</button>

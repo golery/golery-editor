@@ -17,8 +17,12 @@ export const CodeWidget = ({attributes, children, data, setData}) => {
 
     const editor = useSlateStatic() as ReactEditor;
     const onEdit = async () => {
-        const code = await showModal(({closeDialog}) => <CodeEditor code={data.code} onSave={code => closeDialog(code)}/>);
-        setData({code});
+        const code = await showModal<string>(({closeDialog}) => <CodeEditor code={data.code} onSave={code => closeDialog(code)}/>);
+        if (code && code.trim().length > 0) {
+            setData({code});
+        } else {
+            setData();
+        }
     }
     return <div className={styles.holder} onDoubleClick={onEdit}  {...attributes} >
         {children}

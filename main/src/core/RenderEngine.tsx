@@ -59,8 +59,12 @@ const Element = (props: ElementProps)  => {
     const editor: ReactEditor = useSlate() as ReactEditor;
 
     const setData = (data: any) => {
-        const path = ReactEditor.findPath(editor, element);
-        Transforms.setNodes(editor, {data} as any, {at: path})
+        if (data === undefined) {
+            editor.deleteForward('block');
+        } else {
+            const path = ReactEditor.findPath(editor, element);
+            Transforms.setNodes(editor, {data} as any, {at: path})
+        }
     }
 
     const {type, data} = element;
