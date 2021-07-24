@@ -1,5 +1,11 @@
 .code {
   min-height: 15rem;
   padding: 1rem;
-  border: 2px solid gray;
+  border: 1px solid #ccc;
+  border-left: 10px solid darkgreen;
+  width: calc(100% - 3rem);
+  outline: none;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
 }
+
