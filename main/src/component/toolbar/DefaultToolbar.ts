@@ -11,7 +11,6 @@ import {
     MARK_ITALIC,
     MARK_UNDERLINE
 } from "../../core/Schema";
-import {WidgetPlugin} from "../../core/EditorTypes";
 import {EditorPlugin} from "../../core/EditorPlugin";
 
 export const getDefaultToolbar = (editor: BaseEditor, widgets: EditorPlugin[]) => {
@@ -23,11 +22,12 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: EditorPlugin[]) =
         }
 
         const data = await plugin.onInsert();
-        // return Transforms.insertNodes(editor, {
-        //     type: plugin.elmType,
-        //     data: data,
-        //     children: [{text: ''}]
-        // } as any);
+        if (!data) return;
+        return Transforms.insertNodes(editor, {
+            type: plugin.type,
+            data: data,
+            children: [{text: ''}]
+        } as any);
     }
     const operations = {
         toggleH1: () => toggleBlock(editor, BLOCK_H1),

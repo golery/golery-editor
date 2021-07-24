@@ -1,12 +1,18 @@
 import * as React from "react";
 import styles from './CodeEditor.module.scss';
 import {DialogFooter} from "../../../component/modal/EditorModal";
+import {useCallback, useState} from "react";
 
-export const CodeEditor = () => {
+interface Props {
+    onSave: (code:string) => void
+}
+export const CodeEditor = ({onSave}) => {
+    const [code, setCode] = useState('');
+    const onClick = useCallback(() => {onSave(code)}, [code]);
     return (<div>
-        <pre className={styles.code} contentEditable={true}>This is code</pre>
+        <textarea className={styles.code} value={code} onChange={e => setCode(e.target.value)}>This is code</textarea>
         <DialogFooter>
-            <button>Save</button>
+            <button onClick={onClick}>Save</button>
         </DialogFooter>
     </div>);
 }

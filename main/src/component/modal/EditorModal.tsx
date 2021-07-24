@@ -1,14 +1,18 @@
 import * as React from "react";
 import styles from './EditorModal.module.scss';
 import CloseIcon from "../icons/CloseIcon";
+import {useCallback} from "react";
 
-export const EditorModal = ({children}) => {
-    const onClose = () => {
-    };
+interface Props {
+    onCancel: () => void
+    children: any
+}
+
+export const EditorModal = ({onCancel, children}) => {
     return (
         <div className={styles.fullScreen}>
             <div className={styles.dialog}>
-                <div className={styles.closeButton} onClick={onClose}><CloseIcon/></div>
+                <div className={styles.closeButton} onClick={useCallback(() => onCancel(), [])}><CloseIcon/></div>
                 {children}
             </div>
         </div>

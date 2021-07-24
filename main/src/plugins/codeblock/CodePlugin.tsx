@@ -10,7 +10,7 @@ import {CodeEditor} from "./editor/CodeEditor";
 
 const CodeWidget = ({attributes, children}) => {
     useEffect(() => {
-        setTimeout(()=> {
+        setTimeout(() => {
             Prism.highlightAll();
         });
 
@@ -20,15 +20,24 @@ const CodeWidget = ({attributes, children}) => {
 
 export const CodePlugin: EditorPlugin = {
     id: "code",
-    init() {},
+    type: "code",
+    init() {
+    },
     render({type, data, attributes, children}: WidgetRenderParams) {
         if (type === 'code') return <CodeWidget attributes={attributes}>{children}{data.code}</CodeWidget>;
     },
     onInsert() {
-        var elem = document.createElement('div');
-        // FIXME
-        elem.id = 'dialog'
-        document.body.appendChild(elem);
-        ReactDOM.render(<EditorModal><CodeEditor/></EditorModal>, document.getElementById('dialog'));
+        return new Promise((resolve) => {
+            var elem = document.createElement('div');
+            document.body.appendChild(elem);
+            const onClose = (code) => {
+                ReactDOM.unmountComponentAtNode(elem);
+                elem.remove();
+                if (code)
+                resolve(code && {code});
+            }
+            ReactDOM.render(<EditorModal onCancel={() => onClose(undefined)}><CodeEditor
+                onSave={code => onClose(code)}/></EditorModal>, elem);
+        })
     }
 }
