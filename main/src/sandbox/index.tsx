@@ -25,13 +25,13 @@ function getSavedTextValue() {
 const SandboxApp = () => {
     const [value, setValue] = useState<EditorElement[]>(getSavedTextValue());
 
-    const widgets = useMemo(() => getWidgetPlugins(), []);
     const plugins = useMemo(() => getStandardPlugins(), []);
 
     const widgetRender:WidgetRenderer = ({type, data, mode, setData, attributes, children}) => {
-        return widgets.find(widget => widget.elmType === type)?.render({
-            type, data, mode, setData, attributes, children
-        });
+        // return plugins.find(widget => widget.elmType === type)?.render({
+        //     type, data, mode, setData, attributes, children
+        // });
+        return null;
 
     }
 
@@ -66,7 +66,7 @@ const SandboxApp = () => {
 
             <h1>Editor</h1>
             <GoleryEditor editorRef={editor} value={value} setValue={setValueWrapper} plugins={plugins}>
-                <EditorToolbar widgets={widgets}/>
+                <EditorToolbar widgets={plugins}/>
                 <GoleryEditable/>
             </GoleryEditor>
 

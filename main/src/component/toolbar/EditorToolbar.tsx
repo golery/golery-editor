@@ -6,6 +6,7 @@ import {getDefaultToolbar} from "./DefaultToolbar";
 import {EditorIcons} from "./icons";
 import QuoteIcon from "./icons/QuoteIcon";
 import {WidgetPlugin} from "../../core/EditorTypes";
+import {EditorPlugin} from "../../core/EditorPlugin";
 
 interface IconProps {
     icon: string
@@ -48,7 +49,7 @@ const Separator = () => {
 }
 
 interface EditorToolbar {
-    widgets: WidgetPlugin[]
+    widgets: EditorPlugin[]
 }
 
 const EditorToolbar = ({widgets}: EditorToolbar) => {

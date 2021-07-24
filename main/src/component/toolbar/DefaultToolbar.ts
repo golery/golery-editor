@@ -12,21 +12,22 @@ import {
     MARK_UNDERLINE
 } from "../../core/Schema";
 import {WidgetPlugin} from "../../core/EditorTypes";
+import {EditorPlugin} from "../../core/EditorPlugin";
 
-export const getDefaultToolbar = (editor: BaseEditor, widgets: WidgetPlugin[]) => {
+export const getDefaultToolbar = (editor: BaseEditor, widgets: EditorPlugin[]) => {
     const insertWidget = async (type: string) => {
-        const plugin = widgets.find(o => o.elmType === type);
+        const plugin = widgets.find(o => o.id === type);
         if (!plugin) {
             console.log('Plugin ', type, ' not found');
             return;
         }
 
-        const data = await plugin.getDataWhenInsert();
-        return Transforms.insertNodes(editor, {
-            type: plugin.elmType,
-            data: data,
-            children: [{text: ''}]
-        } as any);
+        const data = await plugin.onInsert();
+        // return Transforms.insertNodes(editor, {
+        //     type: plugin.elmType,
+        //     data: data,
+        //     children: [{text: ''}]
+        // } as any);
     }
     const operations = {
         toggleH1: () => toggleBlock(editor, BLOCK_H1),
