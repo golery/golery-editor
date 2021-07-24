@@ -50,11 +50,9 @@ const editorContext = {plugins: getStandardPlugins()};
 const GoleryEditor = ({children, editorRef, value, setValue, plugins}: Props) => {
     const {linkPlugin, editor} = useMemo(() => {
         let editor = withImages(withHistory(withReact(createEditor() as ReactEditor)));
-        const linkPlugin = new LinkPlugin(editor);
-        linkPlugin.init(editor);
         if (plugins) {
             for (let plugin of plugins) {
-                plugin?.init(editor);
+                plugin?.init({editor, controller: {}});
             }
         }
         return ({linkPlugin, editor});
@@ -72,7 +70,6 @@ const GoleryEditor = ({children, editorRef, value, setValue, plugins}: Props) =>
                onChange={newValue => setValue(newValue as EditorElement[])}>
             <EditorPluginContext.Provider value={editorContext}>
                 {children}
-                {linkPlugin.getModal()}
             </EditorPluginContext.Provider>
         </Slate>
     );

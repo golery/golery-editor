@@ -13,7 +13,6 @@ const GoleryEditable = () => {
     const editorContext:EditorContext = React.useContext(EditorPluginContext);
 
     const renderer: WidgetRenderer = (params) => {
-        console.log('RRR', editorContext);
         for (const plugin of editorContext.plugins) {
             if (plugin.render) {
                 const result = plugin.render(params);

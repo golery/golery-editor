@@ -47,6 +47,8 @@ const wrapLink = (editor, url, text) => {
 }
 
 export default class LinkPlugin implements EditorPlugin {
+    public id = "link";
+    public type = "link";
     private readonly controller: LinkPluginController;
     private readonly editor: ReactEditor;
 
@@ -55,7 +57,7 @@ export default class LinkPlugin implements EditorPlugin {
         this.controller = {};
     }
 
-    init(editor) {
+    init({editor}) {
         const {insertData, isInline} = editor;
         const controller = this.controller;
 
