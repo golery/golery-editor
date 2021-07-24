@@ -19,4 +19,7 @@ export const CodePlugin: EditorPlugin = {
     render({type, data, attributes, children}: WidgetRenderParams) {
         if (type === 'code') return <CodeWidget attributes={attributes}>{children}{data.code}</CodeWidget>;
     },
+    onInsert() {
+
+    }
 }
