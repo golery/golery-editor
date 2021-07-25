@@ -15,6 +15,8 @@
 }
 
 .dialog {
+  max-height: 80%;
+  overflow-y: auto;
   min-width: 30%;
   padding: 1.5rem;
   background-color: #fff;
@@ -62,7 +64,7 @@
     }
   }
 
-  input {
+  input[type='text'] {
     padding: 6px 10px;
     outline: 0;
     border: 1px solid #dbdbdb;

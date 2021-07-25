@@ -54,7 +54,11 @@ module.exports = {
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
         contentBase: path.resolve(__dirname, 'src', 'sandbox'),
+        disableHostCheck: true,
         hot: true,
-        port: 9000
+        port: 9000,
+        proxy: {
+            '/api': 'http://www.golery.com',
+        },
     }
 };
