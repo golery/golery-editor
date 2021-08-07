@@ -24,7 +24,8 @@ export const DialogFooter = ({children}) => {
     return (<div className={styles.footer}>{children}</div>);
 }
 
-type ModalBody = ({closeDialog: Function}) => ReactNode;
+export type CloseDialogFunc = ((result: any) => void);
+type ModalBody = ({closeDialog: CloseDialogFunc}) => ReactNode;
 export function showModal<T>(getBody: ModalBody): Promise<T> {
     return new Promise((resolve) => {
         const elm = document.createElement('div');

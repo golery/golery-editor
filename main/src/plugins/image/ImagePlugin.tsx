@@ -3,23 +3,28 @@ import {WidgetRenderParams} from "../../core/EditorTypes";
 import {EditorPlugin} from "../../core/EditorPlugin";
 import {showModal} from "../../component/modal/EditorModal";
 import {ImageEditor} from "./editor/ImageEditor";
-import {ReactEditor} from "slate-react";
+import {goApi} from "../../core/GoApi";
 
 export const ImagePlugin:EditorPlugin = {
     id: 'image',
     type: 'image',
-    // name: 'Image',
-    // icon: 'image',
     init({editor}) {
         editor.insertData = data => {
             console.log('Data', data);
         }
     },
     render({type, data, attributes, children}: WidgetRenderParams) {
-        if (type === 'image') return <div  {...attributes}>{children}<img src={data.url} alt={data.url}/></div>;
+        if (type === 'image') {
+            const url = goApi.getFileUrl(data.key);
+            return <div  {...attributes}>{children}<img src={url} alt={data.key}/></div>;
+        }
     },
     async onInsert() {
-        await showModal(({closeDialog}) => <ImageEditor/>);
-        // return ({url: 'https://picsum.photos/200/300'});
+        const {key} = await showModal(({closeDialog}) => <ImageEditor closeDialog={closeDialog}/>);
+        console.log('vvv', key);
+        return {
+            source: 'file',
+            key
+        }
     }
 }
