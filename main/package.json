@@ -10,12 +10,12 @@
     "url": "https://www.golery.com"
   },
   "scripts": {
-    "build.dev": "webpack --config webpack.config.js --mode development --progress",
-    "build.prod": "webpack --config webpack.config.js --mode production  --progress",
+    "delete_build.dev": "webpack --config webpack.config.js --mode development --progress",
+    "delete_build.prod": "webpack --config webpack.config.js --mode production  --progress",
     "delete_build": "yarn run build.dev && yarn run build.prod",
     "dev": "webpack serve --config webpack.config.sandboxbrowser.js --mode development --progress",
-    "watch.node": "webpack --config webpack.config.sandboxnode.js --mode development --progress --watch",
-    "dev.node": "node ./src/sandbox/build/server.js",
+    "delete_watch.node": "webpack --config webpack.config.sandboxnode.js --mode development --progress --watch",
+    "delete_dev.node": "node ./src/sandbox/build/server.js",
     "build": "rollup --config ./rollup.config.js",
     "watch": "rollup -w --config ./rollup.config.js"
   },

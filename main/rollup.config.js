@@ -5,18 +5,7 @@ import pkg from './package.json';
 
 export default {
     input: 'src/index.ts',
-    // output: {
-    //     dir: 'dist',
-    //     // file: 'dist/main.tsx',
-    //     // format: 'iife',
-    //     // name: 'Foo',
-    //     // sourcemap: 'inline'
-    // },
     output: [
-        // {
-        //     format: 'cjs',
-        //     file: pkg.main
-        // },
         {
             format: 'es',
             file: pkg.module
