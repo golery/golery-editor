@@ -5,7 +5,6 @@ import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
 import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./core/Schema";
 import {EditorContext, EditorElement} from "./core/EditorTypes";
-import LinkPlugin from "./plugins/link/LinkPlugin";
 import {EditorPlugin} from "./core/EditorPlugin";
 import {getStandardPlugins} from "./plugins";
 

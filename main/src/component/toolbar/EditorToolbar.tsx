@@ -5,7 +5,6 @@ import {useSlate} from 'slate-react';
 import {getDefaultToolbar} from "./DefaultToolbar";
 import {EditorIcons} from "./icons";
 import QuoteIcon from "./icons/QuoteIcon";
-import {WidgetPlugin} from "../../core/EditorTypes";
 import {EditorPlugin} from "../../core/EditorPlugin";
 
 interface IconProps {

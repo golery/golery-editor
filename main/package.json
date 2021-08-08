@@ -1,7 +1,8 @@
 {
   "name": "golery-editor",
-  "version": "1.3.7-alpha.2",
-  "description": "A customized vesion of canner-slate-editor for www.golery.com",
+  "private": true,
+  "version": "2.0",
+  "description": "Golery editor",
   "homepage": "https://www.golery.com",
   "author": {
     "name": "Golery",
