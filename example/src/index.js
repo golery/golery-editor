@@ -1,73 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import {useState, useRef, useMemo} from "react";
+import * as ReactDOM from "react-dom";
 
-import GoleryEditor, {SlateHtmlSerializer, SlateEditorHtmlDefaultRule, SlateValue} from "golery-editor/dist/index.dev";
+import {EditorToolbar, GoleryEditable, GoleryEditor, getStandardPlugins} from 'golery-editor';
 
-import "antd/dist/antd.css";
+const DemoPage = () => {
+    const [value, setValue] = useState();
+    const plugins = useMemo(() => getStandardPlugins(), []);
+    const editor = useRef(null);
 
-
-const initialValue = SlateValue.fromJSON({
-    document: {
-        nodes: [
-            {
-                object: "block",
-                type: "paragraph",
-                nodes: [
-                    {
-                        object: "text",
-                        leaves: [
-                            {
-                                text: "A line of text in a paragraph."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-});
-
-const serializer = new SlateHtmlSerializer({ rules: SlateEditorHtmlDefaultRule });
-
-class DemoEditor extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            value: initialValue
-        };
-    }
-
-    render() {
-        const { value } = this.state;
-        const onChange = ({ value }) => this.setState({ value });
-
-        return (
-            <div style={{ margin: "20px" }}>
-                <div id={"sample"}>
-                    This is test<ol>
-                    <li>
-                        first<br />firt of firts
-                    </li>
-                    <li>second</li>
-                </ol>
-                </div>
-                <button onClick={() => this._setHtml()}>SetHtml</button>
-                <button onClick={() => this._getHtml()}>GetHtml</button>
-                <GoleryEditor value={value} onChange={onChange} readOnly={false} debug={true} />
-            </div>
-        );
-    }
-
-    _setHtml() {
-        let html = document.getElementById("sample").innerHTML;
-        const v = serializer.deserialize(html);
-        this.setState({ value: v });
-        console.log(v);
-    }
-
-    _getHtml() {
-        console.log("Out:", serializer.serialize(this.state.value));
-    }
+    return <div>
+        <GoleryEditor editorRef={editor} value={value} setValue={setValue} plugins={plugins}>
+            <EditorToolbar widgets={plugins}/>
+            <GoleryEditable/>
+        </GoleryEditor>
+    </div>
 }
-
-ReactDOM.render(<DemoEditor />, document.getElementById("root"));
+ReactDOM.render(<DemoPage />, document.getElementById("root"));

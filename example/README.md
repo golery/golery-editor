@@ -1,6 +1,22 @@
-An example of how to use golery-editor.
-This is for integration demo only.
-For dev, use main/src/sandbox (ref. main/src/sandbox/README.md)
+This example shows the integration with bundled golery-editor library.
+It has dependency to main... to include the whole package in dist folder.
+
+# RUN
+yarn dev
+Access: http://localhost:8080/
+
+# HOW TO UPDATE PACKAGE
+To update node_modules with latest version of golery-editor from local
+yarn add ../main
+rm -rf node_modules/golery-editor/node_modules/
+Then just copy dist/ folder manually to sync the change.
+cp -r /work/golery-editor/main/dist /work/golery-editor/example/node_modules/golery-editor/
+
+
+
+
+
+==== [OLD DOC]
 
 # USE LOCAL DEV VERSION OF GOLERY-EDITOR
 **/main:**

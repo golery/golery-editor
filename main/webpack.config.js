@@ -1,9 +1,9 @@
 const path = require('path');
 const config = {
-    entry: "./src/index.js",
+    entry: "./src/index_delete.js",
     output: {
         path: __dirname + "/dist",
-        filename: "index.js",
+        filename: "index_delete.js",
         publicPath: "/",
         library: 'GoleryEditor',
         libraryTarget: 'umd',
@@ -63,11 +63,11 @@ const config = {
 
 module.exports = function (env, argv) {
     if (argv.mode === "production") {
-        config.output.filename = "index.js";
+        config.output.filename = "index_delete.js";
         config.output.path += "/min";
         config.devtool = "source-map";
     } else {
-        config.output.filename = "index.js";
+        config.output.filename = "index_delete.js";
         config.output.path += "/dev";
         config.devtool = "eval-source-map";
     }

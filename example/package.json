@@ -1,5 +1,5 @@
 {
-  "name": "golery-canner-slate-editor-example",
+  "name": "golery-editor-integration-example",
   "version": "1.0.0",
   "devtool": "source-map",
   "devDependencies": {
@@ -11,7 +11,6 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
-    "css-loader": "^1.0.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "style-loader": "^0.23.1",
@@ -26,7 +25,7 @@
   "dependencies": {
     "antd": "3.9.1",
     "golery-editor": "../main",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
