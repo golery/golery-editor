@@ -3,8 +3,7 @@ import {useEffect} from "react";
 import "./prism.css";
 import Prism from 'prismjs';
 import styles from "./CodeWidget.module.scss";
-import {ReactEditor, useSlateStatic} from "slate-react";
-import {ModalTemplate, showModal} from "../../../component/modal/EditorModal";
+import {ModalTemplate, showModal} from "../../../component/modal/Modal";
 import {CodeEditor} from "../editor/CodeEditor";
 
 export const CodeWidget = ({attributes, children, data, setData}) => {
@@ -16,7 +15,7 @@ export const CodeWidget = ({attributes, children, data, setData}) => {
     }, []);
 
     const onEdit = async () => {
-        const code = await showModal<string>({getBody: ({closeDialog}) => <CodeEditor code={data.code} onSave={code => closeDialog(code)}/>, template: ModalTemplate.dialog});
+        const code = await showModal<string>({getBody: ({closeModal}) => <CodeEditor code={data.code} onSave={code => closeModal(code)}/>, template: ModalTemplate.dialog});
         if (code && code.trim().length > 0) {
             setData({code});
         } else {

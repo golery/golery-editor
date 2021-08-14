@@ -1,7 +1,6 @@
 import React from "react";
-import {WidgetRenderParams} from "../../core/EditorTypes";
 import {EditorPlugin} from "../../core/EditorPlugin";
-import {showModal} from "../../component/modal/EditorModal";
+import {showModal} from "../../component/modal/Modal";
 import {ImageEditor} from "./edit/ImageEditor";
 import {goApi} from "../../core/GoApi";
 import {ImageView} from "./view/ImageView";
@@ -50,7 +49,7 @@ export const ImagePlugin: EditorPlugin = {
     },
 
     async onInsert(): Promise<Node> {
-        const {key} = await showModal({getBody: ({closeDialog}) => <ImageEditor closeDialog={closeDialog}/>});
+        const {key} = await showModal({getBody: ({closeModal}) => <ImageEditor closeDialog={closeModal}/>});
         return {
             type: 'image',
             src: [{type: 'key', key}]

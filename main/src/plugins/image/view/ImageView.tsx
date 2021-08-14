@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import styles from "./ImageView.module.scss";
 import {ImageViewFullScreen} from "./ImageViewFullScreen";
-import {showModal} from "../../../component/modal/EditorModal";
+import {showModal} from "../../../component/modal/Modal";
 
 export const ImageView = ({url}: { url: string }) => {
     if (!url) return <span>(missing url)</span>;
     const onFullScreen = async () => {
-        await showModal({getBody: ({closeDialog}) => <ImageViewFullScreen closeDialog={closeDialog} url={url}/>});
+        await showModal({getBody: ({closeModal}) => <ImageViewFullScreen closeDialog={closeModal} url={url}/>});
     }
     useEffect(() => {
         onFullScreen()

@@ -3,7 +3,7 @@ import styles from './ImageEditor.module.scss';
 import {useEffect, useRef, useState} from "react";
 import ClipboardUtils from "./ClipboardUtils";
 import {goApi} from "../../../core/GoApi";
-import {CloseDialogFunc} from "../../../component/modal/EditorModal";
+import {CloseDialogFunc} from "../../../component/modal/Modal";
 
 const MAX_IMAGE_WIDTH = 1000;
 const MAX_IMAGE_HEIGHT = 800;
