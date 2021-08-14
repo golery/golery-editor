@@ -80,7 +80,7 @@ export default class LinkPlugin implements EditorPlugin {
         }
     }
 
-    render({type, data, attributes, children}: WidgetRenderParams): React.ReactElement {
+    renderEdit({type, data, attributes, children}: WidgetRenderParams): React.ReactElement {
         if (type !== BLOCK_LINK) return;
         return <a {...attributes} href={data.url} target="_blank">{children}</a>
     }

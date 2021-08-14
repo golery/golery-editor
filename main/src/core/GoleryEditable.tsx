@@ -10,8 +10,8 @@ const GoleryEditable = () => {
 
     const renderer: WidgetRenderer = (params) => {
         for (const plugin of editorContext.plugins) {
-            if (plugin.render) {
-                const result = plugin.render(params);
+            if (plugin.renderEdit) {
+                const result = plugin.renderEdit(params);
                 if (result) return result;
             }
         }

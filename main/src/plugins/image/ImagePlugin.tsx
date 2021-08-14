@@ -23,17 +23,16 @@ interface Node {
 }
 
 function getImageUrl(src: [{ type: 'key' | 'url', key: string }]) {
-    if (!src || src.length == 0) return;
+    if (!src) return;
 
     const {key} = src[0];
-    const url = goApi.getFileUrl(key);
-    return url;
+    return goApi.getFileUrl(key);
 }
 export const ImagePlugin: EditorPlugin = {
     id: 'image',
     type: 'image',
 
-    render({data, attributes, children}: WidgetRenderParams) {
+    renderEdit({data, attributes, children}: WidgetRenderParams) {
         const {type, src} = data as Node;
         if (type === widgetType) {
             const url = getImageUrl(src);

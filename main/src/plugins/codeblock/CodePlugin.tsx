@@ -10,7 +10,7 @@ export const CodePlugin: EditorPlugin = {
     type: "code",
     init() {
     },
-    render({type, data, setData, attributes, children}: WidgetRenderParams) {
+    renderEdit({type, data, setData, attributes, children}: WidgetRenderParams) {
         if (type === 'code') return <CodeWidget attributes={attributes} data={data} setData={setData}>{children}</CodeWidget>;
     },
     async onInsert() {
