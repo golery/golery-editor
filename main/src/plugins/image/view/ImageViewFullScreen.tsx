@@ -1,9 +1,9 @@
-import React, {useCallback} from "react";
+import React from "react";
 import styles from "./ImageViewFullScreen.module.scss";
 import CloseIcon from "../../../component/icons/CloseIcon";
 
+/** Show image in full screen view */
 export const ImageViewFullScreen = ({url, closeDialog}: {url: string, closeDialog: Function}) => {
-    const onClose = () => {}
     return (<div className={styles.component}>
         <div>
             <img src={url}/>
