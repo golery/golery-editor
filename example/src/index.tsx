@@ -2,7 +2,7 @@ import * as React from "react";
 import {useRef, useState} from "react";
 import * as ReactDOM from "react-dom";
 
-import {EditorToolbar, getStandardPlugins, GoleryEditable, GoleryEditor} from 'golery-editor';
+import {GoleryEditor} from 'golery-editor';
 
 const DemoPage = () => {
     const [value, setValue] = useState();

@@ -1,11 +1,27 @@
 {
+  "include": ["src/**/*"],
   "compilerOptions": {
     "outDir": "./dist/",
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true,
     "moduleResolution": "node",
-    "downlevelIteration": true
+    "sourceMap": true,
+
+    // still allow to import .js file
+    "allowJs": true,
+
+    // https://www.typescriptlang.org/tsconfig#downlevelIteration
+    // specific needs of slate
+    "downlevelIteration": true,
+
+    // Emit .d.ts to build/types
+    // this folder is not used for any purpose other than reference to write our own .d.ts file
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "build/types",
+
+    // allows to write import React from "react";
+    "allowSyntheticDefaultImports": true,
   }
 }
