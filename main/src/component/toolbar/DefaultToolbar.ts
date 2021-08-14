@@ -28,7 +28,7 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: EditorPlugin[]) =
         editor.selection = selection;
         return Transforms.insertNodes(editor, {
             type: plugin.type,
-            data: data,
+            ...data,
             children: [{text: ''}]
         } as any);
     }

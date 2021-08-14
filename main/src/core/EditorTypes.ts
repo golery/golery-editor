@@ -1,4 +1,5 @@
 import {EditorPlugin} from "./EditorPlugin";
+import React from "react";
 
 export type ElementType = string;
 export type WidgetData = any;

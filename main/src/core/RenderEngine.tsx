@@ -4,6 +4,7 @@ import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
 import {TextNode, RenderMode, WidgetRenderer} from "./EditorTypes";
 import {linkPluginRenderReadOnly} from "../plugins/link/LinkPlugin";
+import {EditorPlugin} from "./EditorPlugin";
 
 /** Block elements wraps multiple leaf elements */
 function renderDefaultBlockElement(element: TextNode, attributes: object, children: any) {
@@ -69,7 +70,7 @@ const Element = (props: ElementProps)  => {
 
     const {type, data} = element;
     if (widgetRender) {
-        const elm = widgetRender({type, data, mode: RenderMode.EDIT, attributes, children, setData});
+        const elm = widgetRender({type, data: element, mode: RenderMode.EDIT, attributes, children, setData});
         if (elm) return elm;
     }
 
@@ -104,21 +105,17 @@ const Leaf = ({attributes, children, leaf}: LeafProps) => {
 }
 
 /** Render values as readonly. Note that slate is not used for rendering readonly */
-const renderReadOnly = (elms: TextNode[], widgetRender?: WidgetRenderer) => {
+const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[]) => {
     if (!elms) return [];
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {
             const {type, data} = elm;
             const attributes = {key: index};
-            const children = renderReadOnly(elm.children, widgetRender);
+            const children = renderReadOnly(elm.children, plugins);
 
-            const link = linkPluginRenderReadOnly({type, data, mode: RenderMode.VIEW, attributes, children});
-            if (link) {
-                return link;
-            }
-            const customElm = widgetRender && widgetRender({type, data, mode: RenderMode.VIEW, attributes, children});
-            if (customElm) {
-                return customElm;
+            for (const plugin of plugins || []) {
+                const result = plugin.renderView && plugin.renderView(elm);
+                if (result) return result;
             }
             return renderDefaultBlockElement(elm, attributes, children);
         } else {

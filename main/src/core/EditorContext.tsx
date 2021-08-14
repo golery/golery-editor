@@ -42,7 +42,7 @@ const EditorContext = ({children, controllerRef, value, setValue, plugins}: Prop
         let editor = withImages(withHistory(withReact(createEditor() as ReactEditor)));
         if (plugins) {
             for (let plugin of plugins) {
-                plugin?.init({editor, controller: {}});
+                plugin?.init && plugin?.init({editor, controller: {}});
             }
         }
         return ({linkPlugin, editor});

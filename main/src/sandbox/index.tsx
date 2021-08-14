@@ -48,7 +48,7 @@ const SandboxApp = () => {
                 <button onClick={focus}>Focus to editor</button>
                 <button onClick={() => localStorage.clear()}>Reset storage</button>
             </div>
-            <div style={{padding: '1rem 0'}}><textarea value={JSON.stringify(value)} rows={5} cols={100}
+            <div style={{padding: '1rem 0'}}><textarea value={JSON.stringify(value, null, 2)} rows={5} cols={100}
                                                        onChange={() => {
                                                        }}/></div>
 
