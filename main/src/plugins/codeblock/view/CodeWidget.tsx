@@ -4,7 +4,7 @@ import "./prism.css";
 import Prism from 'prismjs';
 import styles from "./CodeWidget.module.scss";
 import {ReactEditor, useSlateStatic} from "slate-react";
-import {showModal} from "../../../component/modal/EditorModal";
+import {ModalTemplate, showModal} from "../../../component/modal/EditorModal";
 import {CodeEditor} from "../editor/CodeEditor";
 
 export const CodeWidget = ({attributes, children, data, setData}) => {
@@ -15,9 +15,8 @@ export const CodeWidget = ({attributes, children, data, setData}) => {
 
     }, []);
 
-    const editor = useSlateStatic() as ReactEditor;
     const onEdit = async () => {
-        const code = await showModal<string>(({closeDialog}) => <CodeEditor code={data.code} onSave={code => closeDialog(code)}/>);
+        const code = await showModal<string>({getBody: ({closeDialog}) => <CodeEditor code={data.code} onSave={code => closeDialog(code)}/>, template: ModalTemplate.dialog});
         if (code && code.trim().length > 0) {
             setData({code});
         } else {

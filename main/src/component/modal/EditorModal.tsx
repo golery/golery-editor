@@ -1,9 +1,8 @@
 import * as React from "react";
+import {ReactElement, ReactNode, useCallback} from "react";
 import styles from './EditorModal.module.scss';
 import CloseIcon from "../icons/CloseIcon";
-import {ReactElement, ReactNode, useCallback} from "react";
 import * as ReactDOM from "react-dom";
-import {CodeEditor} from "../../plugins/codeblock/editor/CodeEditor";
 
 interface Props {
     onCancel: () => void
@@ -25,9 +24,12 @@ export const DialogFooter = ({children}) => {
 }
 
 export type CloseDialogFunc = ((result: any) => void);
-type ModalBody = ({closeDialog: CloseDialogFunc}) => ReactNode;
+type ModalBody = ({closeDialog: CloseDialogFunc}) => ReactElement;
 
-export function showModal<T>(getBody: ModalBody): Promise<T> {
+export enum ModalTemplate {
+    dialog = 'dialog'
+}
+export function showModal<T>({getBody, template} : {getBody: ModalBody, template?: ModalTemplate}): Promise<T> {
     return new Promise((resolve) => {
         const elm = document.createElement('div');
         document.body.appendChild(elm);
@@ -36,13 +38,9 @@ export function showModal<T>(getBody: ModalBody): Promise<T> {
             elm.remove();
             resolve(result);
         }
-        const children = getBody({closeDialog});
-        ReactDOM.render(<EditorModal onCancel={() => closeDialog(undefined)}>{children}</EditorModal>, elm);
+        const children: ReactElement = getBody({closeDialog});
+        const fullScreen = template === ModalTemplate.dialog ? <EditorModal onCancel={() => closeDialog(undefined)}>{children}</EditorModal> :
+            children
+        ReactDOM.render(fullScreen, elm);
     });
-}
-
-export function showAsFullScreen(reactElm : ReactElement) {
-    const elm = document.createElement('div');
-    document.body.appendChild(elm);
-    ReactDOM.render(reactElm, elm);
 }

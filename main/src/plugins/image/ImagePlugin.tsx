@@ -33,7 +33,7 @@ export const ImagePlugin: EditorPlugin = {
     id: 'image',
     type: 'image',
 
-    renderEdit({data, attributes, children}: WidgetRenderParams) {
+    renderEdit({data, attributes, children}) {
         const {type, src} = data as Node;
         if (type === widgetType) {
             const url = getImageUrl(src);
@@ -50,7 +50,7 @@ export const ImagePlugin: EditorPlugin = {
     },
 
     async onInsert(): Promise<Node> {
-        const {key} = await showModal(({closeDialog}) => <ImageEditor closeDialog={closeDialog}/>);
+        const {key} = await showModal({getBody: ({closeDialog}) => <ImageEditor closeDialog={closeDialog}/>});
         return {
             type: 'image',
             src: [{type: 'key', key}]

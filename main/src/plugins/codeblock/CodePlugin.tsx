@@ -14,7 +14,7 @@ export const CodePlugin: EditorPlugin = {
         if (data.type === 'code') return <CodeWidget attributes={attributes} data={data} setData={setData}>{children}</CodeWidget>;
     },
     async onInsert() {
-        const code = await showModal(({closeDialog}) => <CodeEditor code='' onSave={code => closeDialog(code)}/>);
+        const code = await showModal({getBody: ({closeDialog}) => <CodeEditor code='' onSave={code => closeDialog(code)}/>});
         if (code) {
             return ({code});
         }
