@@ -3,7 +3,7 @@ import GoleryEditor from "../GoleryEditor";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
 import GoleryEditable from "../core/GoleryEditable";
 import {useRef, useState} from "react";
-import {EditorElement} from "../core/EditorTypes";
+import {TextNode} from "../core/EditorTypes";
 import {jsx} from "slate-hyperscript";
 
 const html4 = `<p>Image:</p><img class="sc-htpNat yIWw" src="https://cache1.artprintimages.com/images/homepage/slider-tiles/!_2021/apr/0410_slidertiles_afremov.jpg"/>`;
@@ -13,7 +13,7 @@ const html1 = `<p>Code</p><code>import { Injectable, Inject } from '@angular/cor
 const html2 = "Float and height<div>A {B}</div><div>If B is float and A does not have height EXCEPT: A is inline-block</div>";
 // Access via http://localhost:9000/?html
 export const HtmlConversion = () => {
-    const [value, setValue] = useState<EditorElement[]>();
+    const [value, setValue] = useState<TextNode[]>();
     const editor = useRef(null);
 
     const deserialize = el => {

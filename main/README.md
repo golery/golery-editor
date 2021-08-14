@@ -10,6 +10,9 @@ Use sandbox as storybook for development
 # DEV example:
 read example/README.md
 
+# DEV golery www
+yarn upgrade golery-editor --latest
+
 # To publish:   
 /main:
 

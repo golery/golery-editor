@@ -2,11 +2,11 @@ import * as React from 'react';
 import {BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST} from "./Schema";
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
-import {EditorElement, RenderMode, WidgetRenderer} from "./EditorTypes";
+import {TextNode, RenderMode, WidgetRenderer} from "./EditorTypes";
 import {linkPluginRenderReadOnly} from "../plugins/link/LinkPlugin";
 
 /** Block elements wraps multiple leaf elements */
-function renderDefaultBlockElement(element: EditorElement, attributes: object, children: any) {
+function renderDefaultBlockElement(element: TextNode, attributes: object, children: any) {
     const type = element.type;
     // It's mandatory to pass attributes and children values. They come from slatejs library
     switch (type) {
@@ -104,7 +104,7 @@ const Leaf = ({attributes, children, leaf}: LeafProps) => {
 }
 
 /** Render values as readonly. Note that slate is not used for rendering readonly */
-const renderReadOnly = (elms: EditorElement[], widgetRender?: WidgetRenderer) => {
+const renderReadOnly = (elms: TextNode[], widgetRender?: WidgetRenderer) => {
     if (!elms) return [];
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {

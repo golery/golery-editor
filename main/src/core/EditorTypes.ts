@@ -7,7 +7,7 @@ export interface EditorContext {
     plugins: EditorPlugin[]
 }
 
-export interface EditorElement {
+export interface TextNode {
     type: string
     data: any
     children: any[]

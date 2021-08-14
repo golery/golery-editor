@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Ref, useMemo} from 'react';
-import {EditorElement} from "./core/EditorTypes";
+import {TextNode} from "./core/EditorTypes";
 import {getStandardPlugins} from "./plugins";
 import EditorToolbar from "./component/toolbar/EditorToolbar";
 import GoleryEditable from "./core/GoleryEditable";
@@ -9,8 +9,8 @@ import {EditorController} from "./core/EditorController";
 
 
 interface Props {
-    value: EditorElement[]
-    setValue: (value: EditorElement[]) => void
+    value: TextNode[]
+    setValue: (value: TextNode[]) => void
     controllerRef: Ref<EditorController>
 }
 

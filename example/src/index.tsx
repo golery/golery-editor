@@ -2,10 +2,10 @@ import * as React from "react";
 import {useRef, useState} from "react";
 import * as ReactDOM from "react-dom";
 
-import {GoleryEditor} from 'golery-editor';
+import {EditorController, GoleryEditor, TextNode} from 'golery-editor';
 
 const DemoPage = () => {
-    const [value, setValue] = useState<EditorElement[]>();
+    const [value, setValue] = useState<TextNode[]>();
     const controllerRef = useRef<EditorController>();
 
     return <div>

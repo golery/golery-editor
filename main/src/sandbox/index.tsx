@@ -6,7 +6,7 @@ import GoleryEditable from "../core/GoleryEditable";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
 import "./sandbox.module.scss";
 import EditorReadOnly from "../EditorReadOnly";
-import {WidgetRenderer, EditorElement, RenderMode} from "../core/EditorTypes";
+import {WidgetRenderer, TextNode, RenderMode} from "../core/EditorTypes";
 import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
 import {HtmlConversion} from "./HtmlConversion";
 import {getStandardPlugins} from "../plugins";
@@ -23,7 +23,7 @@ function getSavedTextValue() {
 }
 
 const SandboxApp = () => {
-    const [value, setValue] = useState<EditorElement[]>(getSavedTextValue());
+    const [value, setValue] = useState<TextNode[]>(getSavedTextValue());
 
     const controllerRef = useRef(null);
 

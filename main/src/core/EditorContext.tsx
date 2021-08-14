@@ -4,7 +4,7 @@ import {ReactEditor, Slate, withReact} from 'slate-react'
 import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
 import {BLOCK_IMAGE, BLOCK_PARAGRAPH} from "./Schema";
-import {EditorContext, EditorElement} from "./EditorTypes";
+import {EditorContext, TextNode} from "./EditorTypes";
 import {EditorPlugin} from "./EditorPlugin";
 import {getStandardPlugins} from "../plugins";
 import {EditorController} from "./EditorController";
@@ -24,7 +24,7 @@ interface Props {
     children: any
     controllerRef: any
     value: object[]
-    setValue: (value: EditorElement[]) => void
+    setValue: (value: TextNode[]) => void
     plugins?: EditorPlugin[]
 }
 
@@ -55,7 +55,7 @@ const EditorContext = ({children, controllerRef, value, setValue, plugins}: Prop
     const editorValue = Array.isArray(value) ? value : getEmptyTextValue();
     return (
         <Slate editor={editor} value={editorValue as Descendant[]}
-               onChange={newValue => setValue(newValue as EditorElement[])}>
+               onChange={newValue => setValue(newValue as TextNode[])}>
             <EditorPluginContext.Provider value={editorContext}>
                 {children}
             </EditorPluginContext.Provider>
