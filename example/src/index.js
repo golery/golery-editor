@@ -1,19 +1,15 @@
 import * as React from "react";
-import {useState, useRef, useMemo} from "react";
+import {useRef, useState} from "react";
 import * as ReactDOM from "react-dom";
 
-import {EditorToolbar, GoleryEditable, GoleryEditor, getStandardPlugins} from 'golery-editor';
+import {EditorToolbar, getStandardPlugins, GoleryEditable, GoleryEditor} from 'golery-editor';
 
 const DemoPage = () => {
     const [value, setValue] = useState();
-    const plugins = useMemo(() => getStandardPlugins(), []);
-    const editor = useRef(null);
+    const controllerRef = useRef(null);
 
     return <div>
-        <GoleryEditor editorRef={editor} value={value} setValue={setValue} plugins={plugins}>
-            <EditorToolbar widgets={plugins}/>
-            <GoleryEditable/>
-        </GoleryEditor>
+        <GoleryEditor controllerRef={controllerRef} value={value} setValue={setValue}/>
     </div>
 }
 ReactDOM.render(<DemoPage />, document.getElementById("root"));

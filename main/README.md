@@ -5,6 +5,10 @@
 # DEV main
 yarn dev
 http://localhost:9000
+Use sandbox as storybook for development
+
+# DEV example:
+read example/README.md
 
 # To publish:   
 /main:

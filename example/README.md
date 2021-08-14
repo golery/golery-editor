@@ -6,10 +6,16 @@ yarn dev
 Access: http://localhost:8080/
 
 # HOW TO UPDATE PACKAGE
-To update node_modules with latest version of golery-editor from local
-yarn add ../main
-rm -rf node_modules/golery-editor/node_modules/
-Then just copy dist/ folder manually to sync the change.
+## Build: 
+$main yarn build   or yarn watch
+
+## Sync with example:
+- Add dependency (one time) 
+  To update node_modules with latest version of golery-editor from local
+  yarn add ../main
+  rm -rf node_modules/golery-editor/node_modules/
+  
+- Sync manuall:
 cp -r /work/golery-editor/main/dist /work/golery-editor/example/node_modules/golery-editor/
 
 

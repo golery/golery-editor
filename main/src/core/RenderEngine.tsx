@@ -104,7 +104,7 @@ const Leaf = ({attributes, children, leaf}: LeafProps) => {
 }
 
 /** Render values as readonly. Note that slate is not used for rendering readonly */
-const renderReadOnly = (elms: EditorElement[], widgetRender: WidgetRenderer) => {
+const renderReadOnly = (elms: EditorElement[], widgetRender?: WidgetRenderer) => {
     if (!elms) return [];
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {

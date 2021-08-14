@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 import GoleryEditable from "../core/GoleryEditable";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
 import "./sandbox.module.scss";
-import ReadOnlyRender from "../core/ReadOnlyRender";
+import EditorReadOnly from "../EditorReadOnly";
 import {WidgetRenderer, EditorElement, RenderMode} from "../core/EditorTypes";
 import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
 import {HtmlConversion} from "./HtmlConversion";
@@ -25,21 +25,11 @@ function getSavedTextValue() {
 const SandboxApp = () => {
     const [value, setValue] = useState<EditorElement[]>(getSavedTextValue());
 
-    const plugins = useMemo(() => getStandardPlugins(), []);
-
-    const widgetRender:WidgetRenderer = ({type, data, mode, setData, attributes, children}) => {
-        // return plugins.find(widget => widget.elmType === type)?.render({
-        //     type, data, mode, setData, attributes, children
-        // });
-        return null;
-
-    }
-
-    const editor = useRef(null);
+    const controllerRef = useRef(null);
 
     const focus = () => {
-        if (editor.current) {
-            editor.current?.focus();
+        if (controllerRef.current) {
+            controllerRef.current?.focus();
         }
     };
 
@@ -65,12 +55,12 @@ const SandboxApp = () => {
             <hr/>
 
             <h1>Editor</h1>
-            <GoleryEditor controllerRef={editor} value={value} setValue={setValueWrapper}/>
+            <GoleryEditor controllerRef={controllerRef} value={value} setValue={setValueWrapper}/>
 
             <hr/>
 
             <h1>ReadOnly</h1>
-            <ReadOnlyRender value={value} customRender={widgetRender}/>
+            <EditorReadOnly value={value}/>
         </div>
     );
 }

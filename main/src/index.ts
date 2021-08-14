@@ -1,7 +1,5 @@
 import GoleryEditor from "./GoleryEditor";
-import GoleryEditable from "./core/GoleryEditable";
-import EditorToolbar from "./component/toolbar/EditorToolbar";
-import {getStandardPlugins} from "./plugins";
+import EditorReadOnly from "./EditorReadOnly";
 
-export {GoleryEditor, GoleryEditable, EditorToolbar, getStandardPlugins};
+export {GoleryEditor, EditorReadOnly};
 
