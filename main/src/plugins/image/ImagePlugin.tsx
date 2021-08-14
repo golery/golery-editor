@@ -2,8 +2,9 @@ import React from "react";
 import {WidgetRenderParams} from "../../core/EditorTypes";
 import {EditorPlugin} from "../../core/EditorPlugin";
 import {showModal} from "../../component/modal/EditorModal";
-import {ImageEditor} from "./editor/ImageEditor";
+import {ImageEditor} from "./edit/ImageEditor";
 import {goApi} from "../../core/GoApi";
+import {ImageView} from "./view/ImageView";
 
 const widgetType = 'image';
 /**
@@ -44,7 +45,7 @@ export const ImagePlugin: EditorPlugin = {
         const {type, src} = data as Node;
         if (type === widgetType) {
             const url = getImageUrl(src);
-            return url ? <img src={url}/> : <span/>;
+            return <ImageView url={url}/>;
         }
     },
 

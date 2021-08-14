@@ -105,18 +105,16 @@ const Leaf = ({attributes, children, leaf}: LeafProps) => {
 }
 
 /** Render values as readonly. Note that slate is not used for rendering readonly */
-const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[]) => {
+const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?: any) => {
     if (!elms) return [];
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {
-            const {type, data} = elm;
             const attributes = {key: index};
-            const children = renderReadOnly(elm.children, plugins);
-
             for (const plugin of plugins || []) {
-                const result = plugin.renderView && plugin.renderView(elm);
+                const result = plugin.renderView && plugin.renderView(elm, attributes);
                 if (result) return result;
             }
+            const children = renderReadOnly(elm.children, plugins, attributes);
             return renderDefaultBlockElement(elm, attributes, children);
         } else {
             return renderLeafElement(elm, (elm as any)?.text, {key: index});

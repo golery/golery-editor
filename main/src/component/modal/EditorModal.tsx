@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from './EditorModal.module.scss';
 import CloseIcon from "../icons/CloseIcon";
-import {ReactNode, useCallback} from "react";
+import {ReactElement, ReactNode, useCallback} from "react";
 import * as ReactDOM from "react-dom";
 import {CodeEditor} from "../../plugins/codeblock/editor/CodeEditor";
 
@@ -26,6 +26,7 @@ export const DialogFooter = ({children}) => {
 
 export type CloseDialogFunc = ((result: any) => void);
 type ModalBody = ({closeDialog: CloseDialogFunc}) => ReactNode;
+
 export function showModal<T>(getBody: ModalBody): Promise<T> {
     return new Promise((resolve) => {
         const elm = document.createElement('div');
@@ -38,4 +39,10 @@ export function showModal<T>(getBody: ModalBody): Promise<T> {
         const children = getBody({closeDialog});
         ReactDOM.render(<EditorModal onCancel={() => closeDialog(undefined)}>{children}</EditorModal>, elm);
     });
+}
+
+export function showAsFullScreen(reactElm : ReactElement) {
+    const elm = document.createElement('div');
+    document.body.appendChild(elm);
+    ReactDOM.render(reactElm, elm);
 }
