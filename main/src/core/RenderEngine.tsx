@@ -2,7 +2,7 @@ import * as React from 'react';
 import {BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST} from "./Schema";
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
-import {TextNode, RenderMode, WidgetRenderer} from "./EditorTypes";
+import {TextNode, WidgetRenderer} from "./EditorTypes";
 import {linkPluginRenderReadOnly} from "../plugins/link/LinkPlugin";
 import {EditorPlugin} from "./EditorPlugin";
 
@@ -70,7 +70,7 @@ const Element = (props: ElementProps)  => {
 
     const {type, data} = element;
     if (widgetRender) {
-        const elm = widgetRender({type, data: element, mode: RenderMode.EDIT, attributes, children, setData});
+        const elm = widgetRender({data: element, attributes, children, setData});
         if (elm) return elm;
     }
 
@@ -111,7 +111,7 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?:
         if (elm.type || Array.isArray(elm.children)) {
             const attributes = {key: index};
             for (const plugin of plugins || []) {
-                const result = plugin.renderView && plugin.renderView(elm, attributes);
+                const result = plugin.renderView && plugin.renderView({data: elm, attributes: {key: index}});
                 if (result) return result;
             }
             const children = renderReadOnly(elm.children, plugins, attributes);

@@ -10,8 +10,8 @@ export const CodePlugin: EditorPlugin = {
     type: "code",
     init() {
     },
-    renderEdit({type, data, setData, attributes, children}: WidgetRenderParams) {
-        if (type === 'code') return <CodeWidget attributes={attributes} data={data} setData={setData}>{children}</CodeWidget>;
+    renderEdit({data, setData, attributes, children}: WidgetRenderParams) {
+        if (data.type === 'code') return <CodeWidget attributes={attributes} data={data} setData={setData}>{children}</CodeWidget>;
     },
     async onInsert() {
         const code = await showModal(({closeDialog}) => <CodeEditor code='' onSave={code => closeDialog(code)}/>);

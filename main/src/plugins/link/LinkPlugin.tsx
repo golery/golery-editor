@@ -80,8 +80,8 @@ export default class LinkPlugin implements EditorPlugin {
         }
     }
 
-    renderEdit({type, data, attributes, children}: WidgetRenderParams): React.ReactElement {
-        if (type !== BLOCK_LINK) return;
+    renderEdit({data, attributes, children}: WidgetRenderParams): React.ReactElement {
+        if (data.type !== BLOCK_LINK) return;
         return <a {...attributes} href={data.url} target="_blank">{children}</a>
     }
 
@@ -90,7 +90,7 @@ export default class LinkPlugin implements EditorPlugin {
     }
 }
 
-export const linkPluginRenderReadOnly: WidgetRenderer = ({attributes, children, type, data}) => {
-    if (type !== BLOCK_LINK) return;
+export const linkPluginRenderReadOnly: WidgetRenderer = ({attributes, children, data}) => {
+    if (data.type !== BLOCK_LINK) return;
     return <a {...attributes} href={data.url} target="_blank">{children}</a>
 }

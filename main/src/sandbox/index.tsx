@@ -1,15 +1,11 @@
 import GoleryEditor from "../GoleryEditor";
 import * as React from "react";
-import {useCallback, useMemo, useRef, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 import * as ReactDOM from 'react-dom';
-import GoleryEditable from "../core/GoleryEditable";
-import EditorToolbar from "../component/toolbar/EditorToolbar";
 import "./sandbox.module.scss";
 import EditorReadOnly from "../EditorReadOnly";
-import {WidgetRenderer, TextNode, RenderMode} from "../core/EditorTypes";
-import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
+import {TextNode} from "../core/EditorTypes";
 import {HtmlConversion} from "./HtmlConversion";
-import {getStandardPlugins} from "../plugins";
 
 
 function getSavedTextValue() {

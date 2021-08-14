@@ -41,11 +41,11 @@ export const ImagePlugin: EditorPlugin = {
         }
     },
 
-    renderView(data) {
+    renderView({data, attributes}) {
         const {type, src} = data as Node;
         if (type === widgetType) {
             const url = getImageUrl(src);
-            return <ImageView url={url}/>;
+            return <ImageView url={url} {...(attributes || {})}/>;
         }
     },
 

@@ -6,6 +6,6 @@ export interface EditorPlugin {
     type: string
     init?: ({editor: ReactEditor, controller: any}) => void
     renderEdit?: WidgetRenderer
-    renderView?: (data: any, attributes: any) => React.ReactElement
+    renderView?: WidgetRenderer
     onInsert?: ()=> Promise<any>
 }
