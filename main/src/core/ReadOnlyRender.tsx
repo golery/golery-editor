@@ -1,6 +1,6 @@
 import * as React from "react";
-import {renderReadOnly} from "./core/RenderEngine";
-import {WidgetRenderer, EditorElement} from "./core/EditorTypes";
+import {renderReadOnly} from "./RenderEngine";
+import {WidgetRenderer, EditorElement} from "./EditorTypes";
 
 interface Props {
     value: EditorElement[]

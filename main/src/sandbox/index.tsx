@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 import GoleryEditable from "../core/GoleryEditable";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
 import "./sandbox.module.scss";
-import ReadOnlyRender from "../ReadOnlyRender";
+import ReadOnlyRender from "../core/ReadOnlyRender";
 import {WidgetRenderer, EditorElement, RenderMode} from "../core/EditorTypes";
 import {getWidgetPlugins} from "./sampleplugins/SamplePlugins";
 import {HtmlConversion} from "./HtmlConversion";
