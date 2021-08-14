@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styles from "./ImageView.module.scss";
 import {ImageViewFullScreen} from "./ImageViewFullScreen";
 import {showModal} from "../../../component/modal/Modal";
@@ -12,9 +12,9 @@ export const ImageView = ({url}: { url: string }) => {
         });
     }
     
-    useEffect(() => {
-        onFullScreen()
-    }, [])
+    // useEffect(() => {
+    //     onFullScreen()
+    // }, [])
 
     return (<div>
         <div className={styles.imageHolder}>

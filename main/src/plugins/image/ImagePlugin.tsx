@@ -1,11 +1,12 @@
 import React from "react";
 import {EditorPlugin} from "../../core/EditorPlugin";
-import {showModal} from "../../component/modal/Modal";
+import {ModalTemplate, showModal} from "../../component/modal/Modal";
 import {ImageEditor} from "./edit/ImageEditor";
 import {goApi} from "../../core/GoApi";
 import {ImageView} from "./view/ImageView";
 
 const widgetType = 'image';
+
 /**
  * Example data:
  *  {
@@ -28,6 +29,7 @@ function getImageUrl(src: [{ type: 'key' | 'url', key: string }]) {
     const {key} = src[0];
     return goApi.getFileUrl(key);
 }
+
 export const ImagePlugin: EditorPlugin = {
     id: 'image',
     type: 'image',
@@ -49,7 +51,10 @@ export const ImagePlugin: EditorPlugin = {
     },
 
     async onInsert(): Promise<Node> {
-        const {key} = await showModal({getBody: ({closeModal}) => <ImageEditor closeDialog={closeModal}/>});
+        const {key} = await showModal({
+            getBody: ({closeModal}) => <ImageEditor closeDialog={closeModal}/>,
+            template: ModalTemplate.dialog
+        });
         return {
             type: 'image',
             src: [{type: 'key', key}]

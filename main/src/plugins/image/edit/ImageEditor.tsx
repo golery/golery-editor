@@ -119,8 +119,7 @@ export const ImageEditor = ({closeDialog}: Props) => {
         elmInner = <div>
             <div>
                 <div className={styles.button} onClick={uploadImage}><i
-                    className="fa fa-cloud-upload"/>
-                    &nbsp; Upload to Imugr.com**
+                    className="fa fa-cloud-upload"/>UPLOAD
                 </div>
                 <div>
                     <input className={styles.resizeSlider} type="range" value={resizePercent}
