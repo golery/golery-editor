@@ -1,7 +1,7 @@
 import * as React from "react";
 import GoleryEditor from "../GoleryEditor";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
-import GoleryEditable from "../GoleryEditable";
+import GoleryEditable from "../core/GoleryEditable";
 import {useRef, useState} from "react";
 import {EditorElement} from "../core/EditorTypes";
 import {jsx} from "slate-hyperscript";
@@ -69,10 +69,7 @@ export const HtmlConversion = () => {
     return (
         <div>
             <button onClick={convert}>Convert</button>
-            <GoleryEditor editorRef={editor} value={value} setValue={setValue}>
-                <EditorToolbar widgets={[]}/>
-                <GoleryEditable/>
-            </GoleryEditor>
+            <GoleryEditor controllerRef={editor} value={value} setValue={setValue}/>
         </div>
     );
 }

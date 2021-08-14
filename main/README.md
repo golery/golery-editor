@@ -1,6 +1,10 @@
-# Features
-- Softbreak
-- Disable when SSR
+# Project structure
+-main: library main code
+-example: example of using library via npm package dependency
+
+# DEV main
+yarn dev
+http://localhost:9000
 
 # To publish:   
 /main:

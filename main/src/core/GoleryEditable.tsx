@@ -1,13 +1,9 @@
 import * as React from 'react';
 import {useCallback} from 'react';
 import {Editable} from 'slate-react';
-import {Element, Leaf} from "./core/RenderEngine";
-import {EditorContext, WidgetRenderer} from "./core/EditorTypes";
-import {EditorPluginContext} from "./GoleryEditor";
-import {EditorPlugin} from "./core/EditorPlugin";
-
-interface Props {
-}
+import {Element, Leaf} from "./RenderEngine";
+import {EditorContext, WidgetRenderer} from "./EditorTypes";
+import {EditorPluginContext} from "./EditorContext";
 
 const GoleryEditable = () => {
     const editorContext:EditorContext = React.useContext(EditorPluginContext);

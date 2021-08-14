@@ -2,7 +2,7 @@ import GoleryEditor from "../GoleryEditor";
 import * as React from "react";
 import {useCallback, useMemo, useRef, useState} from "react";
 import * as ReactDOM from 'react-dom';
-import GoleryEditable from "../GoleryEditable";
+import GoleryEditable from "../core/GoleryEditable";
 import EditorToolbar from "../component/toolbar/EditorToolbar";
 import "./sandbox.module.scss";
 import ReadOnlyRender from "../ReadOnlyRender";
@@ -65,10 +65,7 @@ const SandboxApp = () => {
             <hr/>
 
             <h1>Editor</h1>
-            <GoleryEditor editorRef={editor} value={value} setValue={setValueWrapper} plugins={plugins}>
-                <EditorToolbar widgets={plugins}/>
-                <GoleryEditable/>
-            </GoleryEditor>
+            <GoleryEditor controllerRef={editor} value={value} setValue={setValueWrapper}/>
 
             <hr/>
 
