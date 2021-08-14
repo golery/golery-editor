@@ -52,8 +52,6 @@ const EditorContext = ({children, controllerRef, value, setValue, plugins}: Prop
         controllerRef.current = new EditorController(editor);
     }, [editor]);
 
-
-    console.log('s', editor.selection);
     const editorValue = Array.isArray(value) ? value : getEmptyTextValue();
     return (
         <Slate editor={editor} value={editorValue as Descendant[]}
