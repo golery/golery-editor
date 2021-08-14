@@ -11,6 +11,7 @@ const MAX_IMAGE_HEIGHT = 800;
 interface Props {
     closeDialog: CloseDialogFunc
 }
+
 export const ImageEditor = ({closeDialog}: Props) => {
     const imageRef = useRef(new Image());
     const [hasImage, setHasImage] = useState<boolean>(false);
@@ -121,10 +122,8 @@ export const ImageEditor = ({closeDialog}: Props) => {
                 <div className={styles.button} onClick={uploadImage}><i
                     className="fa fa-cloud-upload"/>UPLOAD
                 </div>
-                <div>
-                    <input className={styles.resizeSlider} type="range" value={resizePercent}
-                           onChange={(e) => onResize(e)}/>
-                </div>
+                <input className={styles.resizeSlider} type="range" value={resizePercent}
+                       onChange={(e) => onResize(e)}/>
             </div>
             <div style={canvassHolderStyle}>
                 <canvas ref={canvasRef}/>
