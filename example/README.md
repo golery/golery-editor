@@ -16,9 +16,12 @@ $main yarn build   or yarn watch
   rm -rf node_modules/golery-editor/node_modules/
   
 - Sync manuall:
+cp -r /work/golery-editor/main/package.json /work/golery-editor/example/node_modules/golery-editor/
 cp -r /work/golery-editor/main/dist /work/golery-editor/example/node_modules/golery-editor/
 
-
+- Troubleshoot:
+'Invalid hook call. Hooks can only be called inside of the body of a function component.'
+Need to delete node_modules/golery-editor/node_modules
 
 
 

@@ -16,7 +16,7 @@
     "downlevelIteration": true,
 
     // Emit .d.ts to build/types
-    // this folder is not used for any purpose other than reference to write our own .d.ts file
+    // Later rollup.dts() will bundle (and delete unnucessary files) to dist/index.d.ts
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "build/types",

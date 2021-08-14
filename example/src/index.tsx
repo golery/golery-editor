@@ -5,7 +5,7 @@ import * as ReactDOM from "react-dom";
 import {GoleryEditor} from 'golery-editor';
 
 const DemoPage = () => {
-    const [value, setValue] = useState();
+    const [value, setValue] = useState<any>();
     const controllerRef = useRef(null);
 
     return <div>
