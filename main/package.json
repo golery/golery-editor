@@ -9,12 +9,7 @@
     "url": "https://www.golery.com"
   },
   "scripts": {
-    "delete_build.dev": "webpack --config webpack.config.js --mode development --progress",
-    "delete_build.prod": "webpack --config webpack.config.js --mode production  --progress",
-    "delete_build": "yarn run build.dev && yarn run build.prod",
-    "dev": "webpack serve --config webpack.config.sandboxbrowser.js --mode development --progress",
-    "delete_watch.node": "webpack --config webpack.config.sandboxnode.js --mode development --progress --watch",
-    "delete_dev.node": "node ./src/sandbox/build/server.js",
+    "dev": "webpack serve --config webpack.config.js --mode development --progress",
     "build": "rollup --config ./rollup.config.js",
     "watch": "rollup -w --config ./rollup.config.js"
   },
@@ -24,8 +19,10 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "dependencies": {
+    "highlight.js": "^11.2.0",
     "is-url": "^1.2.4",
     "prismjs": "^1.24.1",
+    "shiki": "^0.9.6",
     "slate": "^0.63.0",
     "slate-history": "^0.62.0",
     "slate-hyperscript": "^0.62.0",
@@ -37,6 +34,7 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "css-loader": "^5.2.6",
+    "json-loader": "^0.5.7",
     "node-sass": "^6.0.1",
     "path": "^0.12.7",
     "postcss": "^8.3.6",

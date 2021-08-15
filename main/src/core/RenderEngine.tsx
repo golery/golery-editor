@@ -36,13 +36,12 @@ const BlockElement = (props: ElementProps)  => {
 
 
 /** Render values as readonly. Note that slate is not used for rendering readonly */
-const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?: any) => {
+const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[]) => {
     if (!elms) return [];
+
     return elms.map((elm, index) => {
-        console.log(elm);
         if (elm.type || Array.isArray(elm.children)) {
-            const attributes = {key: index};
-            const children = renderReadOnly(elm.children, plugins, attributes);
+            const children = renderReadOnly(elm.children, plugins);
             for (const plugin of plugins || []) {
                 const renderer = plugin.renderView || plugin.renderEdit;
                 const result = renderer && renderer({data: elm, attributes: {key: index}, children});
@@ -51,7 +50,7 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?:
             }
             return <div key={index}>[Widget not supported, type={elm.type}]</div>;
         } else {
-            return <LeafElement key={index} attributes={{...attributes}} children={(elm as any)?.text} leaf={elm}/>;
+            return <LeafElement key={index} attributes={{}} children={(elm as any)?.text} leaf={elm}/>;
         }
     });
 }

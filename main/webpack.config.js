@@ -1,27 +1,17 @@
 const path = require('path');
-const config = {
-    entry: "./src/index_delete.js",
+const webpack = require("webpack");
+module.exports = {
+    entry: "./src/sandbox/index.tsx",
     output: {
-        path: __dirname + "/dist",
-        filename: "index_delete.js",
+        path: __dirname + "/",
         publicPath: "/",
-        library: 'GoleryEditor',
-        libraryTarget: 'umd',
-        // https://github.com/webpack/webpack/issues/6784
-        globalObject: 'typeof self !== \'undefined\' ? self : this'
+        filename: "bundle.js"
     },
-    devtool: "source-map",
-    externals: {
-        "react": "react",
-        "react-dom": "react-dom",
-        "react-dom/server": "react-dom/server",
-        "lodash": "lodash",
-        "moment": "moment"
-    },
+    devtool: "eval-source-map",
     module: {
         rules: [
             {
-                test: /(\.ts?|\.js?)$/,
+                test: /.ts|.tsx|.js|.jsx|.json/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
@@ -46,31 +36,29 @@ const config = {
                         loader: "css-loader",
                         options: {
                             importLoaders: 1,
-                            modules: true
+                            modules: {
+                                localIdentName: "[name]_[local]_[hash:base64:5]",
+                            }
                         }
                     },
                     {
-                        loader: "sass-loader"
+                        loader: "sass-loader",
                     }
                 ]
             }
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js'],
+        extensions: ['.tsx', '.ts', '.jsx', '.js']
+    },
+    plugins: [new webpack.HotModuleReplacementPlugin()],
+    devServer: {
+        contentBase: path.resolve(__dirname, 'src', 'sandbox'),
+        disableHostCheck: true,
+        hot: true,
+        port: 9000,
+        proxy: {
+            '/api': 'http://www.golery.com',
+        },
     }
-};
-
-module.exports = function (env, argv) {
-    if (argv.mode === "production") {
-        config.output.filename = "index_delete.js";
-        config.output.path += "/min";
-        config.devtool = "source-map";
-    } else {
-        config.output.filename = "index_delete.js";
-        config.output.path += "/dev";
-        config.devtool = "eval-source-map";
-    }
-    console.log(config);
-    return config;
 };

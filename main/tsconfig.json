@@ -1,12 +1,16 @@
 {
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
   "compilerOptions": {
     "outDir": "./dist/",
     "module": "es6",
     "target": "es5",
     "jsx": "react",
     "moduleResolution": "node",
-    "sourceMap": true,
+    //"sourceMap": true,
+
+    // allow import json
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
 
     // still allow to import .js file
     "allowJs": true,

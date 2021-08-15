@@ -6,6 +6,11 @@ import styles from "./CodeWidget.module.scss";
 import {ModalTemplate, showModal} from "../../../component/modal/Modal";
 import {CodeEditor} from "../edit/CodeEditor";
 import {useFocused, useSelected} from "slate-react";
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-tsx';
 
 export const CodeWidget = ({attributes, children, data, setData, readOnly}) => {
     const selected = useSelected();
@@ -31,7 +36,7 @@ export const CodeWidget = ({attributes, children, data, setData, readOnly}) => {
 
     return <div className={styles.holder} onDoubleClick={onEdit}  {...attributes} >
         <pre className={[styles.code, 'language-js', selected && focused ? styles.selected : ' '].join(' ')} contentEditable={false}>
-            <code className='language-js'>{data.code}</code>
+            <code className='language-tsx'>{data.code}</code>
         </pre>
         {children}
     </div>;
