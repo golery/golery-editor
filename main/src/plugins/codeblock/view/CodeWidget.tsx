@@ -4,7 +4,7 @@ import "./prism.css";
 import Prism from 'prismjs';
 import styles from "./CodeWidget.module.scss";
 import {ModalTemplate, showModal} from "../../../component/modal/Modal";
-import {CodeEditor} from "../editor/CodeEditor";
+import {CodeEditor} from "../edit/CodeEditor";
 
 export const CodeWidget = ({attributes, children, data, setData}) => {
     useEffect(() => {

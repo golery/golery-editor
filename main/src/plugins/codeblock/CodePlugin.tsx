@@ -2,7 +2,7 @@ import * as React from "react";
 import {WidgetRenderParams} from "../../core/EditorTypes";
 import {EditorPlugin} from "../../core/EditorPlugin";
 import {ModalTemplate, showModal} from "../../component/modal/Modal";
-import {CodeEditor} from "./editor/CodeEditor";
+import {CodeEditor} from "./edit/CodeEditor";
 import {CodeWidget} from "./view/CodeWidget";
 
 export const CodePlugin: EditorPlugin = {
