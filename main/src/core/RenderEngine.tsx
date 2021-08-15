@@ -3,7 +3,6 @@ import {BLOCK_BULLETED_LIST, BLOCK_H1, BLOCK_H2, BLOCK_H3, BLOCK_LIST_ITEM, BLOC
 import {ReactEditor, useSlate} from 'slate-react';
 import {Transforms,} from 'slate'
 import {TextNode, WidgetRenderer} from "./EditorTypes";
-import {linkPluginRenderReadOnly} from "../plugins/link/LinkPlugin";
 import {EditorPlugin} from "./EditorPlugin";
 
 /** Block elements wraps multiple leaf elements */
@@ -110,11 +109,11 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?:
     return elms.map((elm, index) => {
         if (elm.type || Array.isArray(elm.children)) {
             const attributes = {key: index};
+            const children = renderReadOnly(elm.children, plugins, attributes);
             for (const plugin of plugins || []) {
-                const result = plugin.renderView && plugin.renderView({data: elm, attributes: {key: index}});
+                const result = plugin.renderView && plugin.renderView({data: elm, attributes: {key: index}, children});
                 if (result) return result;
             }
-            const children = renderReadOnly(elm.children, plugins, attributes);
             return renderDefaultBlockElement(elm, attributes, children);
         } else {
             return renderLeafElement(elm, (elm as any)?.text, {key: index});

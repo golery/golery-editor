@@ -1,43 +1,20 @@
 import * as React from 'react';
-import {useEffect, useState, useCallback} from 'react';
-import {ReactEditor, useSlate} from 'slate-react';
-import {BaseRange} from 'slate';
+import {useState} from 'react';
 import styles from './LinkDialog.module.scss';
 import CloseIcon from "../../component/icons/CloseIcon";
 
-interface LinkDialogProps {
-    controller: LinkPluginController
-    wrapLink: (editor, url, text) => void
+interface Props {
+    url: string,
+    closeModal: any
 }
 
-export const LinkDialog = ({controller, wrapLink}: LinkDialogProps) => {
-    const editor = useSlate();
-    const editorSelection = React.useRef<BaseRange>();
-    const [show, setShow] = useState(false);
-    const [link, setLink] = useState<string>();
+export const LinkDialog = ({url, closeModal}: Props) => {
+    const [link, setLink] = useState<string>(url);
     const [text, setText] = useState<string>('link');
     const onInsert = () => {
-        // setShow(false);
-        ReactEditor.focus(editor as ReactEditor);
-        setTimeout(() => {
-            editor.selection = editorSelection.current;
-            wrapLink(editor, link, text || link);
-        });
-        setShow(false);
+        closeModal({link, text});
     }
-    useEffect(() => {
-        controller.showLinkDialog = (link) => {
-            editorSelection.current = editor.selection;
-            setText('link');
-            setLink(link);
-            setShow(true)
-        }
-        return () => controller.showLinkDialog = null;
-    }, [editor]);
-
-    const onClose = useCallback(() => {setShow(false)}, []);
-
-    if (!show) return null;
+    const onClose = () => {};
 
     return (
         <div className={styles.fullScreen} onClick={onClose}>

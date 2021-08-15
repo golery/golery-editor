@@ -1,12 +1,15 @@
 /* Ref. Example https://www.slatejs.org/examples/links */
 import isUrl from 'is-url';
-import * as React from 'react';
+import React from 'react';
 import {Descendant, Editor, Element as SlateElement, Range, Transforms,} from 'slate'
-import {ReactEditor} from 'slate-react';
-import {WidgetRenderer, WidgetRenderParams} from "../../core/EditorTypes";
+import {WidgetRenderParams} from "../../core/EditorTypes";
 import {BLOCK_LINK} from "../../core/Schema";
 import {EditorPlugin} from "../../core/EditorPlugin";
+import {ModalTemplate, showModal} from "../../component/modal/Modal";
 import {LinkDialog} from "./LinkDialog";
+import {ReactEditor} from "slate-react";
+
+type LinkElement = { type: 'link'; url: string; children: Descendant[] }
 
 const unwrapLink = editor => {
     Transforms.unwrapNodes(editor, {
@@ -22,8 +25,6 @@ const isLinkActive = editor => {
     })
     return !!link
 }
-
-type LinkElement = { type: 'link'; url: string ; children: Descendant[] }
 
 const wrapLink = (editor, url, text) => {
     if (isLinkActive(editor)) {
@@ -46,51 +47,54 @@ const wrapLink = (editor, url, text) => {
     }
 }
 
-export default class LinkPlugin implements EditorPlugin {
-    public id = "link";
-    public type = "link";
-    private readonly controller: LinkPluginController;
-    private readonly editor: ReactEditor;
-
-    constructor(editor) {
-        this.editor = editor;
-        this.controller = {};
-    }
+export const LinkPlugin: EditorPlugin = {
+    id: "link",
+    // FIXME: do we need type?
+    type: "link",
 
     init({editor}) {
         const {insertData, isInline} = editor;
-        const controller = this.controller;
 
         editor.isInline = element => {
             return element.type === 'link' ? true : isInline(element)
         }
 
-        function showDialog(text) {
-            controller.showLinkDialog && controller.showLinkDialog(text);
+        async function showDialog(initialUrl: string) {
+            const editorSelection = editor.selection;
+
+            const {link, text} = await showModal({
+                getBody: ({closeModal}) => {
+                    return <LinkDialog closeModal={closeModal} url={initialUrl}/>;
+                }, template: ModalTemplate.dialog
+            });
+
+            editor.selection = editorSelection;
+            ReactEditor.focus(editor as ReactEditor);
+            setTimeout(() => {
+                wrapLink(editor, link, text || link);
+            });
         }
 
         editor.insertData = data => {
             const text = data.getData('text/plain')
 
-            if (text && isUrl(text)) {
+            if (text && text.length >= 7 && isUrl(text)) {
                 showDialog(text);
             } else {
                 insertData(data)
             }
         }
-    }
+    },
 
     renderEdit({data, attributes, children}: WidgetRenderParams): React.ReactElement {
         if (data.type !== BLOCK_LINK) return;
         return <a {...attributes} href={data.url} target="_blank">{children}</a>
-    }
+    },
 
-    getModal() {
-        return <LinkDialog controller={this.controller} wrapLink={wrapLink}/>;
-    }
-}
+    renderView({data, attributes, children}: WidgetRenderParams) {
+        const {type} = data as LinkElement;
+        if (type !== BLOCK_LINK) return;
 
-export const linkPluginRenderReadOnly: WidgetRenderer = ({attributes, children, data}) => {
-    if (data.type !== BLOCK_LINK) return;
-    return <a {...attributes} href={data.url} target="_blank">{children}</a>
+        return <a {...attributes} href={data.url} target="_blank">{children}</a>
+    }
 }
