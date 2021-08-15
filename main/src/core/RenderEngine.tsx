@@ -27,26 +27,6 @@ function renderDefaultBlockElement(element: TextNode, attributes: object, childr
     }
 }
 
-const renderLeafElement = (leaf: any, children: any, attributes: any) => {
-    if (leaf.bold) {
-        children = <strong {...attributes}>{children}</strong>
-    }
-
-    if (leaf.code) {
-        children = <code {...attributes}>{children}</code>
-    }
-
-    if (leaf.italic) {
-        children = <em {...attributes}>{children}</em>
-    }
-
-    if (leaf.underline) {
-        children = <u {...attributes}>{children}</u>
-    }
-
-    return <span {...attributes}>{children}</span>
-}
-
 interface ElementProps {
     attributes: any,
     children: any,
@@ -67,7 +47,6 @@ const Element = (props: ElementProps)  => {
         }
     }
 
-    const {type, data} = element;
     if (widgetRender) {
         const elm = widgetRender({data: element, attributes, children, setData});
         if (elm) return elm;
@@ -86,10 +65,6 @@ interface LeafProps {
 const Leaf = ({attributes, children, leaf}: LeafProps) => {
     if (leaf.bold) {
         children = <strong>{children}</strong>
-    }
-
-    if (leaf.code) {
-        children = <code>{children}</code>
     }
 
     if (leaf.italic) {
@@ -116,7 +91,7 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?:
             }
             return renderDefaultBlockElement(elm, attributes, children);
         } else {
-            return renderLeafElement(elm, (elm as any)?.text, {key: index});
+            return <Leaf attributes={{key: index}} children={(elm as any)?.text} leaf={elm}/>;
         }
     });
 }

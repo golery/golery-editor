@@ -29,7 +29,6 @@ export const CodeWidget = ({attributes, children, data, setData, readOnly}) => {
         }
     }
 
-
     return <div className={styles.holder} onDoubleClick={onEdit}  {...attributes} >
         <pre className={[styles.code, 'language-js', selected && focused ? styles.selected : ' '].join(' ')} contentEditable={false}>
             <code className='language-js'>{data.code}</code>

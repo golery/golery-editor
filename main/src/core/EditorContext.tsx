@@ -3,7 +3,7 @@ import {useEffect, useMemo} from 'react';
 import {ReactEditor, Slate, withReact} from 'slate-react'
 import {withHistory} from 'slate-history';
 import {createEditor, Descendant} from 'slate'
-import {TYPE_IMAGE, BLOCK_PARAGRAPH} from "./Schema";
+import {TYPE_PARAGRAPH} from "./Schema";
 import {EditorContext, TextNode} from "./EditorTypes";
 import {EditorPlugin} from "./EditorPlugin";
 import {getStandardPlugins} from "../plugins";
@@ -32,7 +32,7 @@ interface Props {
 }
 
 const getEmptyTextValue = () => ([{
-    type: BLOCK_PARAGRAPH,
+    type: TYPE_PARAGRAPH,
     children: [{text: ""}],
 }]);
 
