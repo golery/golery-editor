@@ -16,7 +16,7 @@ import 'prismjs/components/prism-tsx';
 export const CodeWidget = ({attributes, children, data, setData, readOnly}) => {
     const selected = useSelected();
     const focused = useFocused();
-    // const ref = useRef();
+    const ref = useRef();
 
     useEffect(() => {
         setTimeout(() => {
