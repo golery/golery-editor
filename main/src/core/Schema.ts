@@ -1,11 +1,12 @@
 /** This file contains description of data of widgets inside editor */
 
-export const BLOCK_H1 = 'h1';
-export const BLOCK_H2 = 'h2';
-export const BLOCK_H3 = 'h3';
-export const BLOCK_NUMBERED_LIST = 'ol';
-export const BLOCK_BULLETED_LIST = 'ul';
-export const BLOCK_LIST_ITEM = 'li';
+/** Text format */
+export const TYPE_H1 = 'h1';
+export const TYPE_H2 = 'h2';
+export const TYPE_H3 = 'h3';
+export const TYPE_NUMBERED_LIST = 'ol';
+export const TYPE_BULLETED_LIST = 'ul';
+export const TYPE_LIST_ITEM = 'li';
 
 /** Leaf format */
 export const MARK_ITALIC = 'italic';

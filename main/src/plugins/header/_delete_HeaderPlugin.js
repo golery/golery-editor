@@ -33,7 +33,7 @@ function doToggleHeader(editor, type) {
         .unwrapBlock(OL_LIST);
 }
 
-const HeaderPlugin = () => {
+const _delete_HeaderPlugin = () => {
     return {
         renderNode: (props, editor, next) => {
             let type = props.node.type;
@@ -84,4 +84,4 @@ const HeaderPlugin = () => {
     };
 };
 
-export default HeaderPlugin;
+export default _delete_HeaderPlugin;

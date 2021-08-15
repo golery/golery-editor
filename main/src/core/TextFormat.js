@@ -5,7 +5,7 @@ import {
     Descendant,
     Element as SlateElement,
 } from 'slate'
-import {BLOCK_BULLETED_LIST, BLOCK_LIST_ITEM, BLOCK_NUMBERED_LIST, TYPE_PARAGRAPH} from "./Schema";
+import {TYPE_BULLETED_LIST, TYPE_LIST_ITEM, TYPE_NUMBERED_LIST, TYPE_PARAGRAPH} from "./Schema";
 
 const isMarkActive = (editor, format) => {
     const marks = Editor.marks(editor)
@@ -31,7 +31,7 @@ const isBlockActive = (editor, format) => {
     return !!match
 }
 
-const LIST_TYPES = [BLOCK_NUMBERED_LIST, BLOCK_BULLETED_LIST]
+const LIST_TYPES = [TYPE_NUMBERED_LIST, TYPE_BULLETED_LIST]
 
 const toggleBlock = (editor, format) => {
     const isActive = isBlockActive(editor, format)
@@ -47,7 +47,7 @@ const toggleBlock = (editor, format) => {
     // FIXME
     //const newProperties: Partial<SlateElement> = {
     const newProperties = {
-        type: isActive ? TYPE_PARAGRAPH : isList ? BLOCK_LIST_ITEM : format,
+        type: isActive ? TYPE_PARAGRAPH : isList ? TYPE_LIST_ITEM : format,
     }
     Transforms.setNodes(editor, newProperties)
 

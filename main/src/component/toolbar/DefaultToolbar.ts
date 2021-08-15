@@ -2,11 +2,11 @@ import {isBlockActive, isMarkActive, toggleBlock, toggleMark} from "../../core/T
 
 import {BaseEditor, Transforms,} from 'slate'
 import {
-    BLOCK_BULLETED_LIST,
-    BLOCK_H1,
-    BLOCK_H2,
-    BLOCK_H3,
-    BLOCK_NUMBERED_LIST,
+    TYPE_BULLETED_LIST,
+    TYPE_H1,
+    TYPE_H2,
+    TYPE_H3,
+    TYPE_NUMBERED_LIST,
     MARK_BOLD,
     MARK_ITALIC,
     MARK_UNDERLINE
@@ -32,20 +32,20 @@ export const getDefaultToolbar = (editor: BaseEditor, widgets: EditorPlugin[]) =
         } as any);
     }
     const operations = {
-        toggleH1: () => toggleBlock(editor, BLOCK_H1),
-        toggleH2: () => toggleBlock(editor, BLOCK_H2),
-        toggleH3: () => toggleBlock(editor, BLOCK_H3),
+        toggleH1: () => toggleBlock(editor, TYPE_H1),
+        toggleH2: () => toggleBlock(editor, TYPE_H2),
+        toggleH3: () => toggleBlock(editor, TYPE_H3),
         toggleBold: () => toggleMark(editor, MARK_BOLD),
         toggleUnderline: () => toggleMark(editor, MARK_UNDERLINE),
         toggleItalic: () => toggleMark(editor, MARK_ITALIC),
 
         // FIXME: multilevel list/bullet
-        toggleList: (level: number) => toggleBlock(editor, BLOCK_NUMBERED_LIST),
-        toggleBullet: (level: number) => toggleBlock(editor, BLOCK_BULLETED_LIST),
+        toggleList: (level: number) => toggleBlock(editor, TYPE_NUMBERED_LIST),
+        toggleBullet: (level: number) => toggleBlock(editor, TYPE_BULLETED_LIST),
 
-        isH1: () => isBlockActive(editor, BLOCK_H1),
-        isH2: () => isBlockActive(editor, BLOCK_H2),
-        isH3: () => isBlockActive(editor, BLOCK_H3),
+        isH1: () => isBlockActive(editor, TYPE_H1),
+        isH2: () => isBlockActive(editor, TYPE_H2),
+        isH3: () => isBlockActive(editor, TYPE_H3),
         isInBold: () => isMarkActive(editor, MARK_BOLD),
         isInItalic: () => isMarkActive(editor, MARK_ITALIC),
         isInUnderline: () => isMarkActive(editor, MARK_UNDERLINE),
