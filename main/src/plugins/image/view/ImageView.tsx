@@ -11,10 +11,6 @@ export const ImageView = ({url}: { url: string }) => {
             getBody: ({closeModal}) => <ImageViewFullScreen closeDialog={closeModal} url={url}/>
         });
     }
-    
-    // useEffect(() => {
-    //     onFullScreen()
-    // }, [])
 
     return (<div>
         <div className={styles.imageHolder}>

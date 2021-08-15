@@ -1,10 +1,11 @@
 import React from "react";
 import {EditorPlugin} from "../../core/EditorPlugin";
 import {ModalTemplate, showModal} from "../../component/modal/Modal";
-import {ImageEditor} from "./edit/ImageEditor";
+import {ImageEditor} from "./edit/editor/ImageEditor";
 import {goApi} from "../../core/GoApi";
 import {ImageView} from "./view/ImageView";
 import {TYPE_IMAGE, ImageElement} from "../../core/Schema";
+import {ImageEdit} from "./edit/ImageEdit";
 
 function getImageUrl(src: [{ type: 'key' | 'url', key: string }]) {
     if (!src) return;
@@ -24,7 +25,7 @@ export const ImagePlugin: EditorPlugin = {
         const {type, src} = data as ImageElement;
         if (type === TYPE_IMAGE) {
             const url = getImageUrl(src);
-            return url ? <div  {...attributes}>{children}<img src={url} alt={url}/></div> : <span/>;
+            return url ? <div  {...attributes}>{children}<ImageEdit url={url}/></div> : <span/>;
         }
     },
 

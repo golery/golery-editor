@@ -5,8 +5,12 @@ import Prism from 'prismjs';
 import styles from "./CodeWidget.module.scss";
 import {ModalTemplate, showModal} from "../../../component/modal/Modal";
 import {CodeEditor} from "../edit/CodeEditor";
+import {useFocused, useSelected} from "slate-react";
 
 export const CodeWidget = ({attributes, children, data, setData, readOnly}) => {
+    const selected = useSelected();
+    const focused = useFocused();
+
     useEffect(() => {
         setTimeout(() => {
             Prism.highlightAll();
@@ -25,9 +29,10 @@ export const CodeWidget = ({attributes, children, data, setData, readOnly}) => {
         }
     }
 
+
     return <div className={styles.holder} onDoubleClick={onEdit}  {...attributes} >
         {children}
-        <pre className={styles.code} contentEditable={false}>
+        <pre className={[styles.code, 'language-js', selected && focused ? styles.selected : ' '].join(' ')} contentEditable={false}>
             <code className='language-js'>{data.code}</code>
         </pre>
     </div>;
