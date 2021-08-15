@@ -1,15 +1,13 @@
 /* Ref. Example https://www.slatejs.org/examples/links */
 import isUrl from 'is-url';
 import React from 'react';
-import {Descendant, Editor, Element as SlateElement, Range, Transforms,} from 'slate'
+import {Editor, Element as SlateElement, Range, Transforms,} from 'slate'
 import {WidgetRenderParams} from "../../core/EditorTypes";
-import {BLOCK_LINK} from "../../core/Schema";
+import {LinkElement, TYPE_LINK} from "../../core/Schema";
 import {EditorPlugin} from "../../core/EditorPlugin";
 import {ModalTemplate, showModal} from "../../component/modal/Modal";
 import {LinkDialog} from "./LinkDialog";
 import {ReactEditor} from "slate-react";
-
-type LinkElement = { type: 'link'; url: string; children: Descendant[] }
 
 const unwrapLink = editor => {
     Transforms.unwrapNodes(editor, {
@@ -35,28 +33,35 @@ const wrapLink = (editor, url, text) => {
     const isCollapsed = selection && Range.isCollapsed(selection)
     const link: LinkElement = {
         type: 'link',
-        url,
-        children: isCollapsed ? [{text: text}] : [],
+        url
     }
 
     if (isCollapsed) {
-        Transforms.insertNodes(editor, link)
+        Transforms.insertNodes(editor, { ... link, children: [{text: text}]})
     } else {
-        Transforms.wrapNodes(editor, link, {split: true})
+        Transforms.wrapNodes(editor, { ... link, children: []}, {split: true})
         Transforms.collapse(editor, {edge: 'end'})
     }
 }
 
 export const LinkPlugin: EditorPlugin = {
     id: "link",
-    // FIXME: do we need type?
-    type: "link",
 
     init({editor}) {
         const {insertData, isInline} = editor;
 
+        editor.insertData = data => {
+            const text = data.getData('text/plain')
+
+            if (text && text.length >= 7 && isUrl(text)) {
+                showDialog(text);
+            } else {
+                insertData(data)
+            }
+        }
+
         editor.isInline = element => {
-            return element.type === 'link' ? true : isInline(element)
+            return element.type === TYPE_LINK ? true : isInline(element)
         }
 
         async function showDialog(initialUrl: string) {
@@ -74,27 +79,18 @@ export const LinkPlugin: EditorPlugin = {
                 wrapLink(editor, link, text || link);
             });
         }
-
-        editor.insertData = data => {
-            const text = data.getData('text/plain')
-
-            if (text && text.length >= 7 && isUrl(text)) {
-                showDialog(text);
-            } else {
-                insertData(data)
-            }
-        }
     },
 
     renderEdit({data, attributes, children}: WidgetRenderParams): React.ReactElement {
-        if (data.type !== BLOCK_LINK) return;
-        return <a {...attributes} href={data.url} target="_blank">{children}</a>
+        const {type, url} = data as LinkElement;
+        if (type !== TYPE_LINK) return;
+        return <a {...attributes} href={url} target="_blank">{children}</a>
     },
 
     renderView({data, attributes, children}: WidgetRenderParams) {
-        const {type} = data as LinkElement;
-        if (type !== BLOCK_LINK) return;
+        const {type, url} = data as LinkElement;
+        if (type !== TYPE_LINK) return;
 
-        return <a {...attributes} href={data.url} target="_blank">{children}</a>
+        return <a {...attributes} href={url} target="_blank">{children}</a>
     }
 }

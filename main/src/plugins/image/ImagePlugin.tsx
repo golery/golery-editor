@@ -4,24 +4,7 @@ import {ModalTemplate, showModal} from "../../component/modal/Modal";
 import {ImageEditor} from "./edit/ImageEditor";
 import {goApi} from "../../core/GoApi";
 import {ImageView} from "./view/ImageView";
-
-const widgetType = 'image';
-
-/**
- * Example data:
- *  {
-    "type": "image",
-    "src": [
-      {
-        "type": "key",
-        "key": "pencil.a0b7b331-d881-4457-a92b-e35667288ccd"
-      }
-    ],
- * */
-interface Node {
-    type: 'image';
-    src: [{ type: 'key' | 'url', key: string }];
-}
+import {TYPE_IMAGE, ImageElement} from "../../core/Schema";
 
 function getImageUrl(src: [{ type: 'key' | 'url', key: string }]) {
     if (!src) return;
@@ -32,25 +15,28 @@ function getImageUrl(src: [{ type: 'key' | 'url', key: string }]) {
 
 export const ImagePlugin: EditorPlugin = {
     id: 'image',
-    type: 'image',
+
+    init({editor}) {
+        editor.voidElements.push(TYPE_IMAGE);
+    },
 
     renderEdit({data, attributes, children}) {
-        const {type, src} = data as Node;
-        if (type === widgetType) {
+        const {type, src} = data as ImageElement;
+        if (type === TYPE_IMAGE) {
             const url = getImageUrl(src);
             return url ? <div  {...attributes}>{children}<img src={url} alt={url}/></div> : <span/>;
         }
     },
 
     renderView({data, attributes}) {
-        const {type, src} = data as Node;
-        if (type === widgetType) {
+        const {type, src} = data as ImageElement;
+        if (type === TYPE_IMAGE) {
             const url = getImageUrl(src);
             return <ImageView url={url} {...(attributes || {})}/>;
         }
     },
 
-    async onInsert(): Promise<Node> {
+    async onInsert(): Promise<ImageElement> {
         const {key} = await showModal({
             getBody: ({closeModal}) => <ImageEditor closeDialog={closeModal}/>,
             template: ModalTemplate.dialog
