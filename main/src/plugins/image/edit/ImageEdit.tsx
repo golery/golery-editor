@@ -7,7 +7,5 @@ export const ImageEdit = ({url}: { url: string }) => {
     const focused = useFocused();
     if (!url) return <span>(missing url)</span>;
 
-    return (<div>
-        <img src={url} alt={url} className={selected && focused ? styles.selected : ''}/>
-    </div>);
+    return (<img contentEditable={false} src={url} alt={url} className={selected && focused ? styles.selected : ''}/>);
 }

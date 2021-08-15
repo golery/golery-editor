@@ -25,7 +25,7 @@ export const ImagePlugin: EditorPlugin = {
         const {type, src} = data as ImageElement;
         if (type === TYPE_IMAGE) {
             const url = getImageUrl(src);
-            return url ? <div  {...attributes}>{children}<ImageEdit url={url}/></div> : <span/>;
+            return url ? <div  {...attributes}><ImageEdit url={url}/>{children}</div> : <span/>;
         }
     },
 

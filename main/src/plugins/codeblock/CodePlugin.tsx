@@ -17,6 +17,7 @@ export const CodePlugin: EditorPlugin = {
         if (data.type !== TYPE_CODE) return;
         return <CodeWidget attributes={attributes} data={data} setData={setData} readOnly={false}>{children}</CodeWidget>;
     },
+
     renderView({data, setData, attributes, children}: WidgetRenderParams) {
         if (data.type !== TYPE_CODE) return;
         return <CodeWidget attributes={attributes} data={data} setData={setData} readOnly={true}>{children}</CodeWidget>;
