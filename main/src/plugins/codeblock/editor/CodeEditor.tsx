@@ -17,7 +17,7 @@ export const CodeEditor = ({code, onSave}: Props) => {
     }, []);
     const displayCode = dirty ? editingCode : code;
     return (<div>
-        <textarea className={styles.code} value={displayCode} onChange={e => onChange}
+        <textarea className={styles.code} value={displayCode} onChange={onChange}
                     placeholder={'Paste code here'}/>
         <DialogFooter>
             <button onClick={onClick}>SAVE</button>
