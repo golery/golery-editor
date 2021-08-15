@@ -9,7 +9,6 @@ export interface EditorContext {
 
 export interface TextNode {
     type: string
-    data: any
     children: any[]
 }
 

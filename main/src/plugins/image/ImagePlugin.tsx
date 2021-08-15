@@ -7,10 +7,10 @@ import {ImageView} from "./view/ImageView";
 import {TYPE_IMAGE, ImageElement} from "../../core/Schema";
 import {ImageEdit} from "./edit/ImageEdit";
 
-function getImageUrl(src: [{ type: 'key' | 'url', key: string }]) {
+function getImageUrl(src: [{ url?: string, key?: string }]) {
     if (!src) return;
-
-    const {key} = src[0];
+    const {key, url} = src[0];
+    if (url) return url;
     return goApi.getFileUrl(key);
 }
 
@@ -44,7 +44,7 @@ export const ImagePlugin: EditorPlugin = {
         });
         return {
             type: 'image',
-            src: [{type: 'key', key}]
+            src: [{key}]
         };
     }
 }

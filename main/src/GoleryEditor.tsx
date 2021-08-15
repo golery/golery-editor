@@ -7,7 +7,6 @@ import GoleryEditable from "./core/GoleryEditable";
 import EditorContext from "./core/EditorContext";
 import {EditorController} from "./core/EditorController";
 
-
 interface Props {
     value: TextNode[]
     setValue: (value: TextNode[]) => void

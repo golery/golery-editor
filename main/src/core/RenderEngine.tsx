@@ -39,6 +39,7 @@ const BlockElement = (props: ElementProps)  => {
 const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?: any) => {
     if (!elms) return [];
     return elms.map((elm, index) => {
+        console.log(elm);
         if (elm.type || Array.isArray(elm.children)) {
             const attributes = {key: index};
             const children = renderReadOnly(elm.children, plugins, attributes);
@@ -48,9 +49,9 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[], attributes?:
 
                 if (result) return result;
             }
-            return <div/>;
+            return <div key={index}>[Widget not supported, type={elm.type}]</div>;
         } else {
-            return <LeafElement attributes={{key: index}} children={(elm as any)?.text} leaf={elm}/>;
+            return <LeafElement key={index} attributes={{...attributes}} children={(elm as any)?.text} leaf={elm}/>;
         }
     });
 }

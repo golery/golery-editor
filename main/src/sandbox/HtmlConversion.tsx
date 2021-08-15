@@ -1,10 +1,9 @@
 import * as React from "react";
-import GoleryEditor from "../GoleryEditor";
-import EditorToolbar from "../component/toolbar/EditorToolbar";
-import GoleryEditable from "../core/GoleryEditable";
 import {useRef, useState} from "react";
+import GoleryEditor from "../GoleryEditor";
 import {TextNode} from "../core/EditorTypes";
 import {jsx} from "slate-hyperscript";
+import {EditorReadOnly} from "../index";
 
 const html4 = `<p>Image:</p><img class="sc-htpNat yIWw" src="https://cache1.artprintimages.com/images/homepage/slider-tiles/!_2021/apr/0410_slidertiles_afremov.jpg"/>`;
 const html3 = `<p>Image:</p><p></p>`;
@@ -13,6 +12,7 @@ const html1 = `<p>Code</p><code>import { Injectable, Inject } from '@angular/cor
 const html2 = "Float and height<div>A {B}</div><div>If B is float and A does not have height EXCEPT: A is inline-block</div>";
 // Access via http://localhost:9000/?html
 export const HtmlConversion = () => {
+    const [html, setHtml] = useState(html4);
     const [value, setValue] = useState<TextNode[]>();
     const editor = useRef(null);
 
@@ -43,10 +43,10 @@ export const HtmlConversion = () => {
                 return jsx('element', { type: 'p' }, children)
             case 'IMG':
                 const src = el.getAttribute('src');
-                return jsx('element', { type: 'img', data: {src} }, children)
+                return jsx('element', { type: 'image', src: [ {url: src}] }, children)
             case 'CODE':
                 const code = el.textContent;
-                return jsx('element', { type: 'code', data: { code } }, children)
+                return jsx('element', { type: 'code', code }, children)
             case 'A':
                 return jsx(
                     'element',
@@ -59,8 +59,6 @@ export const HtmlConversion = () => {
     }
 
     const convert = () => {
-        // const html = "<div>Tab</div>";
-        const html = html1;
         const document = new DOMParser().parseFromString(html, 'text/html')
         const dom = deserialize(document.body)
         console.log(JSON.stringify(dom));
@@ -69,6 +67,13 @@ export const HtmlConversion = () => {
     return (
         <div>
             <button onClick={convert}>Convert</button>
+            <pre>{value && JSON.stringify(value, null, 2)}</pre>
+            <div dangerouslySetInnerHTML={{__html: html}} />
+
+            <hr/>
+            <EditorReadOnly value={value}/>
+
+            <hr/>
             <GoleryEditor controllerRef={editor} value={value} setValue={setValue}/>
         </div>
     );

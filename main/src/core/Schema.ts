@@ -26,7 +26,7 @@ export type LinkElement = {
 
 export type ImageElement = {
     type: 'image'
-    src: [{ type: 'key' | 'url', key: string }]
+    src: [{ url?: string, key?: string }]
 };
 
 export type CodeElement = {
