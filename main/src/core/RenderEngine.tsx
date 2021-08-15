@@ -22,7 +22,7 @@ const BlockElement = (props: ElementProps)  => {
             editor.deleteForward('block');
         } else {
             const path = ReactEditor.findPath(editor, element);
-            Transforms.setNodes(editor, {data} as any, {at: path})
+            Transforms.setNodes(editor, data, {at: path})
         }
     }
 

@@ -14,7 +14,6 @@ const withVoidElements = (editor: any) => {
     const {isVoid} = editor
     editor.isVoid = (element: any) => {
         if (element.type && editor.voidElements.includes(element.type)) {
-            console.log('True for', element.type);
             return true;
         }
         return isVoid(element)
