@@ -46,7 +46,7 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[]) => {
             const children = renderReadOnly(elm.children, plugins);
             for (const plugin of plugins || []) {
                 const renderer = plugin.renderView || plugin.renderEdit;
-                const result = renderer && renderer({data: elm, attributes: {key: index}, children});
+                const result = renderer && renderer({data: elm, children});
 
                 if (result) return <React.Fragment key={index}>{result}</React.Fragment>;
             }
