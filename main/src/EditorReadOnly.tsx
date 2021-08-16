@@ -12,7 +12,7 @@ interface Props {
 /** Render text editor value as read only content.
  * Here, we don't use the Slate for render, just manually iterate through the value tree and render each of them
  * recursively */
-const EditorReadOnly = ({value, customRender}: Props) => {
+const EditorReadOnly = ({value}: Props) => {
     const plugins = useMemo(() => getStandardPlugins(), []);
     return (
         <div className={"readonlyRender"}>
