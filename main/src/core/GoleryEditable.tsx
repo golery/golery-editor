@@ -5,20 +5,18 @@ import {BlockElement} from "./RenderEngine";
 import {EditorContext, WidgetRenderer} from "./EditorTypes";
 import {EditorPluginContext} from "./EditorContext";
 import {LeafElement} from "../plugins/textformat/TextFormatPlugin";
+import {EditorPlugin} from "./EditorPlugin";
+import {RenderElementProps, RenderLeafProps} from "slate-react/dist/components/editable";
 
-const GoleryEditable = () => {
-    const editorContext:EditorContext = React.useContext(EditorPluginContext);
+interface Props {
+    plugins: EditorPlugin[]
+}
 
-    const renderer: WidgetRenderer = (params) => {
-        for (const plugin of editorContext.plugins) {
-            if (plugin.renderEdit) {
-                const result = plugin.renderEdit(params);
-                if (result) return result;
-            }
-        }
-    }
-    const renderElement = useCallback(props => <BlockElement {...props} widgetRender={renderer}/>, [])
-    const renderLeaf = useCallback(props => <LeafElement {...props} />, [])
+const GoleryEditable = ({plugins}: Props) => {
+    const renderElement = useCallback((props: RenderElementProps) =>
+        <BlockElement {...props} plugins={plugins}>{props.children}</BlockElement>, [])
+    const renderLeaf = useCallback((props: RenderLeafProps) =>
+        <LeafElement {...props}>{props.children}</LeafElement>, [])
 
     return (
         <Editable className={'golery-editable'} renderElement={renderElement} renderLeaf={renderLeaf}/>

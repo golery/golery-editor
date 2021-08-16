@@ -10,11 +10,11 @@ interface ElementProps {
     attributes: any,
     children: any,
     element: any,
-    widgetRender: WidgetRenderer
+    plugins: EditorPlugin[]
 }
 
 const BlockElement = (props: ElementProps)  => {
-    const {attributes, children, element, widgetRender} = props;
+    const {attributes, children, element, plugins} = props;
     const editor: ReactEditor = useSlate() as ReactEditor;
 
     const setData = (data: any) => {
@@ -26,9 +26,11 @@ const BlockElement = (props: ElementProps)  => {
         }
     }
 
-    if (widgetRender) {
-        const elm = widgetRender({data: element, attributes, children, setData});
-        if (elm) return elm;
+    for (const plugin of plugins) {
+        if (plugin.renderEdit) {
+            const result = plugin.renderEdit({data: element, setData, attributes, children});
+            if (result) return result;
+        }
     }
 
     return <div/>;
@@ -46,7 +48,7 @@ const renderReadOnly = (elms: TextNode[], plugins?: EditorPlugin[]) => {
                 const renderer = plugin.renderView || plugin.renderEdit;
                 const result = renderer && renderer({data: elm, attributes: {key: index}, children});
 
-                if (result) return result;
+                if (result) return <React.Fragment key={index}>{result}</React.Fragment>;
             }
             return <div key={index}>[Widget not supported, type={elm.type}]</div>;
         } else {

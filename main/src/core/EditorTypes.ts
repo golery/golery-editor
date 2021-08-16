@@ -31,3 +31,6 @@ export interface WidgetRenderParams {
     attributes?: any
     children?: any
 }
+
+export type EditorData = TextNode[];
+

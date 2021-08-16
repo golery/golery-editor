@@ -15,12 +15,12 @@ export const CodePlugin: EditorPlugin = {
 
     renderEdit({data, setData, attributes, children}: WidgetRenderParams) {
         if (data.type !== TYPE_CODE) return;
-        return <CodeWidget {...attributes} data={data} setData={setData} readOnly={false}>{children}</CodeWidget>;
+        return <CodeWidget attributes={attributes} data={data} setData={setData} readOnly={false}>{children}</CodeWidget>;
     },
 
-    renderView({data, setData, attributes, children}: WidgetRenderParams) {
+    renderView({data, setData, children}: WidgetRenderParams) {
         if (data.type !== TYPE_CODE) return;
-        return <CodeWidget {...attributes} data={data} setData={setData} readOnly={true}>{children}</CodeWidget>;
+        return <CodeWidget attributes={{}} data={data} setData={setData} readOnly={true}>{children}</CodeWidget>;
     },
 
     async onInsert(): Promise<CodeElement> {

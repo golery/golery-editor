@@ -48,12 +48,12 @@ const Separator = () => {
 }
 
 interface EditorToolbar {
-    widgets: EditorPlugin[]
+    plugins: EditorPlugin[]
 }
 
-const EditorToolbar = ({widgets}: EditorToolbar) => {
+const EditorToolbar = ({plugins}: EditorToolbar) => {
     const editor = useSlate();
-    const options = getDefaultToolbar(editor, widgets);
+    const options = getDefaultToolbar(editor, plugins);
     return (<div className={styles.component}>
         {options.map((options, i) => {
             if (options === "separator") return <Separator key={i}/>;
